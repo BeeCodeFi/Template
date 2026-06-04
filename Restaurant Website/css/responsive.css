@@ -1,0 +1,574 @@
+/* ═══════════════════════════════════════════════════════════
+   RASA RESTAURANT — RESPONSIVE STYLES
+   ─────────────────────────────────────────────────────────
+   Breakpoints:
+   xs: < 480px
+   sm: 480px – 767px
+   md: 768px – 1023px
+   lg: 1024px – 1279px
+   xl: 1280px – 1439px
+   2xl: 1440px+
+═══════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────
+   EXTRA LARGE — 1440px+
+   ───────────────────────────────────── */
+
+@media (min-width: 1440px) {
+  :root {
+    --container-px: 5rem;
+  }
+
+  .hero__title {
+    font-size: clamp(14rem, 16vw, 18rem);
+  }
+}
+
+/* ─────────────────────────────────────
+   LARGE — max 1280px
+   ───────────────────────────────────── */
+
+@media (max-width: 1280px) {
+  .about__stats {
+    gap: 1.75rem;
+  }
+
+  .contact__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact__map {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ─────────────────────────────────────
+   MEDIUM — max 1024px
+   ───────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  :root {
+    --section-py: clamp(3rem, 7vw, 6rem);
+  }
+
+  /* Nav — show hamburger, hide links */
+  .nav__links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* Hero badges — smaller on tablet */
+  .hero__badges {
+    display: none;
+  }
+
+  /* About — stack */
+  .about__grid {
+    grid-template-columns: 1fr;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .about__image-wrap {
+    max-height: 480px;
+    aspect-ratio: 4/3;
+  }
+
+  /* Signatures — 2 columns */
+  .signatures__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .signatures__grid .dish-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* Chefs — 2 columns + 1 centered */
+  .chefs__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .chefs__grid .chef-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 420px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* Reservations — stack */
+  .reservations__grid {
+    grid-template-columns: 1fr;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .reservations__image-col {
+    display: none; /* Hide on tablet to save space */
+  }
+
+  /* Awards — 2 columns */
+  .awards__strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Contact — 2 columns */
+  .contact__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact__map {
+    grid-column: 1 / -1;
+  }
+
+  /* Footer */
+  .footer__top {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer__brand {
+    align-items: flex-start;
+  }
+
+  .footer__nav {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Gallery */
+  .gallery__masonry {
+    columns: 3;
+  }
+}
+
+/* ─────────────────────────────────────
+   SMALL TABLET — max 768px
+   ───────────────────────────────────── */
+
+@media (max-width: 768px) {
+  :root {
+    --section-py: clamp(2.5rem, 6vw, 4.5rem);
+    --nav-h: 70px;
+  }
+
+  /* Nav */
+  .nav__logo-sub {
+    display: none;
+  }
+
+  .btn--sm {
+    display: none;
+  }
+
+  /* Hero */
+  .hero__title {
+    font-size: clamp(4.5rem, 20vw, 8rem);
+    letter-spacing: 0.1em;
+  }
+
+  .hero__desc br {
+    display: none;
+  }
+
+  .hero__ctas {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto 0;
+  }
+
+  .hero__ctas .btn {
+    width: 100%;
+  }
+
+  .hero__scroll-indicator {
+    display: none;
+  }
+
+  /* Signatures — 1 column */
+  .signatures__grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .signatures__grid .dish-card:last-child {
+    grid-column: auto;
+    max-width: none;
+    margin: 0;
+  }
+
+  /* Menu tabs — scroll horizontally */
+  .menu-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+
+  .menu-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .menu-tab {
+    flex-shrink: 0;
+  }
+
+  .menu-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .menu-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-btn {
+    flex-shrink: 0;
+  }
+
+  /* Menu grid — 1 column */
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-item {
+    flex-direction: column;
+  }
+
+  .menu-item img {
+    width: 100%;
+    height: 200px;
+  }
+
+  /* Gallery */
+  .gallery__masonry {
+    columns: 2;
+  }
+
+  /* Chefs — 1 column */
+  .chefs__grid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .chefs__grid .chef-card:last-child {
+    grid-column: auto;
+    max-width: none;
+    margin: 0;
+  }
+
+  /* Reservations form */
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Testimonials */
+  .testimonials-swiper .swiper-button-prev,
+  .testimonials-swiper .swiper-button-next {
+    display: none;
+  }
+
+  /* Awards */
+  .awards__strip {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Contact */
+  .contact__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact__map {
+    grid-column: auto;
+  }
+
+  .map-embed iframe {
+    height: 220px;
+  }
+
+  /* Footer */
+  .footer__nav {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer__nav-col:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .menu-download {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Section headers */
+  .section-header {
+    text-align: left;
+  }
+}
+
+/* ─────────────────────────────────────
+   MOBILE — max 480px
+   ───────────────────────────────────── */
+
+@media (max-width: 480px) {
+  :root {
+    --container-px: 1.125rem;
+  }
+
+  .hero__title {
+    font-size: clamp(4rem, 22vw, 6rem);
+    letter-spacing: 0.08em;
+  }
+
+  .hero__eyebrow {
+    font-size: 0.625rem;
+  }
+
+  .hero__desc {
+    font-size: 0.8125rem;
+  }
+
+  /* Marquee */
+  .marquee-content span {
+    font-size: 0.875rem;
+  }
+
+  /* About stats — 2 per row */
+  .about__stats {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .about__stat {
+    min-width: calc(50% - 0.75rem);
+  }
+
+  /* Gallery — 1 column on very small screens */
+  .gallery__masonry {
+    columns: 2;
+  }
+
+  /* Chefs quote band smaller */
+  .chefs__quote-text {
+    font-size: clamp(1rem, 4vw, 1.25rem);
+  }
+
+  .chefs__quote-mark {
+    font-size: 4rem;
+  }
+
+  /* Awards — 1 column */
+  .awards__strip {
+    grid-template-columns: 1fr;
+  }
+
+  /* Testimonial card */
+  .testimonial-card {
+    padding: 1.75rem 1.25rem;
+  }
+
+  /* Footer */
+  .footer__nav {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__nav-col:last-child {
+    grid-column: auto;
+  }
+
+  /* Back to top */
+  .back-to-top {
+    bottom: 1rem;
+    right: 1rem;
+    width: 40px; height: 40px;
+  }
+
+  /* Section eyebrow smaller */
+  .section-eyebrow {
+    font-size: 0.625rem;
+  }
+
+  /* Buttons on mobile */
+  .btn {
+    font-size: 0.75rem;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .btn--sm {
+    padding: 0.5rem 1rem;
+  }
+
+  /* Hours table */
+  .hours-table td:first-child {
+    font-size: 0.8125rem;
+    padding-right: 0.75rem;
+  }
+}
+
+/* ─────────────────────────────────────
+   VERY SMALL — max 360px
+   ───────────────────────────────────── */
+
+@media (max-width: 360px) {
+  .hero__title {
+    font-size: clamp(3.5rem, 24vw, 5rem);
+  }
+
+  .section-title {
+    font-size: clamp(1.875rem, 8vw, 2.25rem);
+  }
+
+  .gallery__masonry {
+    columns: 1;
+  }
+}
+
+/* ─────────────────────────────────────
+   LANDSCAPE MOBILE — special handling
+   ───────────────────────────────────── */
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    min-height: 100vw;
+  }
+
+  .hero__title {
+    font-size: clamp(3rem, 12vh, 6rem);
+  }
+
+  .hero__desc {
+    display: none;
+  }
+
+  .mobile-menu {
+    overflow-y: auto;
+  }
+
+  .mobile-menu__links {
+    padding: 2rem 0;
+  }
+}
+
+/* ─────────────────────────────────────
+   REDUCED MOTION — accessibility
+   ───────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .marquee-content {
+    animation: none;
+  }
+
+  .hero__grain {
+    animation: none;
+  }
+
+  .hero__badge {
+    animation: none;
+  }
+
+  .hero__scroll-line {
+    animation: none;
+  }
+
+  .cursor,
+  .cursor-follower {
+    display: none;
+  }
+}
+
+/* ─────────────────────────────────────
+   HIGH CONTRAST — accessibility
+   ───────────────────────────────────── */
+
+@media (prefers-contrast: high) {
+  :root {
+    --color-border-light: rgba(232, 221, 208, 0.3);
+    --color-border: rgba(232, 160, 32, 0.5);
+  }
+
+  .dish-badge,
+  .menu-tab,
+  .filter-btn {
+    border-width: 2px;
+  }
+}
+
+/* ─────────────────────────────────────
+   PRINT STYLES
+   ───────────────────────────────────── */
+
+@media print {
+  .nav,
+  .cursor,
+  .cursor-follower,
+  .hero__grain,
+  .marquee-section,
+  .gallery,
+  .testimonials,
+  .awards,
+  .back-to-top,
+  .mobile-menu {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  .hero {
+    height: auto;
+    padding: 2rem 0;
+  }
+
+  .hero__bg,
+  .hero__overlay {
+    display: none;
+  }
+
+  .hero__content {
+    position: static;
+  }
+
+  .hero__title,
+  .hero__tagline {
+    color: black;
+    opacity: 1;
+  }
+
+  .menu-panel {
+    display: block !important;
+  }
+
+  .menu-tabs,
+  .menu-filters {
+    display: none;
+  }
+}

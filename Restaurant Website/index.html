@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Rasa — Award-winning modern Indian fine dining in London. Seasonal tasting menus, artisan cocktails, and intimate private dining experiences." />
+  <meta name="keywords" content="Indian restaurant, fine dining, London, Michelin, tasting menu, Rasa" />
+  <meta property="og:title" content="Rasa — The Essence of Indian Cuisine" />
+  <meta property="og:description" content="Award-winning modern Indian fine dining in London." />
+  <meta property="og:type" content="website" />
+  <title>Rasa — The Essence of Indian Cuisine</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- GLightbox -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
+  <!-- Remix Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- ═══════════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════════ -->
+  <nav class="nav" id="navbar">
+    <div class="nav__container">
+      <a href="#home" class="nav__logo">
+        <span class="nav__logo-text">Rasa</span>
+        <span class="nav__logo-sub">Modern Indian Cuisine</span>
+      </a>
+
+      <ul class="nav__links" id="navLinks">
+        <li><a href="#about" class="nav__link">Our Story</a></li>
+        <li><a href="#menu" class="nav__link">Menu</a></li>
+        <li><a href="#gallery" class="nav__link">Gallery</a></li>
+        <li><a href="#chefs" class="nav__link">Chefs</a></li>
+        <li><a href="#contact" class="nav__link">Contact</a></li>
+      </ul>
+
+      <div class="nav__actions">
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <i class="ri-sun-line theme-icon--light"></i>
+          <i class="ri-moon-line theme-icon--dark"></i>
+        </button>
+        <a href="#reservations" class="btn btn--outline btn--sm">Reserve a Table</a>
+        <!-- Hamburger -->
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-menu__links">
+      <li><a href="#about" class="mobile-menu__link">Our Story</a></li>
+      <li><a href="#menu" class="mobile-menu__link">Menu</a></li>
+      <li><a href="#gallery" class="mobile-menu__link">Gallery</a></li>
+      <li><a href="#chefs" class="mobile-menu__link">Chefs</a></li>
+      <li><a href="#contact" class="mobile-menu__link">Contact</a></li>
+      <li><a href="#reservations" class="mobile-menu__link btn btn--gold">Reserve a Table</a></li>
+    </ul>
+  </div>
+
+  <main>
+
+    <!-- ═══════════════════════════════════════════
+         HERO
+    ═══════════════════════════════════════════ -->
+    <section class="hero" id="home">
+      <div class="hero__bg">
+        <!-- Photo by Jay Wennington on Unsplash -->
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=85&auto=format&fit=crop" alt="Elegant restaurant dining" class="hero__bg-img" loading="eager" />
+      </div>
+      <div class="hero__overlay"></div>
+      <div class="hero__grain"></div>
+
+      <div class="hero__content">
+        <p class="hero__eyebrow" id="heroEyebrow">Est. 2014 · London</p>
+        <h1 class="hero__title" id="heroTitle">
+          <span class="hero__title-word" aria-label="Rasa">
+            <span class="hero__char">R</span><span class="hero__char">a</span><span class="hero__char">s</span><span class="hero__char">a</span>
+          </span>
+        </h1>
+        <p class="hero__tagline" id="heroTagline">The Essence of Indian Cuisine</p>
+        <p class="hero__desc" id="heroDesc">A culinary journey through the subcontinent's most celebrated flavours,<br>reimagined for the modern palate.</p>
+        <div class="hero__ctas" id="heroCtas">
+          <a href="#reservations" class="btn btn--gold">Reserve a Table</a>
+          <a href="#menu" class="btn btn--ghost">Explore Menu</a>
+        </div>
+      </div>
+
+      <a href="#marquee" class="hero__scroll-indicator" aria-label="Scroll down">
+        <span class="hero__scroll-text">Scroll</span>
+        <span class="hero__scroll-line"></span>
+      </a>
+
+      <!-- Award badges -->
+      <div class="hero__badges">
+        <div class="hero__badge">
+          <i class="ri-award-line"></i>
+          <span>Michelin Star</span>
+        </div>
+        <div class="hero__badge">
+          <i class="ri-star-line"></i>
+          <span>AA Rosette</span>
+        </div>
+        <div class="hero__badge">
+          <i class="ri-trophy-line"></i>
+          <span>Top 50 India</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         MARQUEE STRIP
+    ═══════════════════════════════════════════ -->
+    <section class="marquee-section" id="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-content">
+          <span>Modern Indian Fine Dining</span>
+          <span class="marquee-dot">✦</span>
+          <span>Est. 2014 · London</span>
+          <span class="marquee-dot">✦</span>
+          <span>Michelin Starred</span>
+          <span class="marquee-dot">✦</span>
+          <span>Seasonal Tasting Menus</span>
+          <span class="marquee-dot">✦</span>
+          <span>Mumbai Roots · London Soul</span>
+          <span class="marquee-dot">✦</span>
+          <span>Private Dining Available</span>
+          <span class="marquee-dot">✦</span>
+          <span>Artisan Cocktails</span>
+          <span class="marquee-dot">✦</span>
+          <span>Award Winning Chefs</span>
+          <span class="marquee-dot">✦</span>
+        </div>
+        <!-- Duplicate for seamless loop -->
+        <div class="marquee-content" aria-hidden="true">
+          <span>Modern Indian Fine Dining</span>
+          <span class="marquee-dot">✦</span>
+          <span>Est. 2014 · London</span>
+          <span class="marquee-dot">✦</span>
+          <span>Michelin Starred</span>
+          <span class="marquee-dot">✦</span>
+          <span>Seasonal Tasting Menus</span>
+          <span class="marquee-dot">✦</span>
+          <span>Mumbai Roots · London Soul</span>
+          <span class="marquee-dot">✦</span>
+          <span>Private Dining Available</span>
+          <span class="marquee-dot">✦</span>
+          <span>Artisan Cocktails</span>
+          <span class="marquee-dot">✦</span>
+          <span>Award Winning Chefs</span>
+          <span class="marquee-dot">✦</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         ABOUT / OUR STORY
+    ═══════════════════════════════════════════ -->
+    <section class="about" id="about">
+      <div class="container">
+        <div class="about__grid">
+          <div class="about__image-wrap">
+            <div class="about__image-clip" data-aos="clip-reveal">
+              <!-- Photo by Usman Yousaf on Unsplash -->
+              <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=80&auto=format&fit=crop" alt="Chef preparing Indian spices" class="about__image" loading="lazy" />
+            </div>
+            <div class="about__image-accent"></div>
+            <div class="about__image-badge">
+              <span class="about__image-badge-year">2014</span>
+              <span class="about__image-badge-text">Est.</span>
+            </div>
+          </div>
+
+          <div class="about__content">
+            <p class="section-eyebrow" data-aos="fade-up">Our Story</p>
+            <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">
+              Where Ancient Spice<br />Meets Modern Artistry
+            </h2>
+            <p class="about__text" data-aos="fade-up" data-aos-delay="200">
+              Rasa was born from a single idea: to honour the soul of Indian cuisine without being bound by its traditions. Chef Arjun Mehta left Mumbai's bustling kitchens to London with a suitcase of spice blends and a mission — to create food that feels like memory.
+            </p>
+            <p class="about__text" data-aos="fade-up" data-aos-delay="300">
+              Every dish at Rasa tells a story — of coast and mountain, of grandmother's recipe and molecular precision, of fire-roasted char and the delicate perfume of rose water. We source our spices directly from Kerala and Rajasthan, our herbs from the English countryside.
+            </p>
+
+            <div class="about__stats" data-aos="fade-up" data-aos-delay="400">
+              <div class="about__stat">
+                <span class="about__stat-number" data-count="18">0</span>
+                <span class="about__stat-plus">+</span>
+                <span class="about__stat-label">Awards</span>
+              </div>
+              <div class="about__stat">
+                <span class="about__stat-number" data-count="320">0</span>
+                <span class="about__stat-plus">+</span>
+                <span class="about__stat-label">Dishes Created</span>
+              </div>
+              <div class="about__stat">
+                <span class="about__stat-number" data-count="12">0</span>
+                <span class="about__stat-label">Years of Excellence</span>
+              </div>
+            </div>
+
+            <a href="#chefs" class="btn btn--gold" data-aos="fade-up" data-aos-delay="500">Meet Our Chefs</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SIGNATURE DISHES
+    ═══════════════════════════════════════════ -->
+    <section class="signatures" id="signatures">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <p class="section-eyebrow">Chef's Selection</p>
+          <h2 class="section-title">Signature Dishes</h2>
+          <p class="section-subtitle">Each dish a masterclass in balance — bold spice, delicate technique, and seasonal soul.</p>
+        </div>
+
+        <div class="signatures__grid">
+          <!-- Card 1 -->
+          <article class="dish-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="dish-card__image-wrap">
+              <!-- Photo by Pablo Pacheco on Unsplash -->
+              <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&q=80&auto=format&fit=crop" alt="Dal Makhani" class="dish-card__image" loading="lazy" />
+              <div class="dish-card__overlay">
+                <a href="#menu" class="dish-card__cta">View on Menu</a>
+              </div>
+            </div>
+            <div class="dish-card__body">
+              <div class="dish-card__meta">
+                <span class="dish-badge dish-badge--v">V</span>
+                <span class="dish-badge dish-badge--gf">GF</span>
+              </div>
+              <h3 class="dish-card__name">Rasa Dal Makhani</h3>
+              <p class="dish-card__desc">48-hour slow-cooked black lentils, Amul butter, cream, and smoked fenugreek — the dish that started it all.</p>
+              <div class="dish-card__footer">
+                <span class="dish-card__price">£18</span>
+                <span class="dish-card__course">Main</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="dish-card dish-card--featured" data-aos="fade-up" data-aos-delay="200">
+            <div class="dish-card__image-wrap">
+              <!-- Photo by Krisztina Papp on Unsplash -->
+              <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&q=80&auto=format&fit=crop" alt="Lamb Rogan Josh" class="dish-card__image" loading="lazy" />
+              <div class="dish-card__badge-featured">Signature</div>
+              <div class="dish-card__overlay">
+                <a href="#menu" class="dish-card__cta">View on Menu</a>
+              </div>
+            </div>
+            <div class="dish-card__body">
+              <div class="dish-card__meta">
+                <span class="dish-badge dish-badge--spicy">🌶</span>
+                <span class="dish-badge dish-badge--gf">GF</span>
+              </div>
+              <h3 class="dish-card__name">Kashmiri Rogan Josh</h3>
+              <p class="dish-card__desc">Slow-braised Cumbrian lamb shoulder, Kashmiri chilli, Ratan Jot, whole spices, and saffron-infused jus.</p>
+              <div class="dish-card__footer">
+                <span class="dish-card__price">£32</span>
+                <span class="dish-card__course">Main</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="dish-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="dish-card__image-wrap">
+              <!-- Photo by Monika Grabkowska on Unsplash -->
+              <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&q=80&auto=format&fit=crop" alt="Mango Kulfi" class="dish-card__image" loading="lazy" />
+              <div class="dish-card__overlay">
+                <a href="#menu" class="dish-card__cta">View on Menu</a>
+              </div>
+            </div>
+            <div class="dish-card__body">
+              <div class="dish-card__meta">
+                <span class="dish-badge dish-badge--v">V</span>
+                <span class="dish-badge dish-badge--gf">GF</span>
+              </div>
+              <h3 class="dish-card__name">Alphonso Mango Kulfi</h3>
+              <p class="dish-card__desc">Alphonso mango sorbet, cardamom-scented rabri, pistachio crumble, and rose petal jam.</p>
+              <div class="dish-card__footer">
+                <span class="dish-card__price">£12</span>
+                <span class="dish-card__course">Dessert</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="signatures__footer" data-aos="fade-up">
+          <a href="#menu" class="btn btn--outline">View Full Menu</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         MENU
+    ═══════════════════════════════════════════ -->
+    <section class="menu-section" id="menu">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <p class="section-eyebrow">Our Offerings</p>
+          <h2 class="section-title">The Menu</h2>
+          <p class="section-subtitle">Seasonal ingredients. Ancient techniques. Boundless creativity.</p>
+        </div>
+
+        <!-- Tab bar -->
+        <div class="menu-tabs" data-aos="fade-up">
+          <button class="menu-tab active" data-tab="starters">Starters</button>
+          <button class="menu-tab" data-tab="mains">Mains</button>
+          <button class="menu-tab" data-tab="desserts">Desserts</button>
+          <button class="menu-tab" data-tab="drinks">Drinks</button>
+        </div>
+
+        <!-- Dietary filter -->
+        <div class="menu-filters" data-aos="fade-up" data-aos-delay="100">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="v">Vegetarian</button>
+          <button class="filter-btn" data-filter="vg">Vegan</button>
+          <button class="filter-btn" data-filter="gf">Gluten Free</button>
+          <button class="filter-btn" data-filter="spicy">Spicy</button>
+        </div>
+
+        <!-- Starters -->
+        <div class="menu-panel active" id="tab-starters">
+          <div class="menu-grid">
+
+            <article class="menu-item" data-tags="v gf">
+              <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=75&auto=format&fit=crop" alt="Paneer Tikka" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Paneer Tikka</h3>
+                  <span class="menu-item__price">£14</span>
+                </div>
+                <p>Tandoor-kissed paneer, yellow pepper, mint chutney, and chaat masala.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--v">V</span>
+                  <span class="dish-badge dish-badge--gf">GF</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item" data-tags="gf spicy">
+              <img src="https://images.unsplash.com/photo-1567337710282-00832b415979?w=400&q=75&auto=format&fit=crop" alt="Chicken Seekh Kebab" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Chicken Seekh Kebab</h3>
+                  <span class="menu-item__price">£16</span>
+                </div>
+                <p>Minced free-range chicken, ginger, green chilli, coriander, and smoked over charcoal.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--gf">GF</span>
+                  <span class="dish-badge dish-badge--spicy">🌶</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item" data-tags="vg gf">
+              <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&q=75&auto=format&fit=crop" alt="Aloo Chaat" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Aloo Papri Chaat</h3>
+                  <span class="menu-item__price">£12</span>
+                </div>
+                <p>Crispy potato medallions, tamarind chutney, mint water, pomegranate seeds, and sev.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--vg">VG</span>
+                  <span class="dish-badge dish-badge--gf">GF</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item" data-tags="gf spicy">
+              <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=75&auto=format&fit=crop" alt="Prawn Koliwada" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Prawn Koliwada</h3>
+                  <span class="menu-item__price">£18</span>
+                </div>
+                <p>Cornish tiger prawns, Maharashtrian spice batter, kokum aioli, and coriander oil.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--gf">GF</span>
+                  <span class="dish-badge dish-badge--spicy">🌶</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item" data-tags="v">
+              <img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&q=75&auto=format&fit=crop" alt="Samosa" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Deconstructed Samosa</h3>
+                  <span class="menu-item__price">£11</span>
+                </div>
+                <p>Filo pyramid, spiced potato & pea mousse, tamarind gel, and micro herbs.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--v">V</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item" data-tags="gf">
+              <img src="https://images.unsplash.com/photo-1485963631004-f2f00b1d6606?w=400&q=75&auto=format&fit=crop" alt="Venison Kebab" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Venison Shami Kebab</h3>
+                  <span class="menu-item__price">£19</span>
+                </div>
+                <p>Scottish venison, chana dal, cardamom, rose water, and saffron-infused raita.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--gf">GF</span>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- Mains -->
+        <div class="menu-panel" id="tab-mains">
+          <div class="menu-grid">
+
+            <article class="menu-item" data-tags="v gf">
+              <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&q=75&auto=format&fit=crop" alt="Dal Makhani" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Rasa Dal Makhani</h3>
+                  <span class="menu-item__price">£18</span>
+                </div>
+                <p>48-hour slow-cooked black lentils, Amul butter, cream, and smoked fenugreek.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--v">V</span>
+                  <span class="dish-badge dish-badge--gf">GF</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item" data-tags="gf spicy">
+              <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&q=75&auto=format&fit=crop" alt="Rogan Josh" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Kashmiri Rogan Josh</h3>
+                  <span class="menu-item__price">£32</span>
+                </div>
+                <p>Slow-braised Cumbrian lamb, Kashmiri chilli, Ratan Jot, and saffron-infused jus.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--gf">GF</span>
+                  <span class="dish-badge dish-badge--spicy">🌶</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item" data-tags="gf">
+              <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&q=75&auto=format&fit=crop" alt="Butter Chicken" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Murgh Makhani</h3>
+                  <span class="menu-item__price">£26</span>
+                </div>
+                <p>Free-range chicken tikka, rich tomato-butter sauce, fenugreek, and Kashmiri chilli.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--gf">GF</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item" data-tags="v gf spicy">
+              <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&q=75&auto=format&fit=crop" alt="Paneer Lababdar" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Paneer Lababdar</h3>
+                  <span class="menu-item__price">£22</span>
+                </div>
+                <p>Fresh cottage cheese, caramelised onion gravy, black cumin, and tandoor-charred tomatoes.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--v">V</span>
+                  <span class="dish-badge dish-badge--gf">GF</span>
+                  <span class="dish-badge dish-badge--spicy">🌶</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item" data-tags="gf spicy">
+              <img src="https://images.unsplash.com/photo-1574653853027-5382a3d23a15?w=400&q=75&auto=format&fit=crop" alt="Goan Fish Curry" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Goan Sea Bass Curry</h3>
+                  <span class="menu-item__price">£34</span>
+                </div>
+                <p>Scottish sea bass, coconut milk, Goan masala, raw mango, and curry leaf oil.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--gf">GF</span>
+                  <span class="dish-badge dish-badge--spicy">🌶</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item" data-tags="gf">
+              <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&q=75&auto=format&fit=crop" alt="Biryani" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Dum Gosht Biryani</h3>
+                  <span class="menu-item__price">£28</span>
+                </div>
+                <p>Slow-cooked lamb, aged Basmati rice, fried onions, saffron milk, and served with raita.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--gf">GF</span>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- Desserts -->
+        <div class="menu-panel" id="tab-desserts">
+          <div class="menu-grid">
+
+            <article class="menu-item" data-tags="v gf">
+              <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400&q=75&auto=format&fit=crop" alt="Kulfi" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Alphonso Mango Kulfi</h3>
+                  <span class="menu-item__price">£12</span>
+                </div>
+                <p>Alphonso mango sorbet, cardamom rabri, pistachio crumble, and rose petal jam.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--v">V</span>
+                  <span class="dish-badge dish-badge--gf">GF</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item" data-tags="v">
+              <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&q=75&auto=format&fit=crop" alt="Gulab Jamun" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Gulab Jamun Fondant</h3>
+                  <span class="menu-item__price">£11</span>
+                </div>
+                <p>Warm milk-solids fondant, rose syrup, cardamom ice cream, and edible gold leaf.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--v">V</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item" data-tags="v gf">
+              <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&q=75&auto=format&fit=crop" alt="Rasmalai" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Deconstructed Rasmalai</h3>
+                  <span class="menu-item__price">£13</span>
+                </div>
+                <p>Chenna panna cotta, saffron-cardamom milk, pistachio gel, and edible rose petals.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--v">V</span>
+                  <span class="dish-badge dish-badge--gf">GF</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item" data-tags="v">
+              <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=400&q=75&auto=format&fit=crop" alt="Kheer" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Black Rice Kheer</h3>
+                  <span class="menu-item__price">£10</span>
+                </div>
+                <p>Wild black rice, coconut milk, lychee sorbet, and candied fennel seeds.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--v">V</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item" data-tags="vg gf">
+              <img src="https://images.unsplash.com/photo-1464347744102-11db6282f854?w=400&q=75&auto=format&fit=crop" alt="Halwa" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Carrot & Cardamom Halwa</h3>
+                  <span class="menu-item__price">£9</span>
+                </div>
+                <p>Slow-cooked heritage carrot, date syrup, toasted cashews, and oat cream.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--vg">VG</span>
+                  <span class="dish-badge dish-badge--gf">GF</span>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <!-- Drinks -->
+        <div class="menu-panel" id="tab-drinks">
+          <div class="menu-grid">
+
+            <article class="menu-item" data-tags="vg gf">
+              <img src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=400&q=75&auto=format&fit=crop" alt="Mango Lassi" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Alphonso Mango Lassi</h3>
+                  <span class="menu-item__price">£8</span>
+                </div>
+                <p>Chilled Alphonso mango, strained yogurt, cardamom, and saffron.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--v">V</span>
+                  <span class="dish-badge dish-badge--gf">GF</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item" data-tags="vg gf">
+              <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=75&auto=format&fit=crop" alt="Cocktail" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Masala Gin &amp; Tonic</h3>
+                  <span class="menu-item__price">£14</span>
+                </div>
+                <p>London dry gin, house-made spice syrup, cucumber, fresh lime, and Fever Tree tonic.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--gf">GF</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item" data-tags="vg gf">
+              <img src="https://images.unsplash.com/photo-1585559700398-1385b3a8aeb6?w=400&q=75&auto=format&fit=crop" alt="Rose Sharbat" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Rose &amp; Lychee Sharbat</h3>
+                  <span class="menu-item__price">£7</span>
+                </div>
+                <p>House-infused rose water, lychee, fresh mint, and sparkling water. Non-alcoholic.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--vg">VG</span>
+                  <span class="dish-badge dish-badge--gf">GF</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item" data-tags="vg gf">
+              <img src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&q=75&auto=format&fit=crop" alt="Chai" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Rasa Masala Chai</h3>
+                  <span class="menu-item__price">£5</span>
+                </div>
+                <p>Assam CTC tea, whole spices, oat milk, and palm sugar. Our kitchen ritual.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--v">V</span>
+                  <span class="dish-badge dish-badge--gf">GF</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item" data-tags="gf">
+              <img src="https://images.unsplash.com/photo-1610612220562-dfd98fbeb3e3?w=400&q=75&auto=format&fit=crop" alt="Old Fashioned" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Turmeric Old Fashioned</h3>
+                  <span class="menu-item__price">£16</span>
+                </div>
+                <p>Single malt whisky, turmeric-infused simple syrup, Angostura bitters, and orange peel.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--gf">GF</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="menu-item" data-tags="vg gf">
+              <img src="https://images.unsplash.com/photo-1567920592563-31b8501c2b21?w=400&q=75&auto=format&fit=crop" alt="Wine" loading="lazy" />
+              <div class="menu-item__body">
+                <div class="menu-item__header">
+                  <h3>Curated Wine Pairing</h3>
+                  <span class="menu-item__price">£45</span>
+                </div>
+                <p>Sommelier-selected 4-glass pairing to complement your tasting menu journey.</p>
+                <div class="menu-item__tags">
+                  <span class="dish-badge dish-badge--gf">GF</span>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <div class="menu-download" data-aos="fade-up">
+          <p>Want the full experience?</p>
+          <a href="#" class="btn btn--outline" download>
+            <i class="ri-download-line"></i> Download Full Menu PDF
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         GALLERY
+    ═══════════════════════════════════════════ -->
+    <section class="gallery" id="gallery">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <p class="section-eyebrow">Visual Journey</p>
+          <h2 class="section-title">A Feast for the Eyes</h2>
+        </div>
+      </div>
+
+      <div class="gallery__masonry" data-aos="fade-up">
+        <!-- Photo credits: Unsplash -->
+        <a href="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=90" class="gallery__item glightbox" data-gallery="rasa" data-description="Our dining room at golden hour">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=75&auto=format&fit=crop" alt="Restaurant interior" loading="lazy" />
+          <div class="gallery__item-overlay"><i class="ri-add-line"></i></div>
+        </a>
+        <a href="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=1200&q=90" class="gallery__item glightbox" data-gallery="rasa" data-description="Kashmiri Rogan Josh">
+          <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&q=75&auto=format&fit=crop" alt="Rogan Josh" loading="lazy" />
+          <div class="gallery__item-overlay"><i class="ri-add-line"></i></div>
+        </a>
+        <a href="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=1200&q=90" class="gallery__item glightbox" data-gallery="rasa" data-description="Chef preparing spices">
+          <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&q=75&auto=format&fit=crop" alt="Spice preparation" loading="lazy" />
+          <div class="gallery__item-overlay"><i class="ri-add-line"></i></div>
+        </a>
+        <a href="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=1200&q=90" class="gallery__item glightbox" data-gallery="rasa" data-description="The Rasa signature plating">
+          <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&q=75&auto=format&fit=crop" alt="Plated dish" loading="lazy" />
+          <div class="gallery__item-overlay"><i class="ri-add-line"></i></div>
+        </a>
+        <a href="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=1200&q=90" class="gallery__item glightbox" data-gallery="rasa" data-description="Alphonso Mango Kulfi">
+          <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&q=75&auto=format&fit=crop" alt="Dessert" loading="lazy" />
+          <div class="gallery__item-overlay"><i class="ri-add-line"></i></div>
+        </a>
+        <a href="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=1200&q=90" class="gallery__item glightbox" data-gallery="rasa" data-description="Our bar and cocktail programme">
+          <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&q=75&auto=format&fit=crop" alt="Cocktail bar" loading="lazy" />
+          <div class="gallery__item-overlay"><i class="ri-add-line"></i></div>
+        </a>
+        <a href="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1200&q=90" class="gallery__item glightbox" data-gallery="rasa" data-description="Paneer Tikka from the tandoor">
+          <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&q=75&auto=format&fit=crop" alt="Paneer Tikka" loading="lazy" />
+          <div class="gallery__item-overlay"><i class="ri-add-line"></i></div>
+        </a>
+        <a href="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=90" class="gallery__item glightbox" data-gallery="rasa" data-description="The art of plating">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=75&auto=format&fit=crop" alt="Plated food" loading="lazy" />
+          <div class="gallery__item-overlay"><i class="ri-add-line"></i></div>
+        </a>
+        <a href="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=1200&q=90" class="gallery__item glightbox" data-gallery="rasa" data-description="Dum Gosht Biryani">
+          <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=75&auto=format&fit=crop" alt="Biryani" loading="lazy" />
+          <div class="gallery__item-overlay"><i class="ri-add-line"></i></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         CHEF'S TABLE
+    ═══════════════════════════════════════════ -->
+    <section class="chefs" id="chefs">
+      <!-- Parallax quote band -->
+      <div class="chefs__quote-band">
+        <div class="chefs__quote-bg">
+          <!-- Photo by Louis Hansel on Unsplash -->
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80&auto=format&fit=crop" alt="Kitchen ambiance" loading="lazy" />
+        </div>
+        <div class="chefs__quote-overlay"></div>
+        <div class="chefs__quote-content" data-aos="fade-up">
+          <span class="chefs__quote-mark">"</span>
+          <blockquote class="chefs__quote-text">
+            A spice is never just a spice. It is a conversation between soil, sun, and the hands that learned to cook before words were written.
+          </blockquote>
+          <cite class="chefs__quote-cite">— Arjun Mehta, Executive Chef</cite>
+        </div>
+      </div>
+
+      <!-- Team -->
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <p class="section-eyebrow">The Minds Behind the Magic</p>
+          <h2 class="section-title">Meet Our Team</h2>
+        </div>
+
+        <div class="chefs__grid">
+
+          <article class="chef-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="chef-card__image-wrap">
+              <!-- Photo by Alora Griffiths on Unsplash -->
+              <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=500&q=80&auto=format&fit=crop" alt="Chef Arjun Mehta" loading="lazy" />
+              <div class="chef-card__bio-overlay">
+                <p>Trained at the Culinary Institute of India and Noma Copenhagen, Arjun brings 18 years of craft to every plate. He was named 'Chef of the Year' by the AA in 2022.</p>
+              </div>
+            </div>
+            <div class="chef-card__body">
+              <h3 class="chef-card__name">Arjun Mehta</h3>
+              <p class="chef-card__title">Executive Chef &amp; Founder</p>
+              <div class="chef-card__socials">
+                <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+                <a href="#" aria-label="Twitter"><i class="ri-twitter-x-line"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="chef-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="chef-card__image-wrap">
+              <img src="https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?w=500&q=80&auto=format&fit=crop" alt="Chef Priya Nair" loading="lazy" />
+              <div class="chef-card__bio-overlay">
+                <p>Priya's desserts blur the line between memory and innovation. Her work with Indian sweet traditions and French pastry techniques has earned her a devoted following.</p>
+              </div>
+            </div>
+            <div class="chef-card__body">
+              <h3 class="chef-card__name">Priya Nair</h3>
+              <p class="chef-card__title">Head Pastry Chef</p>
+              <div class="chef-card__socials">
+                <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="chef-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="chef-card__image-wrap">
+              <img src="https://images.unsplash.com/photo-1566554273541-37a9ca77b91f?w=500&q=80&auto=format&fit=crop" alt="James Harlow Sommelier" loading="lazy" />
+              <div class="chef-card__bio-overlay">
+                <p>James pairs our dishes with wines that amplify Indian spice — a rare skill. He curates bottles from small Indian vineyards in Nashik as well as European estates.</p>
+              </div>
+            </div>
+            <div class="chef-card__body">
+              <h3 class="chef-card__name">James Harlow</h3>
+              <p class="chef-card__title">Head Sommelier</p>
+              <div class="chef-card__socials">
+                <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+                <a href="#" aria-label="Twitter"><i class="ri-twitter-x-line"></i></a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         RESERVATIONS
+    ═══════════════════════════════════════════ -->
+    <section class="reservations" id="reservations">
+      <div class="container">
+        <div class="reservations__grid">
+          <div class="reservations__image-col">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80&auto=format&fit=crop" alt="Table setting" loading="lazy" />
+            <div class="reservations__image-info" data-aos="fade-up">
+              <div class="reservations__info-item">
+                <i class="ri-time-line"></i>
+                <div>
+                  <strong>Lunch</strong>
+                  <span>Tue – Sat, 12:00 – 14:30</span>
+                </div>
+              </div>
+              <div class="reservations__info-item">
+                <i class="ri-moon-line"></i>
+                <div>
+                  <strong>Dinner</strong>
+                  <span>Tue – Sun, 18:00 – 22:30</span>
+                </div>
+              </div>
+              <div class="reservations__info-item">
+                <i class="ri-phone-line"></i>
+                <div>
+                  <strong>Phone</strong>
+                  <a href="tel:+442071234567">+44 (0)20 7123 4567</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="reservations__form-col" data-aos="fade-left">
+            <p class="section-eyebrow">Book Your Experience</p>
+            <h2 class="section-title">Reserve a Table</h2>
+            <p class="reservations__subtitle">We look forward to welcoming you. For parties of 8 or more, please call us directly.</p>
+
+            <!-- Replace YOUR_FORM_ID with a Formspree form ID -->
+            <form class="booking-form" id="bookingForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="firstName">First Name *</label>
+                  <input type="text" id="firstName" name="firstName" required autocomplete="given-name" placeholder="Aryan" />
+                  <span class="form-error" aria-live="polite"></span>
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last Name *</label>
+                  <input type="text" id="lastName" name="lastName" required autocomplete="family-name" placeholder="Sharma" />
+                  <span class="form-error" aria-live="polite"></span>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="email">Email Address *</label>
+                  <input type="email" id="email" name="email" required autocomplete="email" placeholder="aryan@example.com" />
+                  <span class="form-error" aria-live="polite"></span>
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone Number *</label>
+                  <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="+44 7700 900000" />
+                  <span class="form-error" aria-live="polite"></span>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="date">Date *</label>
+                  <input type="date" id="date" name="date" required />
+                  <span class="form-error" aria-live="polite"></span>
+                </div>
+                <div class="form-group">
+                  <label for="time">Time *</label>
+                  <select id="time" name="time" required>
+                    <option value="" disabled selected>Select a time</option>
+                    <optgroup label="Lunch">
+                      <option value="12:00">12:00 PM</option>
+                      <option value="12:30">12:30 PM</option>
+                      <option value="13:00">1:00 PM</option>
+                      <option value="13:30">1:30 PM</option>
+                      <option value="14:00">2:00 PM</option>
+                    </optgroup>
+                    <optgroup label="Dinner">
+                      <option value="18:00">6:00 PM</option>
+                      <option value="18:30">6:30 PM</option>
+                      <option value="19:00">7:00 PM</option>
+                      <option value="19:30">7:30 PM</option>
+                      <option value="20:00">8:00 PM</option>
+                      <option value="20:30">8:30 PM</option>
+                      <option value="21:00">9:00 PM</option>
+                      <option value="21:30">9:30 PM</option>
+                    </optgroup>
+                  </select>
+                  <span class="form-error" aria-live="polite"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="guests">Number of Guests *</label>
+                <select id="guests" name="guests" required>
+                  <option value="" disabled selected>Select party size</option>
+                  <option value="1">1 person</option>
+                  <option value="2">2 people</option>
+                  <option value="3">3 people</option>
+                  <option value="4">4 people</option>
+                  <option value="5">5 people</option>
+                  <option value="6">6 people</option>
+                  <option value="7">7 people</option>
+                </select>
+                <span class="form-error" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="occasion">Special Occasion</label>
+                <select id="occasion" name="occasion">
+                  <option value="" selected>None</option>
+                  <option value="birthday">Birthday</option>
+                  <option value="anniversary">Anniversary</option>
+                  <option value="proposal">Proposal</option>
+                  <option value="business">Business Dinner</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="notes">Special Requests</label>
+                <textarea id="notes" name="notes" rows="3" placeholder="Dietary requirements, allergies, high chair needed, etc."></textarea>
+              </div>
+
+              <button type="submit" class="btn btn--gold btn--full">
+                <span class="btn__text">Confirm Reservation</span>
+                <span class="btn__loader"><i class="ri-loader-4-line"></i></span>
+              </button>
+            </form>
+
+            <!-- Success State -->
+            <div class="booking-success" id="bookingSuccess">
+              <i class="ri-checkbox-circle-line"></i>
+              <h3>Table Reserved!</h3>
+              <p>Thank you for your booking. We've sent a confirmation to your email and look forward to welcoming you at Rasa.</p>
+              <a href="#home" class="btn btn--outline">Back to Home</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         TESTIMONIALS
+    ═══════════════════════════════════════════ -->
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <p class="section-eyebrow">What Our Guests Say</p>
+          <h2 class="section-title">Stories at the Table</h2>
+        </div>
+
+        <div class="swiper testimonials-swiper" data-aos="fade-up">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <article class="testimonial-card">
+                <div class="testimonial-card__stars">
+                  <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                </div>
+                <blockquote class="testimonial-card__text">
+                  "Rasa is not just a restaurant — it's an experience that stays with you for weeks. The Rogan Josh was the finest I've ever eaten, and the ambiance is extraordinary. London's best-kept secret."
+                </blockquote>
+                <div class="testimonial-card__author">
+                  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=80&auto=format&fit=crop" alt="Sarah W." loading="lazy" />
+                  <div>
+                    <strong>Sarah W.</strong>
+                    <span>London, UK</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="swiper-slide">
+              <article class="testimonial-card">
+                <div class="testimonial-card__stars">
+                  <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                </div>
+                <blockquote class="testimonial-card__text">
+                  "We celebrated our anniversary here and it was absolutely magical. The tasting menu is a journey through India — each course more surprising than the last. The sommelier's wine pairing was impeccable."
+                </blockquote>
+                <div class="testimonial-card__author">
+                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80&auto=format&fit=crop" alt="Michael &amp; Clara T." loading="lazy" />
+                  <div>
+                    <strong>Michael &amp; Clara T.</strong>
+                    <span>New York, USA</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="swiper-slide">
+              <article class="testimonial-card">
+                <div class="testimonial-card__stars">
+                  <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                </div>
+                <blockquote class="testimonial-card__text">
+                  "I've eaten at Michelin-starred restaurants across Europe, and Rasa holds its own with the very best. Chef Mehta's use of spice is unlike anything — it's building a symphony, not just adding heat."
+                </blockquote>
+                <div class="testimonial-card__author">
+                  <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&q=80&auto=format&fit=crop" alt="François D." loading="lazy" />
+                  <div>
+                    <strong>François D.</strong>
+                    <span>Paris, France</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="swiper-slide">
+              <article class="testimonial-card">
+                <div class="testimonial-card__stars">
+                  <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                </div>
+                <blockquote class="testimonial-card__text">
+                  "The Dal Makhani reminded me of my mother's kitchen in Delhi — yet it was entirely elevated. Rasa manages that rare thing: it makes you feel at home while taking you somewhere entirely new."
+                </blockquote>
+                <div class="testimonial-card__author">
+                  <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80&auto=format&fit=crop" alt="Deepika R." loading="lazy" />
+                  <div>
+                    <strong>Deepika R.</strong>
+                    <span>Mumbai, India</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         AWARDS & PRESS
+    ═══════════════════════════════════════════ -->
+    <section class="awards" id="awards">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <p class="section-eyebrow">Recognition</p>
+          <h2 class="section-title">Awards &amp; Press</h2>
+        </div>
+
+        <div class="awards__strip" data-aos="fade-up">
+          <div class="award-item">
+            <i class="ri-award-fill award-icon"></i>
+            <span class="award-name">Michelin Star</span>
+            <span class="award-year">2019 – Present</span>
+          </div>
+          <div class="award-item">
+            <i class="ri-star-fill award-icon"></i>
+            <span class="award-name">AA 3 Rosettes</span>
+            <span class="award-year">2020 – Present</span>
+          </div>
+          <div class="award-item">
+            <i class="ri-trophy-fill award-icon"></i>
+            <span class="award-name">Top 50 Restaurants UK</span>
+            <span class="award-year">2021, 2022, 2024</span>
+          </div>
+          <div class="award-item">
+            <i class="ri-newspaper-fill award-icon"></i>
+            <span class="award-name">Times Restaurant of the Year</span>
+            <span class="award-year">2022</span>
+          </div>
+          <div class="award-item">
+            <i class="ri-global-fill award-icon"></i>
+            <span class="award-name">Condé Nast Traveller</span>
+            <span class="award-year">Best Indian, UK 2023</span>
+          </div>
+          <div class="award-item">
+            <i class="ri-heart-fill award-icon"></i>
+            <span class="award-name">Chef of the Year — AA</span>
+            <span class="award-year">Arjun Mehta, 2022</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         CONTACT + HOURS + MAP
+    ═══════════════════════════════════════════ -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="section-header" data-aos="fade-up">
+          <p class="section-eyebrow">Find Us</p>
+          <h2 class="section-title">Contact &amp; Location</h2>
+        </div>
+
+        <div class="contact__grid">
+          <div class="contact__info" data-aos="fade-up" data-aos-delay="100">
+            <h3>Visit Rasa</h3>
+            <address>
+              <p><i class="ri-map-pin-2-line"></i> 14 Mayfair Lane<br>London, W1J 7BX<br>United Kingdom</p>
+              <p><i class="ri-phone-line"></i> <a href="tel:+442071234567">+44 (0)20 7123 4567</a></p>
+              <p><i class="ri-mail-line"></i> <a href="mailto:hello@rasalondon.co.uk">hello@rasalondon.co.uk</a></p>
+            </address>
+            <div class="contact__social">
+              <a href="#" class="social-link" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+              <a href="#" class="social-link" aria-label="Facebook"><i class="ri-facebook-circle-line"></i></a>
+              <a href="#" class="social-link" aria-label="TripAdvisor"><i class="ri-tripadvisor-line"></i></a>
+              <a href="#" class="social-link" aria-label="Twitter"><i class="ri-twitter-x-line"></i></a>
+            </div>
+          </div>
+
+          <div class="contact__hours" data-aos="fade-up" data-aos-delay="200">
+            <h3>Opening Hours</h3>
+            <table class="hours-table">
+              <tbody>
+                <tr><td>Monday</td><td><span class="hours-closed">Closed</span></td></tr>
+                <tr><td>Tuesday – Saturday</td><td>12:00 – 14:30<br>18:00 – 22:30</td></tr>
+                <tr><td>Sunday</td><td>12:00 – 16:00 (Brunch)<br>18:00 – 21:30</td></tr>
+              </tbody>
+            </table>
+            <p class="contact__note"><i class="ri-information-line"></i> Last orders 30 minutes before close. Kitchen holidays vary — check social media.</p>
+          </div>
+
+          <div class="contact__map" data-aos="fade-up" data-aos-delay="300">
+            <h3>Find Us</h3>
+            <div class="map-embed">
+              <!-- Mayfair, London coordinates -->
+              <iframe
+                title="Rasa Restaurant Location — Mayfair, London"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-0.1510%2C51.5070%2C-0.1410%2C51.5120&layer=mapnik&marker=51.5095%2C-0.1460"
+                allowfullscreen
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <span class="footer__logo">Rasa</span>
+          <p class="footer__tagline">The Essence of Indian Cuisine</p>
+          <div class="footer__social">
+            <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+            <a href="#" aria-label="Facebook"><i class="ri-facebook-circle-line"></i></a>
+            <a href="#" aria-label="TripAdvisor"><i class="ri-tripadvisor-line"></i></a>
+            <a href="#" aria-label="Twitter"><i class="ri-twitter-x-line"></i></a>
+          </div>
+        </div>
+
+        <nav class="footer__nav" aria-label="Footer navigation">
+          <div class="footer__nav-col">
+            <h4>Experience</h4>
+            <ul>
+              <li><a href="#about">Our Story</a></li>
+              <li><a href="#menu">Menu</a></li>
+              <li><a href="#signatures">Signature Dishes</a></li>
+              <li><a href="#gallery">Gallery</a></li>
+            </ul>
+          </div>
+          <div class="footer__nav-col">
+            <h4>Visit</h4>
+            <ul>
+              <li><a href="#reservations">Reserve a Table</a></li>
+              <li><a href="#chefs">Meet Our Chefs</a></li>
+              <li><a href="#contact">Location &amp; Hours</a></li>
+              <li><a href="#testimonials">Guest Reviews</a></li>
+            </ul>
+          </div>
+          <div class="footer__nav-col">
+            <h4>Contact</h4>
+            <ul>
+              <li><a href="tel:+442071234567">+44 (0)20 7123 4567</a></li>
+              <li><a href="mailto:hello@rasalondon.co.uk">hello@rasalondon.co.uk</a></li>
+              <li>14 Mayfair Lane, London</li>
+              <li>W1J 7BX, United Kingdom</li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; 2026 Rasa Ltd. All rights reserved.</p>
+        <p class="footer__legal">
+          <a href="#">Privacy Policy</a>
+          <span>·</span>
+          <a href="#">Terms of Service</a>
+          <span>·</span>
+          <a href="#">Allergen Information</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Back to top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      <i class="ri-arrow-up-line"></i>
+    </button>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════════ -->
+  <!-- Lenis smooth scroll -->
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <!-- Swiper -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- GLightbox -->
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+  <!-- App scripts -->
+  <script src="js/menu-filter.js"></script>
+  <script src="js/gsap-animations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,393 @@
+/* ═══════════════════════════════════════════════════════════
+   RASA RESTAURANT — ANIMATIONS
+   ─────────────────────────────────────────────────────────
+   Keyframes, micro-interactions, transitions, scroll indicators
+═══════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────
+   KEYFRAME DEFINITIONS
+   ───────────────────────────────────── */
+
+@keyframes marqueeScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes scrollLine {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  45%  { transform: scaleY(1); transform-origin: top; }
+  55%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+@keyframes fadeInPanel {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(0.8); opacity: 0.8; }
+  70%  { transform: scale(1.4); opacity: 0; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10%       { transform: translate(-2%, -3%); }
+  20%       { transform: translate(3%, 2%); }
+  30%       { transform: translate(-1%, 4%); }
+  40%       { transform: translate(4%, -1%); }
+  50%       { transform: translate(-3%, 3%); }
+  60%       { transform: translate(2%, -4%); }
+  70%       { transform: translate(-4%, 2%); }
+  80%       { transform: translate(3%, -3%); }
+  90%       { transform: translate(-2%, 1%); }
+}
+
+@keyframes counterUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes drawUnderline {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+@keyframes ripple {
+  0%   { transform: scale(0); opacity: 0.4; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+@keyframes bounceArrow {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(6px); }
+}
+
+/* ─────────────────────────────────────
+   GRAIN ANIMATION
+   ───────────────────────────────────── */
+
+.hero__grain {
+  animation: grain 6s steps(1) infinite;
+  will-change: transform;
+}
+
+/* ─────────────────────────────────────
+   HERO SCROLL INDICATOR
+   ───────────────────────────────────── */
+
+.hero__scroll-indicator {
+  animation: bounceArrow 2.2s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────
+   BUTTON RIPPLE EFFECT
+   ───────────────────────────────────── */
+
+.btn {
+  overflow: hidden;
+}
+
+.btn .ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  width: 10px; height: 10px;
+  pointer-events: none;
+  animation: ripple 0.6s ease-out forwards;
+  transform: translate(-50%, -50%);
+}
+
+/* ─────────────────────────────────────
+   NAV LINK UNDERLINE DRAW
+   ───────────────────────────────────── */
+
+.nav__link::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -4px;
+  height: 1px;
+  background: var(--color-accent);
+  width: 0;
+  transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ─────────────────────────────────────
+   DISH / CHEF CARD HOVER TRANSITIONS
+   ───────────────────────────────────── */
+
+.dish-card,
+.chef-card,
+.menu-item,
+.award-item {
+  will-change: transform;
+}
+
+/* ─────────────────────────────────────
+   FLOATING BADGE ANIMATION
+   ───────────────────────────────────── */
+
+.hero__badge {
+  animation: float 4s ease-in-out infinite;
+}
+
+.hero__badge:nth-child(2) {
+  animation-delay: 0.7s;
+}
+
+.hero__badge:nth-child(3) {
+  animation-delay: 1.4s;
+}
+
+/* ─────────────────────────────────────
+   DIETARY BADGE ENTRANCE
+   ───────────────────────────────────── */
+
+.menu-item .dish-badge {
+  transition: transform 0.2s var(--transition-spring), box-shadow 0.2s;
+}
+
+.menu-item:hover .dish-badge {
+  transform: scale(1.08);
+}
+
+/* ─────────────────────────────────────
+   ABOUT IMAGE CLIP REVEAL
+   Triggered by IntersectionObserver
+   ───────────────────────────────────── */
+
+.about__image-clip {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.2s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.about__image-clip.revealed {
+  clip-path: inset(0 0% 0 0);
+}
+
+/* ─────────────────────────────────────
+   GALLERY ITEM STAGGER (via AOS delay)
+   ───────────────────────────────────── */
+
+.gallery__item {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.5s ease;
+}
+
+/* ─────────────────────────────────────
+   FORM INPUT FOCUS TRANSITION
+   ───────────────────────────────────── */
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  transition: border-color 0.25s ease,
+              box-shadow 0.25s ease,
+              background-color 0.3s ease;
+}
+
+/* ─────────────────────────────────────
+   THEME TRANSITION — smooth global switch
+   ───────────────────────────────────── */
+
+body,
+.nav,
+.about,
+.signatures,
+.menu-section,
+.gallery,
+.chefs,
+.reservations,
+.testimonials,
+.awards,
+.contact,
+.footer,
+.dish-card,
+.chef-card,
+.menu-item,
+.award-item,
+.testimonial-card,
+.booking-form input,
+.booking-form select,
+.booking-form textarea {
+  transition:
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    color 0.4s ease;
+}
+
+/* ─────────────────────────────────────
+   AWARD ICON HOVER ANIMATION
+   ───────────────────────────────────── */
+
+.award-item:hover .award-icon {
+  animation: float 1.5s ease-in-out;
+}
+
+/* ─────────────────────────────────────
+   COUNTER NUMBER ANIMATE
+   ───────────────────────────────────── */
+
+.about__stat-number {
+  will-change: contents;
+  display: inline-block;
+}
+
+.about__stat.counting .about__stat-number {
+  animation: counterUp 0.5s ease forwards;
+}
+
+/* ─────────────────────────────────────
+   LOADER / SKELETON SHIMMER
+   ───────────────────────────────────── */
+
+.skeleton {
+  background: linear-gradient(90deg,
+    var(--color-bg-card) 25%,
+    var(--color-bg-alt) 50%,
+    var(--color-bg-card) 75%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+/* ─────────────────────────────────────
+   MOBILE MENU LINK STAGGER
+   ───────────────────────────────────── */
+
+.mobile-menu__link {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease, color 0.3s ease;
+}
+
+.mobile-menu.open .mobile-menu__link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-menu.open li:nth-child(1) .mobile-menu__link { transition-delay: 0.1s; }
+.mobile-menu.open li:nth-child(2) .mobile-menu__link { transition-delay: 0.15s; }
+.mobile-menu.open li:nth-child(3) .mobile-menu__link { transition-delay: 0.2s; }
+.mobile-menu.open li:nth-child(4) .mobile-menu__link { transition-delay: 0.25s; }
+.mobile-menu.open li:nth-child(5) .mobile-menu__link { transition-delay: 0.3s; }
+.mobile-menu.open li:nth-child(6) .mobile-menu__link { transition-delay: 0.35s; }
+
+/* ─────────────────────────────────────
+   PAGE LOAD — prevent FOUC
+   ───────────────────────────────────── */
+
+body {
+  opacity: 0;
+  animation: fadeInPanel 0.5s ease 0.1s forwards;
+}
+
+/* ─────────────────────────────────────
+   AOS CUSTOM OVERRIDES
+   Ensure consistent with our theme
+   ───────────────────────────────────── */
+
+[data-aos] {
+  pointer-events: none;
+}
+
+[data-aos].aos-animate {
+  pointer-events: auto;
+}
+
+/* ─────────────────────────────────────
+   SWIPER SLIDE ENTRANCE
+   ───────────────────────────────────── */
+
+.swiper-slide {
+  height: auto;
+  opacity: 0.5;
+  transform: scale(0.96);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.swiper-slide-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ─────────────────────────────────────
+   BACK TO TOP BUTTON
+   ───────────────────────────────────── */
+
+.back-to-top {
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* ─────────────────────────────────────
+   CHEF QUOTE PARALLAX PLACEHOLDER
+   (GSAP handles the actual parallax)
+   ───────────────────────────────────── */
+
+.chefs__quote-bg img {
+  will-change: transform;
+}
+
+/* ─────────────────────────────────────
+   SECTION DIVIDERS — subtle gradient lines
+   ───────────────────────────────────── */
+
+section + section {
+  position: relative;
+}
+
+/* ─────────────────────────────────────
+   FOCUS-VISIBLE STYLES (Accessibility)
+   ───────────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ─────────────────────────────────────
+   SELECTION COLOR
+   ───────────────────────────────────── */
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+/* ─────────────────────────────────────
+   SCROLLBAR STYLING
+   ───────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-hover);
+}
