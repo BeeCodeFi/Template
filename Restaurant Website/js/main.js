@@ -60,17 +60,24 @@ function initAOS() {
 function initGLightbox() {
   if (typeof GLightbox === 'undefined') return;
 
-  GLightbox({
+  const lightbox = GLightbox({
     selector: '.glightbox',
     touchNavigation: true,
     loop: true,
     autoplayVideos: false,
     openEffect: 'fade',
     closeEffect: 'fade',
-    cssEfects: {
+    cssEffects: {
       fade: { in: 'fadeIn', out: 'fadeOut' }
     },
+    zoomable: false,
+    draggable: true,
   });
+
+  // Pause Lenis smooth scroll while lightbox is open —
+  // prevents scroll-position conflicts with position:fixed overlay
+  lightbox.on('open', () => { if (lenis) lenis.stop(); });
+  lightbox.on('close', () => { if (lenis) lenis.start(); });
 }
 
 /* ─────────────────────────────────────
