@@ -60,11 +60,11 @@ function initAOS() {
    ───────────────────────────────────── */
 
 function initCustomLightbox() {
-  // Build DOM
-  const lb = document.createElement('div');
+  // Build DOM — use <dialog> so showModal() places it in the browser's top layer.
+  // Top-layer elements are always above all page content, immune to z-index,
+  // transforms, backdrop-filter, or will-change on any ancestor.
+  const lb = document.createElement('dialog');
   lb.id = 'rasa-lightbox';
-  lb.setAttribute('role', 'dialog');
-  lb.setAttribute('aria-modal', 'true');
   lb.setAttribute('aria-label', 'Image lightbox');
   lb.innerHTML = `
     <button class="lb-btn lb-close" aria-label="Close lightbox"><i class="ri-close-line"></i></button>
@@ -137,13 +137,23 @@ function initCustomLightbox() {
     collectItems();
     if (!items.length) return;
     show(idx);
-    lb.classList.add('lb-open');
+    lb.showModal();                                           // enters top layer
+    requestAnimationFrame(() => lb.classList.add('lb-open')); // triggers fade-in
     lb.querySelector('.lb-close').focus({ preventScroll: true });
   }
 
   function close() {
-    lb.classList.remove('lb-open');
+    if (!lb.open) return;
+    lb.classList.remove('lb-open');                           // triggers fade-out
+    setTimeout(() => { if (lb.open) lb.close(); }, 320);     // remove from top layer after transition
   }
+
+  // Intercept native Escape key — <dialog> fires 'cancel' before auto-closing.
+  // We prevent the instant close and use our animated close instead.
+  lb.addEventListener('cancel', (e) => {
+    e.preventDefault();
+    close();
+  });
 
   lb.querySelector('.lb-close').addEventListener('click', (e) => { e.stopPropagation(); close(); });
   lb.querySelector('.lb-prev').addEventListener('click',  (e) => { e.stopPropagation(); show(current - 1); });
@@ -152,8 +162,8 @@ function initCustomLightbox() {
   lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
 
   document.addEventListener('keydown', (e) => {
-    if (!lb.classList.contains('lb-open')) return;
-    if (e.key === 'Escape')     close();
+    if (!lb.open) return;
+    // Escape is handled by the 'cancel' event above
     if (e.key === 'ArrowLeft')  show(current - 1);
     if (e.key === 'ArrowRight') show(current + 1);
   });

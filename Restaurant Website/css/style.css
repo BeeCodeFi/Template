@@ -2378,27 +2378,46 @@ section {
    ───────────────────────────────────── */
 
 #rasa-lightbox {
+  /* ── Reset <dialog> UA defaults ── */
+  border: none;
+  outline: none;
+  padding: 72px 88px 48px;
+  margin: 0;
+  max-width: none;
+  max-height: none;
+  /* ── Full-viewport coverage ── */
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 999999;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  /* ── Appearance ── */
   background: rgba(4, 4, 8, 0.96);
+  /* ── Layout ── */
   display: flex;
   align-items: center;
   justify-content: center;
-  /* padding: top leaves room for close btn; sides for prev/next; bottom for caption */
-  padding: 72px 88px 48px;
-  box-sizing: border-box;
+  /* ── Hidden state (opacity-based, not display-based) ── */
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
 
+/* When <dialog> has the [open] attribute (set by showModal()),
+   override the browser's forced display:block back to flex. */
+#rasa-lightbox[open] {
+  display: flex;
+}
+
 #rasa-lightbox.lb-open {
   opacity: 1;
   pointer-events: auto;
+}
+
+/* Keep backdrop transparent — the dialog background IS the dark overlay.
+   The backdrop still exists and blocks pointer events to the page below. */
+#rasa-lightbox::backdrop {
+  background: transparent;
 }
 
 .lb-content {
@@ -2476,9 +2495,11 @@ section {
   flex-shrink: 0;
 }
 
-/* Close / Prev / Next buttons */
+/* Close / Prev / Next buttons — position:absolute relative to the dialog
+   (which covers the full viewport), giving identical visual placement to
+   position:fixed but without the "fixed-inside-fixed" instability. */
 .lb-btn {
-  position: fixed;
+  position: absolute;
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.14);
   color: rgba(255, 255, 255, 0.85);
@@ -2490,7 +2511,6 @@ section {
   font-size: 1.5rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  z-index: 1000000;
   backdrop-filter: blur(8px);
 }
 
