@@ -565,4 +565,216 @@ document.addEventListener('DOMContentLoaded', () => {
   initRipple();
   initBookingForm();
   initActiveNav();
+  // Premium loop animations
+  initTextScramble();
+  initMagneticButtons();
+  initCardTilt();
+  initHeroParticles();
+  initCursorSpotlight();
 });
+
+/* ─────────────────────────────────────
+   TEXT SCRAMBLE
+   Section eyebrows cycle through random
+   glyphs then resolve to real text on
+   scroll entry — signature luxury effect
+   ───────────────────────────────────── */
+
+function initTextScramble() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ·✦—◆';
+
+  class Scramble {
+    constructor(el) {
+      this.el = el;
+      this.original = el.textContent.trim();
+      this.frame = 0;
+      this.queue = [];
+      this.raf = null;
+      this.tick = this.tick.bind(this);
+    }
+
+    start() {
+      this.frame = 0;
+      this.queue = [...this.original].map((char, i) => ({
+        to: char,
+        start: Math.floor(i * 1.8),
+        end: Math.floor(i * 1.8) + Math.floor(Math.random() * 10 + 6),
+        glyph: '',
+      }));
+      cancelAnimationFrame(this.raf);
+      this.tick();
+    }
+
+    tick() {
+      let out = '';
+      let done = 0;
+      for (const item of this.queue) {
+        if (this.frame >= item.end) {
+          done++;
+          out += item.to;
+        } else if (this.frame >= item.start) {
+          if (!item.glyph || Math.random() < 0.3) {
+            item.glyph = item.to === ' '
+              ? ' '
+              : CHARS[Math.floor(Math.random() * CHARS.length)];
+          }
+          out += `<span class="scramble-glyph">${item.glyph}</span>`;
+        } else {
+          out += item.to === ' ' ? ' ' : '<span class="scramble-glyph">\xb7</span>';
+        }
+      }
+      this.el.innerHTML = out;
+      this.frame++;
+      if (done < this.queue.length) {
+        this.raf = requestAnimationFrame(this.tick);
+      } else {
+        this.el.textContent = this.original; // clean up spans
+      }
+    }
+  }
+
+  document.querySelectorAll('.section-eyebrow').forEach((el) => {
+    const fx = new Scramble(el);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          fx.start();
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.8 }
+    );
+    observer.observe(el);
+  });
+}
+
+/* ─────────────────────────────────────
+   MAGNETIC BUTTONS
+   CTA buttons slightly attract toward
+   the cursor when hovering nearby
+   ───────────────────────────────────── */
+
+function initMagneticButtons() {
+  if (!window.matchMedia('(pointer: fine)').matches) return;
+
+  document.querySelectorAll('.btn--gold, .btn--outline').forEach((btn) => {
+    let bounds = null;
+
+    btn.addEventListener('mouseenter', () => {
+      bounds = btn.getBoundingClientRect();
+      btn.classList.add('magnetic-active');
+    });
+
+    btn.addEventListener('mousemove', (e) => {
+      if (!bounds) return;
+      const cx = bounds.left + bounds.width / 2;
+      const cy = bounds.top + bounds.height / 2;
+      const dx = (e.clientX - cx) * 0.28;
+      const dy = (e.clientY - cy) * 0.28;
+      btn.style.transform = `translate(${dx}px, ${dy}px)`;
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      btn.classList.remove('magnetic-active');
+      btn.style.transition = 'transform 0.55s cubic-bezier(0.23, 1, 0.32, 1)';
+      btn.style.transform = '';
+      bounds = null;
+      setTimeout(() => (btn.style.transition = ''), 600);
+    });
+  });
+}
+
+/* ─────────────────────────────────────
+   3D CARD TILT
+   Dish cards, chef cards, and award
+   tiles tilt in 3D on mousemove —
+   like a holographic trading card
+   ───────────────────────────────────── */
+
+function initCardTilt() {
+  if (!window.matchMedia('(pointer: fine)').matches) return;
+
+  document.querySelectorAll('.dish-card, .chef-card, .award-item').forEach((card) => {
+    card.addEventListener('mouseenter', () => {
+      card.style.transition = 'transform 0.08s ease, box-shadow 0.08s ease';
+    });
+
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = [
+        'perspective(900px)',
+        `rotateY(${x * 12}deg)`,
+        `rotateX(${-y * 12}deg)`,
+        'translateZ(10px)',
+      ].join(' ');
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform 0.65s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.65s ease';
+      card.style.transform = '';
+    });
+  });
+}
+
+/* ─────────────────────────────────────
+   HERO FLOATING PARTICLES
+   18 gold/saffron spice-dust motes
+   drift upward through the hero
+   ───────────────────────────────────── */
+
+function initHeroParticles() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('span');
+    p.className = 'hero__particle';
+    const size = Math.random() * 3 + 1;
+    p.style.cssText = [
+      `left:${Math.random() * 100}%`,
+      `width:${size}px`,
+      `height:${size}px`,
+      `--drift:${(Math.random() - 0.5) * 100}px`,
+      `animation-delay:${Math.random() * 12}s`,
+      `animation-duration:${Math.random() * 10 + 10}s`,
+    ].join(';');
+    hero.appendChild(p);
+  }
+}
+
+/* ─────────────────────────────────────
+   CURSOR SPOTLIGHT
+   Soft radial gradient follows cursor
+   with gentle lerp for silky movement
+   ───────────────────────────────────── */
+
+function initCursorSpotlight() {
+  if (!window.matchMedia('(pointer: fine)').matches) return;
+
+  const spotlight = document.createElement('div');
+  spotlight.className = 'cursor-spotlight';
+  document.body.appendChild(spotlight);
+
+  let targetX = window.innerWidth / 2;
+  let targetY = window.innerHeight / 2;
+  let currentX = targetX;
+  let currentY = targetY;
+
+  window.addEventListener('mousemove', (e) => {
+    targetX = e.clientX;
+    targetY = e.clientY;
+  });
+
+  (function animate() {
+    currentX += (targetX - currentX) * 0.06;
+    currentY += (targetY - currentY) * 0.06;
+    spotlight.style.setProperty('--x', `${currentX}px`);
+    spotlight.style.setProperty('--y', `${currentY}px`);
+    requestAnimationFrame(animate);
+  })();
+}
