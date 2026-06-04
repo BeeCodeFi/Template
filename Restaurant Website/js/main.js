@@ -141,24 +141,15 @@ function initCustomLightbox() {
     collectItems();
     show(idx);
     lb.classList.add('lb-open');
-    // Lock body in place without losing scroll position
+    // Pause Lenis and block native scroll without touching body position
     if (typeof lenis !== 'undefined' && lenis) lenis.stop();
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${savedScrollY}px`;
-    document.body.style.left = '0';
-    document.body.style.right = '0';
-    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
     lb.querySelector('.lb-close').focus({ preventScroll: true });
   }
 
   function close() {
     lb.classList.remove('lb-open');
-    // Restore body positioning first
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.left = '';
-    document.body.style.right = '';
-    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
     // Restore scroll position instantly before Lenis resumes
     window.scrollTo({ top: savedScrollY, behavior: 'instant' });
     if (typeof lenis !== 'undefined' && lenis) lenis.start();

@@ -2376,8 +2376,8 @@ section {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   z-index: 999999;
   background: rgba(4, 4, 8, 0.96);
   display: flex;
@@ -2403,13 +2403,13 @@ section {
   align-items: center;
   width: 100%;
   max-width: 1100px;
-  /* prevent any child overflow */
-  overflow: hidden;
+  max-height: calc(100vh - 120px);
+  overflow: visible;
 }
 
 .lb-img {
   /* Use vh directly — percentages inside flex columns are unreliable */
-  max-height: calc(100vh - 200px);
+  max-height: calc(100vh - 260px);
   max-width: 100%;
   width: auto;
   height: auto;
@@ -2517,7 +2517,7 @@ section {
 
 @media (max-width: 600px) {
   #rasa-lightbox { padding: 64px 52px 40px; }
-  .lb-img { max-height: calc(100vh - 180px); }
+  .lb-img { max-height: calc(100vh - 230px); }
   .lb-btn { width: 40px; height: 40px; font-size: 1.25rem; }
   .lb-prev { left: 0.5rem; }
   .lb-next { right: 0.5rem; }
