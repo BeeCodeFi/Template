@@ -54,30 +54,139 @@ function initAOS() {
 }
 
 /* ─────────────────────────────────────
-   GLIGHTBOX — GALLERY LIGHTBOX
+   CUSTOM LIGHTBOX
+   Zero-dependency, always viewport-centered.
+   Keyboard nav, touch swipe, Lenis pause.
    ───────────────────────────────────── */
 
-function initGLightbox() {
-  if (typeof GLightbox === 'undefined') return;
+function initCustomLightbox() {
+  // Build DOM
+  const lb = document.createElement('div');
+  lb.id = 'rasa-lightbox';
+  lb.setAttribute('role', 'dialog');
+  lb.setAttribute('aria-modal', 'true');
+  lb.setAttribute('aria-label', 'Image lightbox');
+  lb.innerHTML = `
+    <button class="lb-btn lb-close" aria-label="Close lightbox"><i class="ri-close-line"></i></button>
+    <button class="lb-btn lb-prev"  aria-label="Previous image"><i class="ri-arrow-left-s-line"></i></button>
+    <button class="lb-btn lb-next"  aria-label="Next image"><i class="ri-arrow-right-s-line"></i></button>
+    <div class="lb-content">
+      <img class="lb-img" src="" alt="" />
+      <p class="lb-caption"></p>
+      <p class="lb-counter"></p>
+    </div>`;
+  document.body.appendChild(lb);
 
-  const lightbox = GLightbox({
-    selector: '.glightbox',
-    touchNavigation: true,
-    loop: true,
-    autoplayVideos: false,
-    openEffect: 'fade',
-    closeEffect: 'fade',
-    cssEffects: {
-      fade: { in: 'fadeIn', out: 'fadeOut' }
-    },
-    zoomable: false,
-    draggable: true,
+  const lbImg     = lb.querySelector('.lb-img');
+  const lbCaption = lb.querySelector('.lb-caption');
+  const lbCounter = lb.querySelector('.lb-counter');
+
+  // Collect all gallery items at init time
+  let items = [];
+  let current = 0;
+  let touchStartX = 0;
+
+  function collectItems() {
+    items = [...document.querySelectorAll('.gallery__item[data-lightbox]')].map(el => ({
+      href:    el.getAttribute('data-href') || '',
+      caption: el.getAttribute('data-caption') || '',
+    }));
+  }
+
+  function show(idx) {
+    current = ((idx % items.length) + items.length) % items.length;
+    const item = items[current];
+    lbImg.classList.add('lb-loading');
+    lbCaption.textContent = item.caption;
+    lbCounter.textContent = `${current + 1} / ${items.length}`;
+    const tmp = new Image();
+    tmp.onload = () => {
+      lbImg.src = tmp.src;
+      lbImg.alt = item.caption;
+      lbImg.classList.remove('lb-loading');
+    };
+    tmp.src = item.href;
+  }
+
+  function open(idx) {
+    collectItems();
+    show(idx);
+    lb.classList.add('lb-open');
+    document.body.style.overflow = 'hidden';
+    if (lenis) lenis.stop();
+    lb.querySelector('.lb-close').focus();
+  }
+
+  function close() {
+    lb.classList.remove('lb-open');
+    document.body.style.overflow = '';
+    if (lenis) lenis.start();
+  }
+
+  // Wire up gallery item clicks
+  document.addEventListener('click', (e) => {
+    const item = e.target.closest('.gallery__item[data-lightbox]');
+    if (!item) return;
+    e.preventDefault();
+    collectItems();
+    const idx = [...document.querySelectorAll('.gallery__item[data-lightbox]')].indexOf(item);
+    open(idx >= 0 ? idx : 0);
   });
 
-  // Pause Lenis smooth scroll while lightbox is open —
-  // prevents scroll-position conflicts with position:fixed overlay
-  lightbox.on('open', () => { if (lenis) lenis.stop(); });
-  lightbox.on('close', () => { if (lenis) lenis.start(); });
+  lb.querySelector('.lb-close').addEventListener('click', close);
+  lb.querySelector('.lb-prev').addEventListener('click', () => show(current - 1));
+  lb.querySelector('.lb-next').addEventListener('click', () => show(current + 1));
+
+  // Click outside image closes
+  lb.addEventListener('click', (e) => {
+    if (e.target === lb) close();
+  });
+
+  // Keyboard nav
+  document.addEventListener('keydown', (e) => {
+    if (!lb.classList.contains('lb-open')) return;
+    if (e.key === 'Escape')      close();
+    if (e.key === 'ArrowLeft')   show(current - 1);
+    if (e.key === 'ArrowRight')  show(current + 1);
+  });
+
+  // Touch swipe
+  lb.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+  lb.addEventListener('touchend',   (e) => {
+    const dx = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(dx) > 50) dx < 0 ? show(current + 1) : show(current - 1);
+  });
+}
+
+/* ─────────────────────────────────────
+   GALLERY SWIPER
+   ───────────────────────────────────── */
+
+function initGallerySwiper() {
+  if (typeof Swiper === 'undefined') return;
+
+  new Swiper('.gallery-swiper', {
+    slidesPerView: 1.25,
+    spaceBetween: 16,
+    centeredSlides: true,
+    loop: true,
+    speed: 680,
+    grabCursor: true,
+    navigation: {
+      prevEl: '.gallery-prev',
+      nextEl: '.gallery-next',
+    },
+    breakpoints: {
+      600:  { slidesPerView: 2.1, spaceBetween: 20 },
+      900:  { slidesPerView: 2.8, spaceBetween: 24 },
+      1200: { slidesPerView: 3.4, spaceBetween: 28 },
+      1600: { slidesPerView: 4.0, spaceBetween: 32 },
+    },
+    a11y: {
+      prevSlideMessage: 'Previous image',
+      nextSlideMessage: 'Next image',
+    },
+  });
 }
 
 /* ─────────────────────────────────────
@@ -553,7 +662,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
   initLenis();
   initAOS();
-  initGLightbox();
+  initCustomLightbox();
+  initGallerySwiper();
   initSwiper();
   initNavScroll();
   initMobileMenu();

@@ -1201,31 +1201,46 @@ section {
 }
 
 /* ─────────────────────────────────────
-   12. GALLERY
+   12. GALLERY — SWIPER CAROUSEL
    ───────────────────────────────────── */
 
 .gallery {
   background: var(--color-bg-alt);
   padding-bottom: var(--section-py);
+  overflow: hidden;
 }
 
 .gallery .section-header {
   text-align: center;
 }
 
-.gallery__masonry {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(4, 260px);
-  gap: 1rem;
-  margin-top: 2rem;
+/* Carousel wrap — initial state is invisible; GSAP scrub animates it in */
+.gallery__carousel-wrap {
+  position: relative;
+  margin-top: 2.5rem;
+  opacity: 0;
+  transform: translateY(60px);
+}
+
+/* Swiper itself overflows its container to show partial prev/next slides */
+.gallery-swiper {
+  overflow: visible;
+  padding: 0 clamp(1.25rem, 5vw, 4rem);
+}
+
+.gallery__slide {
+  height: 480px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
 }
 
 .gallery__item {
   display: block;
+  width: 100%;
+  height: 100%;
   position: relative;
   overflow: hidden;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   cursor: zoom-in;
 }
 
@@ -1233,29 +1248,18 @@ section {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s ease;
+  transition: transform 0.7s ease;
   display: block;
 }
 
-/* Explicit grid placement — creates a staggered masonry rhythm */
-.gallery__item:nth-child(1) { grid-area: 1 / 1 / 3 / 2; }
-.gallery__item:nth-child(2) { grid-area: 1 / 2 / 2 / 3; }
-.gallery__item:nth-child(3) { grid-area: 1 / 3 / 3 / 4; }
-.gallery__item:nth-child(4) { grid-area: 2 / 2 / 3 / 3; }
-.gallery__item:nth-child(5) { grid-area: 3 / 1 / 4 / 2; }
-.gallery__item:nth-child(6) { grid-area: 3 / 2 / 5 / 3; }
-.gallery__item:nth-child(7) { grid-area: 3 / 3 / 4 / 4; }
-.gallery__item:nth-child(8) { grid-area: 4 / 1 / 5 / 2; }
-.gallery__item:nth-child(9) { grid-area: 4 / 3 / 5 / 4; }
-
 .gallery__item:hover img {
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
 .gallery__item-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(232, 160, 32, 0.5);
+  background: rgba(10, 10, 15, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1268,14 +1272,60 @@ section {
 }
 
 .gallery__item-overlay i {
-  color: white;
-  font-size: 2rem;
-  transform: rotate(0deg) scale(0.6);
+  color: var(--color-accent);
+  font-size: 2.5rem;
+  transform: scale(0.7);
   transition: transform var(--transition-spring);
+  background: rgba(10, 10, 15, 0.6);
+  border-radius: 50%;
+  width: 64px; height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .gallery__item:hover .gallery__item-overlay i {
-  transform: rotate(0deg) scale(1);
+  transform: scale(1);
+}
+
+/* Gallery navigation buttons */
+.gallery-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 1.625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-card);
+}
+
+.gallery-prev { left: clamp(0.25rem, 1.5vw, 1rem); }
+.gallery-next { right: clamp(0.25rem, 1.5vw, 1rem); }
+
+.gallery-nav:hover {
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border-color: var(--color-accent);
+  transform: translateY(-50%) scale(1.08);
+}
+
+/* Slide counter */
+.gallery-counter {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  letter-spacing: 0.15em;
+  color: var(--color-text-muted);
 }
 
 /* ─────────────────────────────────────
@@ -2268,113 +2318,120 @@ section {
 }
 
 /* ─────────────────────────────────────
-   GLIGHTBOX OVERRIDES
-   Full height-chain fix to ensure centered positioning.
-   GLightbox internally calculates centering but our global
-   CSS resets (img display:block, height:auto) break the
-   flex chain. Override the entire chain explicitly.
+   CUSTOM LIGHTBOX
+   Zero-dependency, always centered.
+   position:fixed with full flex chain,
+   no external library conflicts.
    ───────────────────────────────────── */
 
-.glightbox-container {
-  position: fixed !important;
-  inset: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  z-index: 999999 !important;
-  pointer-events: auto !important;
-  overflow: hidden !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+#rasa-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: rgba(4, 4, 8, 0.96);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
-.goverlay {
-  position: fixed !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
+#rasa-lightbox.lb-open {
+  opacity: 1;
+  pointer-events: auto;
 }
 
-/* Full flex centering chain — every level must have height */
-.gcontainer {
-  position: relative !important;
-  width: 100% !important;
-  height: 100% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  overflow: hidden !important;
-  z-index: 1 !important;
+.lb-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 80px;
+  max-width: min(92vw, 1200px);
+  max-height: 90vh;
 }
 
-.gslider {
-  width: 100% !important;
-  height: 100% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  overflow: hidden !important;
+.lb-img {
+  max-width: 100%;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  display: block;
+  transition: opacity 0.25s ease;
 }
 
-.gslide {
-  width: 100% !important;
-  height: 100% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+.lb-img.lb-loading {
+  opacity: 0.2;
 }
 
-.gslide-inner-content {
-  width: 100% !important;
-  height: 100% !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+.lb-caption {
+  font-family: var(--font-label);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(232, 221, 208, 0.55);
+  margin-top: 1.25rem;
+  text-align: center;
 }
 
-.ginner-container {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: auto !important;
-  height: 100vh !important;
-  max-height: 100vh !important;
-  padding: 2rem !important;
+.lb-counter {
+  font-family: var(--font-label);
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  color: rgba(232, 221, 208, 0.35);
+  margin-top: 0.5rem;
 }
 
-.gslide-image {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+/* Close / Prev / Next buttons */
+.lb-btn {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  width: 52px; height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 1000000;
+  backdrop-filter: blur(8px);
 }
 
-/* Undo global img resets that break GLightbox centering */
-.glightbox-container img {
-  display: block !important;
-  margin: 0 auto !important;
+.lb-btn:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #000;
+  transform: scale(1.1);
 }
 
-.gslide-image img {
-  max-height: 88vh !important;
-  max-width: 88vw !important;
-  width: auto !important;
-  height: auto !important;
-  object-fit: contain !important;
-  display: block !important;
-  margin: 0 auto !important;
-  border-radius: 0 !important;
+.lb-close {
+  top: 1.5rem;
+  right: 1.5rem;
 }
 
-/* Navigation buttons stay at viewport center */
-.gnext,
-.gprev {
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  position: fixed !important;
+.lb-prev {
+  top: 50%;
+  left: 1.25rem;
+  transform: translateY(-50%);
 }
+.lb-prev:hover { transform: translateY(-50%) scale(1.1); }
 
-.gclose {
-  position: fixed !important;
-  top: 1rem !important;
-  right: 1rem !important;
+.lb-next {
+  top: 50%;
+  right: 1.25rem;
+  transform: translateY(-50%);
+}
+.lb-next:hover { transform: translateY(-50%) scale(1.1); }
+
+@media (max-width: 600px) {
+  .lb-content { padding: 0 52px; }
+  .lb-btn { width: 40px; height: 40px; font-size: 1.25rem; }
+  .lb-prev { left: 0.5rem; }
+  .lb-next { right: 0.5rem; }
 }
