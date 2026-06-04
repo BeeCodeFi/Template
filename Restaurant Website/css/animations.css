@@ -303,12 +303,13 @@ body {
    Ensure consistent with our theme
    ───────────────────────────────────── */
 
-[data-aos] {
-  pointer-events: none;
+/* Custom clip-reveal animation for about section image */
+[data-aos="clip-reveal"] {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.1s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
-[data-aos].aos-animate {
-  pointer-events: auto;
+[data-aos="clip-reveal"].aos-animate {
+  clip-path: inset(0 0 0% 0);
 }
 
 /* ─────────────────────────────────────
