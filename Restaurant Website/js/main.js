@@ -85,46 +85,47 @@ function initCustomLightbox() {
   let current = 0;
   let touchStartX = 0;
 
+  // Only collect from real slides, never Swiper loop-clones
+  function getRealItems() {
+    return [...document.querySelectorAll('.gallery__item[data-lightbox]')]
+      .filter(el => !el.closest('.swiper-slide-duplicate'));
+  }
+
   function collectItems() {
-    items = [...document.querySelectorAll('.gallery__item[data-lightbox]')].map(el => ({
+    items = getRealItems().map(el => ({
       href:    el.getAttribute('data-href') || '',
       caption: el.getAttribute('data-caption') || '',
-      // store thumbnail src for instant preview while full-res loads
       thumb:   el.querySelector('img') ? el.querySelector('img').src : '',
     }));
   }
 
   function show(idx) {
     current = ((idx % items.length) + items.length) % items.length;
-    const item = items[current];
+    const item  = items[current];
+    const token = current; // capture index for async closure — avoids href/URL mismatch
 
     lbCaption.textContent = item.caption;
     lbCounter.textContent = `${current + 1} / ${items.length}`;
 
-    // 1. Show thumbnail immediately (no blank screen)
-    if (item.thumb) {
-      lbImg.src = item.thumb;
-      lbImg.alt = item.caption;
-    }
+    // Show thumbnail immediately so there's never a black frame
+    lbImg.alt = item.caption;
+    if (item.thumb) lbImg.src = item.thumb;
     lbImg.classList.add('lb-loading');
 
-    // 2. Swap in full-res when ready
+    // Load the full-res version; compare by captured index, not by URL string
     const full = new window.Image();
     full.onload = () => {
-      // Only swap if user hasn't already navigated away
-      if (items[current] && items[current].href === full.src) {
+      if (token === current) {
         lbImg.src = full.src;
         lbImg.classList.remove('lb-loading');
       }
     };
     full.onerror = () => {
-      // Full-res failed — thumbnail is already showing, just remove spinner
-      lbImg.classList.remove('lb-loading');
+      if (token === current) lbImg.classList.remove('lb-loading');
     };
-    // Set src AFTER attaching handlers
     full.src = item.href;
 
-    // If full-res is already cached it fires sync — catch that case
+    // Already cached — fires synchronously before onload wires up
     if (full.complete && full.naturalWidth > 0) {
       lbImg.src = full.src;
       lbImg.classList.remove('lb-loading');
@@ -146,13 +147,14 @@ function initCustomLightbox() {
     if (lenis) lenis.start();
   }
 
-  // Gallery item clicks
+  // Gallery item clicks — ignore Swiper loop-clone slides
   document.addEventListener('click', (e) => {
     const item = e.target.closest('.gallery__item[data-lightbox]');
     if (!item) return;
+    if (item.closest('.swiper-slide-duplicate')) return; // clone — skip
     e.preventDefault();
-    collectItems();
-    const all = [...document.querySelectorAll('.gallery__item[data-lightbox]')];
+    e.stopPropagation();
+    const all = getRealItems();
     open(all.indexOf(item) >= 0 ? all.indexOf(item) : 0);
   });
 
@@ -679,11 +681,32 @@ function initActiveNav() {
    INIT ALL
    ───────────────────────────────────── */
 
+/* ─────────────────────────────────────
+   GALLERY HOVER CAPTIONS
+   Reads data-caption from each item and
+   injects it into the overlay so it
+   appears on hover and in the lightbox.
+   ───────────────────────────────────── */
+function initGalleryCaptions() {
+  document.querySelectorAll('.gallery__item[data-caption]').forEach(item => {
+    const caption = item.getAttribute('data-caption');
+    const overlay = item.querySelector('.gallery__item-overlay');
+    if (!overlay || !caption) return;
+    // Avoid duplicating if already added
+    if (overlay.querySelector('.gallery__item-caption')) return;
+    const span = document.createElement('span');
+    span.className = 'gallery__item-caption';
+    span.textContent = caption;
+    overlay.appendChild(span);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
   initLenis();
   initAOS();
   initCustomLightbox();
+  initGalleryCaptions();
   initGallerySwiper();
   initSwiper();
   initNavScroll();
