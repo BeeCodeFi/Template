@@ -2383,6 +2383,9 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
+  /* padding: top leaves room for close btn; sides for prev/next; bottom for caption */
+  padding: 72px 88px 48px;
+  box-sizing: border-box;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
@@ -2398,18 +2401,19 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: calc(100% - 160px);
-  max-width: 1200px;
-  height: calc(100% - 80px);
-  max-height: 90vh;
+  width: 100%;
+  max-width: 1100px;
+  /* prevent any child overflow */
+  overflow: hidden;
 }
 
 .lb-img {
+  /* Use vh directly — percentages inside flex columns are unreliable */
+  max-height: calc(100vh - 200px);
   max-width: 100%;
-  max-height: calc(100% - 80px);
   width: auto;
   height: auto;
+  flex-shrink: 1;
   object-fit: contain;
   border-radius: var(--radius-md);
   display: block;
@@ -2512,8 +2516,8 @@ section {
 .lb-next:hover { transform: translateY(-50%) scale(1.1); }
 
 @media (max-width: 600px) {
-  .lb-content { width: calc(100% - 100px); height: calc(100% - 60px); }
-  .lb-img { max-height: calc(100% - 70px); }
+  #rasa-lightbox { padding: 64px 52px 40px; }
+  .lb-img { max-height: calc(100vh - 180px); }
   .lb-btn { width: 40px; height: 40px; font-size: 1.25rem; }
   .lb-prev { left: 0.5rem; }
   .lb-next { right: 0.5rem; }
