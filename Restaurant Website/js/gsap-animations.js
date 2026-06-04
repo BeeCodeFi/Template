@@ -423,8 +423,149 @@
     );
   }
 
+  /* ─────────────────────────────────────
+     RASA TITLE — LOOPING MULTI-EFFECT ANIMATION
+     Five premium effects cycle indefinitely
+     after the hero entrance completes:
+       1. Saffron shimmer wave
+       2. Levitate wave
+       3. 3D perspective tilt
+       4. Scale radiate from centre
+       5. Glitch & elastic snap
+     ───────────────────────────────────── */
+
+  function initRasaLoopAnimation() {
+    const chars = document.querySelectorAll('.hero__char');
+    if (!chars.length) return;
+
+    const GOLD  = '#E8A020';
+    const WHITE = '#ffffff';
+    const PAUSE = 1.6; // seconds of calm between each effect
+
+    // ── 1. Saffron shimmer: gold wash sweeps L→R then resets R→L ──
+    function shimmerWave() {
+      return gsap.timeline()
+        .to(chars, {
+          color: GOLD,
+          textShadow: '0 0 40px rgba(232,160,32,0.75), 0 0 90px rgba(232,160,32,0.3)',
+          duration: 0.38,
+          stagger: { each: 0.13, ease: 'power1.in' },
+          ease: 'power2.out',
+        })
+        .to(chars, {
+          color: WHITE,
+          textShadow: '0 0 0px rgba(232,160,32,0)',
+          duration: 0.45,
+          stagger: { each: 0.11, from: 'end', ease: 'power1.out' },
+          ease: 'power2.in',
+        }, '+=0.18');
+    }
+
+    // ── 2. Levitate wave: letters rise in sequence then settle ──
+    function levitateWave() {
+      return gsap.timeline()
+        .to(chars, {
+          y: -30,
+          duration: 0.45,
+          stagger: { each: 0.11, ease: 'sine.inOut' },
+          ease: 'power2.out',
+        })
+        .to(chars, {
+          y: 0,
+          duration: 0.55,
+          stagger: { each: 0.11, from: 'end', ease: 'sine.inOut' },
+          ease: 'power2.inOut',
+        }, '-=0.12');
+    }
+
+    // ── 3. 3D perspective tilt: letters rotate on Y axis with depth ──
+    function perspectiveTilt() {
+      return gsap.timeline()
+        .to(chars, {
+          rotationY: 24,
+          transformPerspective: 480,
+          color: 'rgba(255,255,255,0.55)',
+          duration: 0.52,
+          stagger: 0.08,
+          ease: 'power2.inOut',
+        })
+        .to(chars, {
+          rotationY: 0,
+          color: WHITE,
+          duration: 0.58,
+          stagger: { each: 0.08, from: 'end' },
+          ease: 'back.out(1.6)',
+        }, '-=0.08');
+    }
+
+    // ── 4. Scale radiate: letters pulse outward from centre ──
+    function scaleRadiate() {
+      return gsap.timeline()
+        .to(chars, {
+          scale: 1.22,
+          color: GOLD,
+          textShadow: '0 0 24px rgba(232,160,32,0.55)',
+          duration: 0.48,
+          stagger: { each: 0.1, from: 'center', ease: 'power1.out' },
+          ease: 'power2.out',
+        })
+        .to(chars, {
+          scale: 1,
+          color: WHITE,
+          textShadow: '0 0 0px rgba(232,160,32,0)',
+          duration: 0.52,
+          stagger: { each: 0.1, from: 'center', ease: 'power1.in' },
+          ease: 'power2.in',
+        }, '+=0.14');
+    }
+
+    // ── 5. Glitch & elastic snap: brief displacement then spring back ──
+    function glitchSnap() {
+      // Pre-compute offsets so they are stable within one play
+      const offsets = Array.from(chars).map(() => ({
+        x: (Math.random() - 0.5) * 16,
+        y: (Math.random() - 0.5) * 12,
+        skewX: (Math.random() - 0.5) * 10,
+      }));
+      return gsap.timeline()
+        .to(chars, {
+          x: (i) => offsets[i].x,
+          y: (i) => offsets[i].y,
+          skewX: (i) => offsets[i].skewX,
+          color: GOLD,
+          duration: 0.09,
+          stagger: 0.025,
+          ease: 'none',
+        })
+        .to(chars, {
+          x: 0,
+          y: 0,
+          skewX: 0,
+          color: WHITE,
+          duration: 0.65,
+          stagger: 0.04,
+          ease: 'elastic.out(1, 0.45)',
+        }, '+=0.05');
+    }
+
+    const effects = [shimmerWave, levitateWave, perspectiveTilt, scaleRadiate, glitchSnap];
+    let effectIndex = 0;
+
+    function playNextEffect() {
+      const tl = effects[effectIndex]();
+      effectIndex = (effectIndex + 1) % effects.length;
+      tl.eventCallback('onComplete', () => {
+        gsap.delayedCall(PAUSE, playNextEffect);
+      });
+    }
+
+    // Start after the entrance animation finishes (~3.8 s)
+    gsap.delayedCall(3.8, playNextEffect);
+  }
+
   function init() {
     initHeroAnimation();
+    initRasaLoopAnimation();
     initHeroParallax();
     initHeroZoom();
     initAboutParallax();
