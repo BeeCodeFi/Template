@@ -447,7 +447,11 @@ section {
   font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 400;
   color: var(--color-text-dim);
-  transition: color var(--transition-base);
+  /* Must include opacity + transform so the stagger animation in animations.css works.
+     animations.css sets this same selector with a full transition list, but since
+     style.css is loaded after it, this rule would override and strip opacity/transform
+     from the transition — breaking the fade-in stagger. */
+  transition: opacity 0.4s ease, transform 0.4s ease, color var(--transition-base);
   letter-spacing: 0.02em;
 }
 
@@ -1225,11 +1229,13 @@ section {
 .gallery__carousel-wrap {
   position: relative;
   margin-top: 2.5rem;
-  opacity: 0;
-  transform: translateY(60px);
   /* overflow:hidden clips the partial slides at edges */
   overflow: hidden;
   padding: 0 0 1rem;
+  /* NOTE: opacity/transform initial state is set by GSAP inline.
+     Do NOT set opacity:0 here — if GSAP or ScrollTrigger fails
+     (e.g. on mobile where Lenis smoothTouch:false stops scroll events
+     from reaching ScrollTrigger.update), the gallery stays visible. */
 }
 
 /* Swiper: show 3+ partial slides across full width */
@@ -2394,7 +2400,10 @@ section {
   /* ── Appearance ── */
   background: rgba(4, 4, 8, 0.96);
   /* ── Layout ── */
-  display: flex;
+  /* NOTE: do NOT set display:flex here.
+     <dialog> is display:none by UA stylesheet when not open.
+     We only override it in [open] below so it never renders
+     as a covering layer when the lightbox is closed. */
   align-items: center;
   justify-content: center;
   /* ── Hidden state (opacity-based, not display-based) ── */
@@ -2404,7 +2413,8 @@ section {
 }
 
 /* When <dialog> has the [open] attribute (set by showModal()),
-   override the browser's forced display:block back to flex. */
+   override the browser's forced display:block back to flex.
+   This is the ONLY place display:flex is set on the lightbox. */
 #rasa-lightbox[open] {
   display: flex;
 }

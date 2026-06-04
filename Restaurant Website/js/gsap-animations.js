@@ -403,21 +403,25 @@
     const wrap = document.querySelector('.gallery__carousel-wrap');
     if (!wrap) return;
 
-    // Animate from off-state to full visibility, scrubbed to scroll.
-    // ease:'none' is required for scrub to work linearly.
+    // Set initial hidden state inline (GSAP controls it, not CSS).
+    // Use once:true + toggleActions instead of scrub so the animation
+    // fires as a one-shot trigger and doesn't require continuous
+    // ScrollTrigger.update calls — which don't arrive on mobile because
+    // Lenis runs with smoothTouch:false and touch scroll events bypass
+    // the lenis.on('scroll', ScrollTrigger.update) integration.
     gsap.fromTo(
       wrap,
       { opacity: 0, y: 70 },
       {
         opacity: 1,
         y: 0,
-        ease: 'none',
+        duration: 0.9,
+        ease: 'power3.out',
         scrollTrigger: {
           trigger: wrap,
-          start: 'top 92%',
-          end: 'top 28%',
-          scrub: 1.4,
-          // No once:true — reverses when scrolling back up
+          start: 'top 90%',
+          once: true,
+          toggleActions: 'play none none none',
         },
       }
     );

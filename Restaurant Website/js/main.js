@@ -308,16 +308,15 @@ function initMobileMenu() {
     hamburger.classList.add('active');
     mobileMenu.classList.add('open');
     hamburger.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-    if (lenis) lenis.stop();
+    // Do NOT call lenis.stop() — in Lenis v1.1.x it sets pointer-events:none
+    // on the scroll wrapper, freezing all interaction including the menu links.
+    // The full-screen overlay prevents accidental page scrolling anyway.
   }
 
   function closeMenu() {
     hamburger.classList.remove('active');
     mobileMenu.classList.remove('open');
     hamburger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-    if (lenis) lenis.start();
   }
 
   hamburger.addEventListener('click', () => {
