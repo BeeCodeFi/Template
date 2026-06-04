@@ -83,12 +83,12 @@ function initCustomLightbox() {
   const lbCounter = lb.querySelector('.lb-counter');
   const lbSpinner = lb.querySelector('.lb-spinner');
 
-  let items        = [];
-  let current      = 0;
-  let savedScrollY = 0;
-  let touchStartX  = 0;
+  let items       = [];
+  let current     = 0;
+  let touchStartX = 0;
+  // Track pointer-down position to distinguish tap from swipe drag
+  let pdX = 0, pdY = 0;
 
-  // Only collect real slides — never Swiper loop-clones
   function getRealItems() {
     return [...document.querySelectorAll('.gallery__item[data-lightbox]')]
       .filter(el => !el.closest('.swiper-slide-duplicate'));
@@ -102,6 +102,7 @@ function initCustomLightbox() {
   }
 
   function show(idx) {
+    if (!items.length) return;
     current = ((idx % items.length) + items.length) % items.length;
     const item  = items[current];
     const token = current;
@@ -109,15 +110,14 @@ function initCustomLightbox() {
     lbCaption.textContent = item.caption;
     lbCounter.textContent = `${current + 1} / ${items.length}`;
 
-    // Reset: hide previous image, show spinner
     lbImg.style.opacity = '0';
     lbSpinner.style.display = 'flex';
 
     const full = new window.Image();
     full.onload = () => {
       if (token !== current) return;
-      lbImg.src       = full.src;
-      lbImg.alt       = item.caption;
+      lbImg.src = full.src;
+      lbImg.alt = item.caption;
       lbImg.style.opacity = '1';
       lbSpinner.style.display = 'none';
     };
@@ -127,22 +127,19 @@ function initCustomLightbox() {
     };
     full.src = item.href;
 
-    // Already cached — sync fire before handlers
     if (full.complete && full.naturalWidth > 0) {
-      lbImg.src       = full.src;
-      lbImg.alt       = item.caption;
+      lbImg.src = full.src;
+      lbImg.alt = item.caption;
       lbImg.style.opacity = '1';
       lbSpinner.style.display = 'none';
     }
   }
 
   function open(idx) {
-    savedScrollY = window.scrollY || window.pageYOffset;
     collectItems();
+    if (!items.length) return;
     show(idx);
     lb.classList.add('lb-open');
-    // No scroll lock needed — the fixed overlay already covers the full viewport.
-    // Stopping Lenis causes pointer-event freezes in v1.1.x; leave it running.
     lb.querySelector('.lb-close').focus({ preventScroll: true });
   }
 
@@ -150,27 +147,35 @@ function initCustomLightbox() {
     lb.classList.remove('lb-open');
   }
 
-  // Gallery item clicks
-  // NOTE: preventDefault + stopPropagation run FIRST so clone clicks
-  // also get cancelled (prevents page jumping)
+  // Track pointer-down so we can reject swipe drags in the click handler
+  document.addEventListener('pointerdown', (e) => {
+    pdX = e.clientX;
+    pdY = e.clientY;
+  }, { capture: true, passive: true });
+
+  // CAPTURE PHASE (true) — fires before Swiper's preventClicksPropagation
+  // can call stopPropagation, ensuring gallery clicks always reach us.
   document.addEventListener('click', (e) => {
     const item = e.target.closest('.gallery__item[data-lightbox]');
     if (!item) return;
+
+    // Ignore if the pointer moved more than 6px — it was a swipe, not a tap
+    if (Math.abs(e.clientX - pdX) > 6 || Math.abs(e.clientY - pdY) > 6) return;
+
     e.preventDefault();
     e.stopPropagation();
-    if (item.closest('.swiper-slide-duplicate')) return; // was a clone — click is cancelled, nothing else happens
+
+    if (item.closest('.swiper-slide-duplicate')) return;
     const all = getRealItems();
     open(all.indexOf(item) >= 0 ? all.indexOf(item) : 0);
-  });
+  }, true); // <-- capture phase
 
   lb.querySelector('.lb-close').addEventListener('click', (e) => { e.stopPropagation(); close(); });
-  lb.querySelector('.lb-prev').addEventListener('click', (e) => { e.stopPropagation(); show(current - 1); });
-  lb.querySelector('.lb-next').addEventListener('click', (e) => { e.stopPropagation(); show(current + 1); });
+  lb.querySelector('.lb-prev').addEventListener('click',  (e) => { e.stopPropagation(); show(current - 1); });
+  lb.querySelector('.lb-next').addEventListener('click',  (e) => { e.stopPropagation(); show(current + 1); });
 
-  // Click on dark backdrop closes
   lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
 
-  // Keyboard
   document.addEventListener('keydown', (e) => {
     if (!lb.classList.contains('lb-open')) return;
     if (e.key === 'Escape')     close();
@@ -178,7 +183,6 @@ function initCustomLightbox() {
     if (e.key === 'ArrowRight') show(current + 1);
   });
 
-  // Touch swipe
   lb.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
   lb.addEventListener('touchend', (e) => {
     const dx = e.changedTouches[0].screenX - touchStartX;
