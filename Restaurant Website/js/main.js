@@ -81,7 +81,6 @@ function initCustomLightbox() {
   const lbCaption = lb.querySelector('.lb-caption');
   const lbCounter = lb.querySelector('.lb-counter');
 
-  // Collect all gallery items at init time
   let items = [];
   let current = 0;
   let touchStartX = 0;
@@ -90,22 +89,46 @@ function initCustomLightbox() {
     items = [...document.querySelectorAll('.gallery__item[data-lightbox]')].map(el => ({
       href:    el.getAttribute('data-href') || '',
       caption: el.getAttribute('data-caption') || '',
+      // store thumbnail src for instant preview while full-res loads
+      thumb:   el.querySelector('img') ? el.querySelector('img').src : '',
     }));
   }
 
   function show(idx) {
     current = ((idx % items.length) + items.length) % items.length;
     const item = items[current];
-    lbImg.classList.add('lb-loading');
+
     lbCaption.textContent = item.caption;
     lbCounter.textContent = `${current + 1} / ${items.length}`;
-    const tmp = new Image();
-    tmp.onload = () => {
-      lbImg.src = tmp.src;
+
+    // 1. Show thumbnail immediately (no blank screen)
+    if (item.thumb) {
+      lbImg.src = item.thumb;
       lbImg.alt = item.caption;
+    }
+    lbImg.classList.add('lb-loading');
+
+    // 2. Swap in full-res when ready
+    const full = new window.Image();
+    full.onload = () => {
+      // Only swap if user hasn't already navigated away
+      if (items[current] && items[current].href === full.src) {
+        lbImg.src = full.src;
+        lbImg.classList.remove('lb-loading');
+      }
+    };
+    full.onerror = () => {
+      // Full-res failed — thumbnail is already showing, just remove spinner
       lbImg.classList.remove('lb-loading');
     };
-    tmp.src = item.href;
+    // Set src AFTER attaching handlers
+    full.src = item.href;
+
+    // If full-res is already cached it fires sync — catch that case
+    if (full.complete && full.naturalWidth > 0) {
+      lbImg.src = full.src;
+      lbImg.classList.remove('lb-loading');
+    }
   }
 
   function open(idx) {
@@ -123,36 +146,34 @@ function initCustomLightbox() {
     if (lenis) lenis.start();
   }
 
-  // Wire up gallery item clicks
+  // Gallery item clicks
   document.addEventListener('click', (e) => {
     const item = e.target.closest('.gallery__item[data-lightbox]');
     if (!item) return;
     e.preventDefault();
     collectItems();
-    const idx = [...document.querySelectorAll('.gallery__item[data-lightbox]')].indexOf(item);
-    open(idx >= 0 ? idx : 0);
+    const all = [...document.querySelectorAll('.gallery__item[data-lightbox]')];
+    open(all.indexOf(item) >= 0 ? all.indexOf(item) : 0);
   });
 
   lb.querySelector('.lb-close').addEventListener('click', close);
   lb.querySelector('.lb-prev').addEventListener('click', () => show(current - 1));
   lb.querySelector('.lb-next').addEventListener('click', () => show(current + 1));
 
-  // Click outside image closes
-  lb.addEventListener('click', (e) => {
-    if (e.target === lb) close();
-  });
+  // Click on dark backdrop closes
+  lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
 
-  // Keyboard nav
+  // Keyboard
   document.addEventListener('keydown', (e) => {
     if (!lb.classList.contains('lb-open')) return;
-    if (e.key === 'Escape')      close();
-    if (e.key === 'ArrowLeft')   show(current - 1);
-    if (e.key === 'ArrowRight')  show(current + 1);
+    if (e.key === 'Escape')     close();
+    if (e.key === 'ArrowLeft')  show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
   });
 
   // Touch swipe
   lb.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
-  lb.addEventListener('touchend',   (e) => {
+  lb.addEventListener('touchend', (e) => {
     const dx = e.changedTouches[0].screenX - touchStartX;
     if (Math.abs(dx) > 50) dx < 0 ? show(current + 1) : show(current - 1);
   });

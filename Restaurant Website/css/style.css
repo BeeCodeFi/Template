@@ -2366,11 +2366,12 @@ section {
   object-fit: contain;
   border-radius: var(--radius-md);
   display: block;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.2s ease;
 }
 
 .lb-img.lb-loading {
-  opacity: 0.2;
+  opacity: 0.55;
+  filter: blur(4px);
 }
 
 .lb-caption {
