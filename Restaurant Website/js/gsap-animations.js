@@ -385,6 +385,97 @@
      Wait for DOMContentLoaded
      ───────────────────────────────────── */
 
+  /* ─────────────────────────────────────
+     GALLERY FLOATING REVEAL
+     Items start scattered at small scale with gentle
+     ambient float. On scroll into view they snap
+     back to their grid positions with staggered spring.
+     ───────────────────────────────────── */
+
+  function initGalleryReveal() {
+    const grid = document.querySelector('.gallery__masonry');
+    const items = grid ? [...grid.querySelectorAll('.gallery__item')] : [];
+    if (!items.length) return;
+
+    // Precompute random scatter offsets per item
+    const seeds = items.map(() => ({
+      x:   (Math.random() - 0.5) * 160,
+      y:   (Math.random() - 0.5) * 120,
+      rot: (Math.random() - 0.5) * 16,
+      s:    0.45 + Math.random() * 0.15,
+    }));
+
+    // Phase 1 — scatter all items (invisible)
+    items.forEach((item, i) => {
+      gsap.set(item, {
+        x:        seeds[i].x,
+        y:        seeds[i].y,
+        scale:    seeds[i].s,
+        rotation: seeds[i].rot,
+        opacity:  0,
+      });
+    });
+
+    // Contain scatter visually inside the gallery section
+    const gallerySection = document.querySelector('.gallery');
+    if (gallerySection) gallerySection.style.overflow = 'hidden';
+
+    // Phase 2 — when gallery approaches viewport, fade items in
+    // and start a gentle drift loop so they look "alive"
+    const floatTls = [];
+
+    ScrollTrigger.create({
+      trigger: grid,
+      start: 'top 110%',
+      once: true,
+      onEnter: () => {
+        items.forEach((item, i) => {
+          // Fade softly to 15% visible so they look like ghosts
+          gsap.to(item, { opacity: 0.15, duration: 0.6, delay: i * 0.06 });
+
+          // Gentle looping drift around seed position
+          const tl = gsap.timeline({ repeat: -1, yoyo: true });
+          tl.to(item, {
+            x: seeds[i].x + (Math.random() - 0.5) * 32,
+            y: seeds[i].y + (Math.random() - 0.5) * 22,
+            rotation: seeds[i].rot + (Math.random() - 0.5) * 5,
+            duration: 1.8 + Math.random() * 1.5,
+            ease: 'sine.inOut',
+            delay: i * 0.14,
+          });
+          floatTls.push(tl);
+        });
+      },
+    });
+
+    // Phase 3 — when gallery fully enters view, snap to grid
+    ScrollTrigger.create({
+      trigger: grid,
+      start: 'top 68%',
+      once: true,
+      onEnter: () => {
+        // Kill all float loops immediately
+        floatTls.forEach(tl => tl.kill());
+
+        // Restore overflow
+        if (gallerySection) gallerySection.style.overflow = '';
+
+        // Snap items home with random stagger order
+        gsap.to(items, {
+          x:        0,
+          y:        0,
+          scale:    1,
+          rotation: 0,
+          opacity:  1,
+          duration: 1.05,
+          stagger:  { each: 0.07, from: 'random' },
+          ease:     'power4.out',
+          clearProps: 'transform',
+        });
+      },
+    });
+  }
+
   function init() {
     initHeroAnimation();
     initHeroParallax();
@@ -397,6 +488,7 @@
     initAwardsReveal();
     initFooterReveal();
     initMarqueeEffect();
+    initGalleryReveal();
 
     // Refresh ScrollTrigger after all animations are set up
     ScrollTrigger.refresh();
