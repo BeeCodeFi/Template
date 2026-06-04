@@ -2411,9 +2411,31 @@ section {
   transition: opacity 0.2s ease;
 }
 
-.lb-img.lb-loading {
-  opacity: 0.55;
-  filter: blur(4px);
+.lb-img {
+  transition: opacity 0.25s ease;
+}
+
+/* Spinner shown while image loads */
+.lb-spinner {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.lb-spinner div {
+  width: 52px;
+  height: 52px;
+  border: 2px solid rgba(232, 160, 32, 0.2);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: lbSpin 0.75s linear infinite;
+}
+
+@keyframes lbSpin {
+  to { transform: rotate(360deg); }
 }
 
 .lb-caption {

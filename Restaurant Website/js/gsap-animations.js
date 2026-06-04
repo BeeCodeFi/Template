@@ -442,113 +442,127 @@
     const WHITE = '#ffffff';
     const PAUSE = 1.6; // seconds of calm between each effect
 
-    // ── 1. Saffron shimmer: gold wash sweeps L→R then resets R→L ──
-    function shimmerWave() {
+    // ── 1. EXPLOSIVE SCATTER — chars hurl outward then elastic-snap back ──
+    function explosiveScatter() {
+      const vectors = [
+        { x: -160, y: -90,  r: -220 },
+        { x: -60,  y:  120, r:  180 },
+        { x:  60,  y:  130, r: -160 },
+        { x:  170, y: -80,  r:  200 },
+      ];
       return gsap.timeline()
         .to(chars, {
-          color: GOLD,
-          textShadow: '0 0 40px rgba(232,160,32,0.75), 0 0 90px rgba(232,160,32,0.3)',
+          x: (i) => vectors[i % vectors.length].x,
+          y: (i) => vectors[i % vectors.length].y,
+          rotation: (i) => vectors[i % vectors.length].r,
+          scale: 0.25,
+          opacity: 0,
+          duration: 0.5,
+          stagger: 0.07,
+          ease: 'power3.in',
+        })
+        .to(chars, {
+          x: 0, y: 0, rotation: 0, scale: 1, opacity: 1,
+          duration: 1.0,
+          stagger: { each: 0.09, from: 'end' },
+          ease: 'elastic.out(1, 0.48)',
+        }, '+=0.06');
+    }
+
+    // ── 2. NEON STROBE — sharp gold lightning cascades letter-by-letter ──
+    function neonStrobe() {
+      const tl = gsap.timeline();
+      Array.from(chars).forEach((c, i) => {
+        tl.to(c, {
+          color: '#FFE566',
+          textShadow: '0 0 6px #fff, 0 0 18px #FFD700, 0 0 55px rgba(232,160,32,0.9), 0 0 110px rgba(232,100,0,0.5)',
+          scale: 1.18,
+          duration: 0.07,
+          ease: 'none',
+        }, i * 0.13)
+        .to(c, {
+          color: WHITE,
+          textShadow: '0 0 0 transparent',
+          scale: 1,
+          duration: 0.6,
+          ease: 'power3.out',
+        }, i * 0.13 + 0.1);
+      });
+      return tl;
+    }
+
+    // ── 3. ROLODEX FLIP — letters vanish backward, reappear from front ──
+    function rolodexFlip() {
+      return gsap.timeline()
+        .to(chars, {
+          rotationX: -90,
+          opacity: 0,
+          y: -20,
+          transformPerspective: 500,
           duration: 0.38,
-          stagger: { each: 0.13, ease: 'power1.in' },
-          ease: 'power2.out',
-        })
-        .to(chars, {
-          color: WHITE,
-          textShadow: '0 0 0px rgba(232,160,32,0)',
-          duration: 0.45,
-          stagger: { each: 0.11, from: 'end', ease: 'power1.out' },
+          stagger: 0.1,
           ease: 'power2.in',
-        }, '+=0.18');
-    }
-
-    // ── 2. Levitate wave: letters rise in sequence then settle ──
-    function levitateWave() {
-      return gsap.timeline()
-        .to(chars, {
-          y: -30,
-          duration: 0.45,
-          stagger: { each: 0.11, ease: 'sine.inOut' },
-          ease: 'power2.out',
         })
+        .set(chars, { rotationX: 90, y: 20 })
         .to(chars, {
+          rotationX: 0,
+          opacity: 1,
           y: 0,
-          duration: 0.55,
-          stagger: { each: 0.11, from: 'end', ease: 'sine.inOut' },
-          ease: 'power2.inOut',
-        }, '-=0.12');
-    }
-
-    // ── 3. 3D perspective tilt: letters rotate on Y axis with depth ──
-    function perspectiveTilt() {
-      return gsap.timeline()
-        .to(chars, {
-          rotationY: 24,
-          transformPerspective: 480,
-          color: 'rgba(255,255,255,0.55)',
-          duration: 0.52,
-          stagger: 0.08,
-          ease: 'power2.inOut',
-        })
-        .to(chars, {
-          rotationY: 0,
-          color: WHITE,
-          duration: 0.58,
-          stagger: { each: 0.08, from: 'end' },
-          ease: 'back.out(1.6)',
+          duration: 0.62,
+          stagger: 0.1,
+          ease: 'back.out(2)',
         }, '-=0.08');
     }
 
-    // ── 4. Scale radiate: letters pulse outward from centre ──
-    function scaleRadiate() {
+    // ── 4. LIQUID MELT — letters drip flat then spring back tall ──
+    function liquidMelt() {
       return gsap.timeline()
         .to(chars, {
-          scale: 1.22,
+          scaleY: 0.05,
+          scaleX: 1.4,
+          y: 30,
           color: GOLD,
-          textShadow: '0 0 24px rgba(232,160,32,0.55)',
-          duration: 0.48,
-          stagger: { each: 0.1, from: 'center', ease: 'power1.out' },
-          ease: 'power2.out',
+          transformOrigin: 'center bottom',
+          duration: 0.42,
+          stagger: { each: 0.09, ease: 'power2.in' },
+          ease: 'power3.in',
         })
         .to(chars, {
-          scale: 1,
+          scaleY: 1,
+          scaleX: 1,
+          y: 0,
           color: WHITE,
-          textShadow: '0 0 0px rgba(232,160,32,0)',
-          duration: 0.52,
-          stagger: { each: 0.1, from: 'center', ease: 'power1.in' },
-          ease: 'power2.in',
-        }, '+=0.14');
+          transformOrigin: 'center bottom',
+          duration: 0.8,
+          stagger: { each: 0.1, from: 'end' },
+          ease: 'elastic.out(1.3, 0.4)',
+        }, '+=0.04');
     }
 
-    // ── 5. Glitch & elastic snap: brief displacement then spring back ──
-    function glitchSnap() {
-      // Pre-compute offsets so they are stable within one play
-      const offsets = Array.from(chars).map(() => ({
-        x: (Math.random() - 0.5) * 16,
-        y: (Math.random() - 0.5) * 12,
-        skewX: (Math.random() - 0.5) * 10,
-      }));
+    // ── 5. ORBITAL SWEEP — letters arc far right with skew blur, whip back ──
+    function orbitalSweep() {
       return gsap.timeline()
         .to(chars, {
-          x: (i) => offsets[i].x,
-          y: (i) => offsets[i].y,
-          skewX: (i) => offsets[i].skewX,
+          x: (i) => 80 + i * 55,
+          skewX: -30,
+          opacity: 0.2,
           color: GOLD,
-          duration: 0.09,
-          stagger: 0.025,
-          ease: 'none',
+          duration: 0.44,
+          stagger: 0.07,
+          ease: 'power3.in',
         })
         .to(chars, {
           x: 0,
-          y: 0,
           skewX: 0,
+          opacity: 1,
           color: WHITE,
-          duration: 0.65,
-          stagger: 0.04,
-          ease: 'elastic.out(1, 0.45)',
-        }, '+=0.05');
+          duration: 0.75,
+          stagger: { each: 0.09, from: 'end' },
+          ease: 'back.out(2.2)',
+        }, '+=0.02');
     }
 
-    const effects = [shimmerWave, levitateWave, perspectiveTilt, scaleRadiate, glitchSnap];
+    const effects = [explosiveScatter, neonStrobe, rolodexFlip, liquidMelt, orbitalSweep];
     let effectIndex = 0;
 
     function playNextEffect() {

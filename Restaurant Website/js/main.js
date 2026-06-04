@@ -71,6 +71,7 @@ function initCustomLightbox() {
     <button class="lb-btn lb-prev"  aria-label="Previous image"><i class="ri-arrow-left-s-line"></i></button>
     <button class="lb-btn lb-next"  aria-label="Next image"><i class="ri-arrow-right-s-line"></i></button>
     <div class="lb-content">
+      <div class="lb-spinner"><div></div></div>
       <img class="lb-img" src="" alt="" />
       <p class="lb-caption"></p>
       <p class="lb-counter"></p>
@@ -80,12 +81,14 @@ function initCustomLightbox() {
   const lbImg     = lb.querySelector('.lb-img');
   const lbCaption = lb.querySelector('.lb-caption');
   const lbCounter = lb.querySelector('.lb-counter');
+  const lbSpinner = lb.querySelector('.lb-spinner');
 
-  let items = [];
-  let current = 0;
-  let touchStartX = 0;
+  let items        = [];
+  let current      = 0;
+  let savedScrollY = 0;
+  let touchStartX  = 0;
 
-  // Only collect from real slides, never Swiper loop-clones
+  // Only collect real slides — never Swiper loop-clones
   function getRealItems() {
     return [...document.querySelectorAll('.gallery__item[data-lightbox]')]
       .filter(el => !el.closest('.swiper-slide-duplicate'));
@@ -95,72 +98,78 @@ function initCustomLightbox() {
     items = getRealItems().map(el => ({
       href:    el.getAttribute('data-href') || '',
       caption: el.getAttribute('data-caption') || '',
-      thumb:   el.querySelector('img') ? el.querySelector('img').src : '',
     }));
   }
 
   function show(idx) {
     current = ((idx % items.length) + items.length) % items.length;
     const item  = items[current];
-    const token = current; // capture index for async closure — avoids href/URL mismatch
+    const token = current;
 
     lbCaption.textContent = item.caption;
     lbCounter.textContent = `${current + 1} / ${items.length}`;
 
-    // Show thumbnail immediately so there's never a black frame
-    lbImg.alt = item.caption;
-    if (item.thumb) lbImg.src = item.thumb;
-    lbImg.classList.add('lb-loading');
+    // Reset: hide previous image, show spinner
+    lbImg.style.opacity = '0';
+    lbSpinner.style.display = 'flex';
 
-    // Load the full-res version; compare by captured index, not by URL string
     const full = new window.Image();
     full.onload = () => {
-      if (token === current) {
-        lbImg.src = full.src;
-        lbImg.classList.remove('lb-loading');
-      }
+      if (token !== current) return;
+      lbImg.src       = full.src;
+      lbImg.alt       = item.caption;
+      lbImg.style.opacity = '1';
+      lbSpinner.style.display = 'none';
     };
     full.onerror = () => {
-      if (token === current) lbImg.classList.remove('lb-loading');
+      if (token !== current) return;
+      lbSpinner.style.display = 'none';
     };
     full.src = item.href;
 
-    // Already cached — fires synchronously before onload wires up
+    // Already cached — sync fire before handlers
     if (full.complete && full.naturalWidth > 0) {
-      lbImg.src = full.src;
-      lbImg.classList.remove('lb-loading');
+      lbImg.src       = full.src;
+      lbImg.alt       = item.caption;
+      lbImg.style.opacity = '1';
+      lbSpinner.style.display = 'none';
     }
   }
 
   function open(idx) {
+    savedScrollY = window.scrollY || window.pageYOffset;
     collectItems();
     show(idx);
     lb.classList.add('lb-open');
     document.body.style.overflow = 'hidden';
-    if (lenis) lenis.stop();
-    lb.querySelector('.lb-close').focus();
+    if (typeof lenis !== 'undefined' && lenis) lenis.stop();
+    lb.querySelector('.lb-close').focus({ preventScroll: true });
   }
 
   function close() {
     lb.classList.remove('lb-open');
     document.body.style.overflow = '';
-    if (lenis) lenis.start();
+    if (typeof lenis !== 'undefined' && lenis) lenis.start();
+    // Restore scroll position — prevents lenis/browser scroll-jump
+    window.scrollTo({ top: savedScrollY, behavior: 'instant' });
   }
 
-  // Gallery item clicks — ignore Swiper loop-clone slides
+  // Gallery item clicks
+  // NOTE: preventDefault + stopPropagation run FIRST so clone clicks
+  // also get cancelled (prevents page jumping)
   document.addEventListener('click', (e) => {
     const item = e.target.closest('.gallery__item[data-lightbox]');
     if (!item) return;
-    if (item.closest('.swiper-slide-duplicate')) return; // clone — skip
     e.preventDefault();
     e.stopPropagation();
+    if (item.closest('.swiper-slide-duplicate')) return; // was a clone — click is cancelled, nothing else happens
     const all = getRealItems();
     open(all.indexOf(item) >= 0 ? all.indexOf(item) : 0);
   });
 
-  lb.querySelector('.lb-close').addEventListener('click', close);
-  lb.querySelector('.lb-prev').addEventListener('click', () => show(current - 1));
-  lb.querySelector('.lb-next').addEventListener('click', () => show(current + 1));
+  lb.querySelector('.lb-close').addEventListener('click', (e) => { e.stopPropagation(); close(); });
+  lb.querySelector('.lb-prev').addEventListener('click', (e) => { e.stopPropagation(); show(current - 1); });
+  lb.querySelector('.lb-next').addEventListener('click', (e) => { e.stopPropagation(); show(current + 1); });
 
   // Click on dark backdrop closes
   lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
