@@ -730,45 +730,122 @@
         </div>
       </div>
 
-      <div class="gallery__masonry" id="galleryMasonry">
-        <!-- Photo credits: Unsplash -->
-        <a href="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=90&auto=format&fit=crop" class="gallery__item glightbox" data-gallery="rasa" data-type="image" data-description="Our dining room at golden hour">
-          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=75&auto=format&fit=crop" alt="Restaurant interior" loading="lazy" />
-          <div class="gallery__item-overlay"><i class="ri-add-line"></i></div>
-        </a>
-        <a href="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=1200&q=90&auto=format&fit=crop" class="gallery__item glightbox" data-gallery="rasa" data-type="image" data-description="Kashmiri Rogan Josh">
-          <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&q=75&auto=format&fit=crop" alt="Rogan Josh" loading="lazy" />
-          <div class="gallery__item-overlay"><i class="ri-add-line"></i></div>
-        </a>
-        <a href="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=1200&q=90&auto=format&fit=crop" class="gallery__item glightbox" data-gallery="rasa" data-type="image" data-description="Chef preparing spices">
-          <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&q=75&auto=format&fit=crop" alt="Spice preparation" loading="lazy" />
-          <div class="gallery__item-overlay"><i class="ri-add-line"></i></div>
-        </a>
-        <a href="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=1200&q=90&auto=format&fit=crop" class="gallery__item glightbox" data-gallery="rasa" data-type="image" data-description="The Rasa signature plating">
-          <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&q=75&auto=format&fit=crop" alt="Plated dish" loading="lazy" />
-          <div class="gallery__item-overlay"><i class="ri-add-line"></i></div>
-        </a>
-        <a href="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=1200&q=90&auto=format&fit=crop" class="gallery__item glightbox" data-gallery="rasa" data-type="image" data-description="Alphonso Mango Kulfi">
-          <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&q=75&auto=format&fit=crop" alt="Dessert" loading="lazy" />
-          <div class="gallery__item-overlay"><i class="ri-add-line"></i></div>
-        </a>
-        <a href="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=1200&q=90&auto=format&fit=crop" class="gallery__item glightbox" data-gallery="rasa" data-type="image" data-description="Our bar and cocktail programme">
-          <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&q=75&auto=format&fit=crop" alt="Cocktail bar" loading="lazy" />
-          <div class="gallery__item-overlay"><i class="ri-add-line"></i></div>
-        </a>
-        <a href="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1200&q=90&auto=format&fit=crop" class="gallery__item glightbox" data-gallery="rasa" data-type="image" data-description="Paneer Tikka from the tandoor">
-          <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&q=75&auto=format&fit=crop" alt="Paneer Tikka" loading="lazy" />
-          <div class="gallery__item-overlay"><i class="ri-add-line"></i></div>
-        </a>
-        <a href="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=90&auto=format&fit=crop" class="gallery__item glightbox" data-gallery="rasa" data-type="image" data-description="The art of plating">
-          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=75&auto=format&fit=crop" alt="Plated food" loading="lazy" />
-          <div class="gallery__item-overlay"><i class="ri-add-line"></i></div>
-        </a>
-        <a href="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=1200&q=90&auto=format&fit=crop" class="gallery__item glightbox" data-gallery="rasa" data-type="image" data-description="Dum Gosht Biryani">
-          <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=75&auto=format&fit=crop" alt="Biryani" loading="lazy" />
-          <div class="gallery__item-overlay"><i class="ri-add-line"></i></div>
-        </a>
-      </div>
+      <!-- Swiper carousel wrap -->
+      <div class="gallery__carousel-wrap">
+        <div class="swiper gallery-swiper">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide gallery__slide">
+              <div class="gallery__item" data-lightbox data-href="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=90&auto=format&fit=crop" data-caption="Our dining room at golden hour">
+                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80&auto=format&fit=crop" alt="Restaurant interior" loading="lazy" />
+                <div class="gallery__item-overlay"><i class="ri-zoom-in-line"></i></div>
+              </div>
+            </div>
+
+            <div class="swiper-slide gallery__slide">
+              <div class="gallery__item" data-lightbox data-href="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=1400&q=90&auto=format&fit=crop" data-caption="Chef Arjun preparing spice blends">
+                <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=80&auto=format&fit=crop" alt="Chef preparing spices" loading="lazy" />
+                <div class="gallery__item-overlay"><i class="ri-zoom-in-line"></i></div>
+              </div>
+            </div>
+
+            <div class="swiper-slide gallery__slide">
+              <div class="gallery__item" data-lightbox data-href="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=1400&q=90&auto=format&fit=crop" data-caption="Kashmiri Rogan Josh">
+                <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=800&q=80&auto=format&fit=crop" alt="Rogan Josh" loading="lazy" />
+                <div class="gallery__item-overlay"><i class="ri-zoom-in-line"></i></div>
+              </div>
+            </div>
+
+            <div class="swiper-slide gallery__slide">
+              <div class="gallery__item" data-lightbox data-href="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=1400&q=90&auto=format&fit=crop" data-caption="The Rasa signature plating">
+                <img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=800&q=80&auto=format&fit=crop" alt="Signature plating" loading="lazy" />
+                <div class="gallery__item-overlay"><i class="ri-zoom-in-line"></i></div>
+              </div>
+            </div>
+
+            <div class="swiper-slide gallery__slide">
+              <div class="gallery__item" data-lightbox data-href="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1400&q=90&auto=format&fit=crop" data-caption="Paneer Tikka from the tandoor">
+                <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80&auto=format&fit=crop" alt="Paneer Tikka" loading="lazy" />
+                <div class="gallery__item-overlay"><i class="ri-zoom-in-line"></i></div>
+              </div>
+            </div>
+
+            <div class="swiper-slide gallery__slide">
+              <div class="gallery__item" data-lightbox data-href="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=1400&q=90&auto=format&fit=crop" data-caption="Dum Gosht Biryani">
+                <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&q=80&auto=format&fit=crop" alt="Biryani" loading="lazy" />
+                <div class="gallery__item-overlay"><i class="ri-zoom-in-line"></i></div>
+              </div>
+            </div>
+
+            <div class="swiper-slide gallery__slide">
+              <div class="gallery__item" data-lightbox data-href="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=1400&q=90&auto=format&fit=crop" data-caption="Alphonso Mango Kulfi">
+                <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=800&q=80&auto=format&fit=crop" alt="Mango Kulfi" loading="lazy" />
+                <div class="gallery__item-overlay"><i class="ri-zoom-in-line"></i></div>
+              </div>
+            </div>
+
+            <div class="swiper-slide gallery__slide">
+              <div class="gallery__item" data-lightbox data-href="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1400&q=90&auto=format&fit=crop" data-caption="The art of plating">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80&auto=format&fit=crop" alt="Plated food" loading="lazy" />
+                <div class="gallery__item-overlay"><i class="ri-zoom-in-line"></i></div>
+              </div>
+            </div>
+
+            <div class="swiper-slide gallery__slide">
+              <div class="gallery__item" data-lightbox data-href="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=1400&q=90&auto=format&fit=crop" data-caption="Our bar &amp; cocktail programme">
+                <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=800&q=80&auto=format&fit=crop" alt="Cocktail bar" loading="lazy" />
+                <div class="gallery__item-overlay"><i class="ri-zoom-in-line"></i></div>
+              </div>
+            </div>
+
+            <div class="swiper-slide gallery__slide">
+              <div class="gallery__item" data-lightbox data-href="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=1400&q=90&auto=format&fit=crop" data-caption="Dal Makhani slow-cooked overnight">
+                <img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=800&q=80&auto=format&fit=crop" alt="Dal Makhani" loading="lazy" />
+                <div class="gallery__item-overlay"><i class="ri-zoom-in-line"></i></div>
+              </div>
+            </div>
+
+            <div class="swiper-slide gallery__slide">
+              <div class="gallery__item" data-lightbox data-href="https://images.unsplash.com/photo-1476224203421-74177f10c01b?w=1400&q=90&auto=format&fit=crop" data-caption="A feast for the senses">
+                <img src="https://images.unsplash.com/photo-1476224203421-74177f10c01b?w=800&q=80&auto=format&fit=crop" alt="Food spread" loading="lazy" />
+                <div class="gallery__item-overlay"><i class="ri-zoom-in-line"></i></div>
+              </div>
+            </div>
+
+            <div class="swiper-slide gallery__slide">
+              <div class="gallery__item" data-lightbox data-href="https://images.unsplash.com/photo-1455619452474-d2be8182ae57?w=1400&q=90&auto=format&fit=crop" data-caption="Spice-roasted lamb shoulder">
+                <img src="https://images.unsplash.com/photo-1455619452474-d2be8182ae57?w=800&q=80&auto=format&fit=crop" alt="Spiced lamb" loading="lazy" />
+                <div class="gallery__item-overlay"><i class="ri-zoom-in-line"></i></div>
+              </div>
+            </div>
+
+            <div class="swiper-slide gallery__slide">
+              <div class="gallery__item" data-lightbox data-href="https://images.unsplash.com/photo-1547592180-85f173990554?w=1400&q=90&auto=format&fit=crop" data-caption="Saag Paneer with charred bread">
+                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=800&q=80&auto=format&fit=crop" alt="Paneer curry" loading="lazy" />
+                <div class="gallery__item-overlay"><i class="ri-zoom-in-line"></i></div>
+              </div>
+            </div>
+
+            <div class="swiper-slide gallery__slide">
+              <div class="gallery__item" data-lightbox data-href="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=1400&q=90&auto=format&fit=crop" data-caption="Hyderabadi dum biryani">
+                <img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80&auto=format&fit=crop" alt="Dum biryani" loading="lazy" />
+                <div class="gallery__item-overlay"><i class="ri-zoom-in-line"></i></div>
+              </div>
+            </div>
+
+            <div class="swiper-slide gallery__slide">
+              <div class="gallery__item" data-lightbox data-href="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=1400&q=90&auto=format&fit=crop" data-caption="Masala chai and petit fours">
+                <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&q=80&auto=format&fit=crop" alt="Masala chai" loading="lazy" />
+                <div class="gallery__item-overlay"><i class="ri-zoom-in-line"></i></div>
+              </div>
+            </div>
+
+          </div><!-- /.swiper-wrapper -->
+        </div><!-- /.gallery-swiper -->
+
+        <button class="gallery-nav gallery-prev" aria-label="Previous image"><i class="ri-arrow-left-s-line"></i></button>
+        <button class="gallery-nav gallery-next" aria-label="Next image"><i class="ri-arrow-right-s-line"></i></button>
+      </div><!-- /.gallery__carousel-wrap -->
     </section>
 
     <!-- ═══════════════════════════════════════════

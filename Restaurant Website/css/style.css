@@ -1214,24 +1214,30 @@ section {
   text-align: center;
 }
 
-/* Carousel wrap — initial state is invisible; GSAP scrub animates it in */
+/* Outer wrap clips the carousel and positions nav buttons */
 .gallery__carousel-wrap {
   position: relative;
   margin-top: 2.5rem;
   opacity: 0;
   transform: translateY(60px);
+  /* overflow:hidden clips the partial slides at edges */
+  overflow: hidden;
+  padding: 0 0 1rem;
 }
 
-/* Swiper itself overflows its container to show partial prev/next slides */
+/* Swiper: show 3+ partial slides across full width */
 .gallery-swiper {
-  overflow: visible;
-  padding: 0 clamp(1.25rem, 5vw, 4rem);
+  width: 100%;
+  overflow: hidden;
+  padding: 0.5rem clamp(1.25rem, 5vw, 4rem);
+  box-sizing: border-box;
 }
 
 .gallery__slide {
   height: 480px;
   border-radius: var(--radius-lg);
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .gallery__item {
