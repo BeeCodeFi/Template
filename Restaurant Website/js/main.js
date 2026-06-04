@@ -141,17 +141,27 @@ function initCustomLightbox() {
     collectItems();
     show(idx);
     lb.classList.add('lb-open');
-    document.body.style.overflow = 'hidden';
+    // Lock body in place without losing scroll position
     if (typeof lenis !== 'undefined' && lenis) lenis.stop();
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${savedScrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.overflow = 'hidden';
     lb.querySelector('.lb-close').focus({ preventScroll: true });
   }
 
   function close() {
     lb.classList.remove('lb-open');
+    // Restore body positioning first
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
     document.body.style.overflow = '';
-    if (typeof lenis !== 'undefined' && lenis) lenis.start();
-    // Restore scroll position — prevents lenis/browser scroll-jump
+    // Restore scroll position instantly before Lenis resumes
     window.scrollTo({ top: savedScrollY, behavior: 'instant' });
+    if (typeof lenis !== 'undefined' && lenis) lenis.start();
   }
 
   // Gallery item clicks
