@@ -679,7 +679,13 @@ section {
 
 .marquee-track {
   display: flex;
+  width: max-content;
   white-space: nowrap;
+  animation: marqueeScroll 30s linear infinite;
+}
+
+.marquee-section:hover .marquee-track {
+  animation-play-state: paused;
 }
 
 .marquee-content {
@@ -687,7 +693,6 @@ section {
   align-items: center;
   gap: 2rem;
   padding: 1.25rem 2rem;
-  animation: marqueeScroll 30s linear infinite;
   flex-shrink: 0;
 }
 

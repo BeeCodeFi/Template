@@ -141,18 +141,13 @@ function initCustomLightbox() {
     collectItems();
     show(idx);
     lb.classList.add('lb-open');
-    // Pause Lenis and block native scroll without touching body position
-    if (typeof lenis !== 'undefined' && lenis) lenis.stop();
-    document.documentElement.style.overflow = 'hidden';
+    // No scroll lock needed — the fixed overlay already covers the full viewport.
+    // Stopping Lenis causes pointer-event freezes in v1.1.x; leave it running.
     lb.querySelector('.lb-close').focus({ preventScroll: true });
   }
 
   function close() {
     lb.classList.remove('lb-open');
-    document.documentElement.style.overflow = '';
-    // Restore scroll position instantly before Lenis resumes
-    window.scrollTo({ top: savedScrollY, behavior: 'instant' });
-    if (typeof lenis !== 'undefined' && lenis) lenis.start();
   }
 
   // Gallery item clicks
