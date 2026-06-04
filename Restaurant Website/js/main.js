@@ -86,8 +86,6 @@ function initCustomLightbox() {
   let items       = [];
   let current     = 0;
   let touchStartX = 0;
-  // Track pointer-down position to distinguish tap from swipe drag
-  let pdX = 0, pdY = 0;
 
   function getRealItems() {
     return [...document.querySelectorAll('.gallery__item[data-lightbox]')]
@@ -147,29 +145,6 @@ function initCustomLightbox() {
     lb.classList.remove('lb-open');
   }
 
-  // Track pointer-down so we can reject swipe drags in the click handler
-  document.addEventListener('pointerdown', (e) => {
-    pdX = e.clientX;
-    pdY = e.clientY;
-  }, { capture: true, passive: true });
-
-  // CAPTURE PHASE (true) — fires before Swiper's preventClicksPropagation
-  // can call stopPropagation, ensuring gallery clicks always reach us.
-  document.addEventListener('click', (e) => {
-    const item = e.target.closest('.gallery__item[data-lightbox]');
-    if (!item) return;
-
-    // Ignore if the pointer moved more than 6px — it was a swipe, not a tap
-    if (Math.abs(e.clientX - pdX) > 6 || Math.abs(e.clientY - pdY) > 6) return;
-
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (item.closest('.swiper-slide-duplicate')) return;
-    const all = getRealItems();
-    open(all.indexOf(item) >= 0 ? all.indexOf(item) : 0);
-  }, true); // <-- capture phase
-
   lb.querySelector('.lb-close').addEventListener('click', (e) => { e.stopPropagation(); close(); });
   lb.querySelector('.lb-prev').addEventListener('click',  (e) => { e.stopPropagation(); show(current - 1); });
   lb.querySelector('.lb-next').addEventListener('click',  (e) => { e.stopPropagation(); show(current + 1); });
@@ -188,13 +163,15 @@ function initCustomLightbox() {
     const dx = e.changedTouches[0].screenX - touchStartX;
     if (Math.abs(dx) > 50) dx < 0 ? show(current + 1) : show(current - 1);
   });
+
+  return { open };
 }
 
 /* ─────────────────────────────────────
    GALLERY SWIPER
    ───────────────────────────────────── */
 
-function initGallerySwiper() {
+function initGallerySwiper(openFn) {
   if (typeof Swiper === 'undefined') return;
 
   new Swiper('.gallery-swiper', {
@@ -217,6 +194,22 @@ function initGallerySwiper() {
     a11y: {
       prevSlideMessage: 'Previous image',
       nextSlideMessage: 'Next image',
+    },
+    on: {
+      // Swiper's own click fires only after it confirms it was a tap, not a drag.
+      // Match by data-href so duplicates (loop clones) resolve to the real item index.
+      click(swiper, event) {
+        if (!openFn) return;
+        const item = event.target.closest('.gallery__item[data-lightbox]');
+        if (!item) return;
+        const href = item.getAttribute('data-href');
+        // Collect original (non-clone) slides in DOM order
+        const realItems = [...document.querySelectorAll(
+          '.gallery-swiper .swiper-slide:not(.swiper-slide-duplicate) .gallery__item[data-lightbox]'
+        )];
+        const idx = realItems.findIndex(el => el.getAttribute('data-href') === href);
+        openFn(idx >= 0 ? idx : 0);
+      },
     },
   });
 }
@@ -714,9 +707,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
   initLenis();
   initAOS();
-  initCustomLightbox();
+  const lightbox = initCustomLightbox();
   initGalleryCaptions();
-  initGallerySwiper();
+  initGallerySwiper(lightbox ? lightbox.open : null);
   initSwiper();
   initNavScroll();
   initMobileMenu();
