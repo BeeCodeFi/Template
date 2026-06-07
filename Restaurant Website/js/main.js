@@ -17,6 +17,14 @@ function initLenis() {
   // Only on non-reduced-motion devices
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+  // Skip Lenis on touch/mobile devices (pointer: coarse = finger/stylus).
+  // Lenis with smoothTouch:false does nothing on real phones — it doesn't
+  // intercept touch events, so native scroll fires but Lenis's own 'scroll'
+  // event doesn't emit reliably (especially during iOS momentum scrolling).
+  // Without Lenis, GSAP ScrollTrigger uses its own native scroll listener
+  // and works perfectly on all mobile browsers out of the box.
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+
   lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -24,27 +32,17 @@ function initLenis() {
     smoothTouch: false,
   });
 
-  // Run Lenis inside GSAP's own ticker so both are always in sync.
-  // This is the officially recommended pattern for Lenis + GSAP ScrollTrigger
-  // and ensures ScrollTrigger receives position updates on every frame,
-  // including on touch/mobile devices where smoothTouch:false means Lenis
-  // defers to native scroll (its own rAF loop would otherwise be decoupled
-  // from GSAP, causing ScrollTrigger animations to miss frames or not fire).
+  // Run Lenis inside GSAP's own ticker (officially recommended pattern)
+  // so both are always frame-synced on desktop.
   if (typeof gsap !== 'undefined') {
     gsap.ticker.add((time) => { lenis.raf(time * 1000); });
     gsap.ticker.lagSmoothing(0);
   } else {
-    // Fallback: plain rAF when GSAP is unavailable
     (function tick(time) { lenis.raf(time); requestAnimationFrame(tick); })();
   }
 
   if (typeof ScrollTrigger !== 'undefined') {
-    // Primary: update ScrollTrigger via Lenis scroll events (smooth scroll)
     lenis.on('scroll', ScrollTrigger.update);
-    // Fallback: also update on native scroll events so ScrollTrigger
-    // animations work on touch devices (iOS/Android) where Lenis lets
-    // the browser handle scrolling natively (smoothTouch:false).
-    window.addEventListener('scroll', () => ScrollTrigger.update(), { passive: true });
   }
 }
 
