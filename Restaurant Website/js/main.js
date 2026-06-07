@@ -24,16 +24,27 @@ function initLenis() {
     smoothTouch: false,
   });
 
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
+  // Run Lenis inside GSAP's own ticker so both are always in sync.
+  // This is the officially recommended pattern for Lenis + GSAP ScrollTrigger
+  // and ensures ScrollTrigger receives position updates on every frame,
+  // including on touch/mobile devices where smoothTouch:false means Lenis
+  // defers to native scroll (its own rAF loop would otherwise be decoupled
+  // from GSAP, causing ScrollTrigger animations to miss frames or not fire).
+  if (typeof gsap !== 'undefined') {
+    gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    // Fallback: plain rAF when GSAP is unavailable
+    (function tick(time) { lenis.raf(time); requestAnimationFrame(tick); })();
   }
 
-  requestAnimationFrame(raf);
-
-  // GSAP ScrollTrigger integration
   if (typeof ScrollTrigger !== 'undefined') {
+    // Primary: update ScrollTrigger via Lenis scroll events (smooth scroll)
     lenis.on('scroll', ScrollTrigger.update);
+    // Fallback: also update on native scroll events so ScrollTrigger
+    // animations work on touch devices (iOS/Android) where Lenis lets
+    // the browser handle scrolling natively (smoothTouch:false).
+    window.addEventListener('scroll', () => ScrollTrigger.update(), { passive: true });
   }
 }
 
