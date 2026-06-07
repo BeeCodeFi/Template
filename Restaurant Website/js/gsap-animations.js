@@ -25,20 +25,11 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Prevent constant ScrollTrigger.refresh() calls caused by iOS Safari's
-  // address bar resizing the viewport on every scroll gesture.
+  // Prevent iOS address-bar resize from spamming ScrollTrigger.refresh()
   ScrollTrigger.config({ ignoreMobileResize: true });
 
-  // iOS Safari fix: normalizeScroll manages scroll position via JS so
-  // ScrollTrigger always has accurate data during momentum scrolling.
-  // allowNestedScroll:true lets Swiper carousels and the Maps iframe
-  // still receive touch events without being blocked by normalizeScroll.
-  if (window.matchMedia('(pointer: coarse)').matches) {
-    ScrollTrigger.normalizeScroll({
-      normalizeScrollX: false,
-      allowNestedScroll: true,
-    });
-  }
+  // Detect real touch devices (phones/tablets)
+  const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
 
   /* ─────────────────────────────────────
      HERO ENTRANCE ANIMATION
@@ -596,6 +587,16 @@
     gsap.delayedCall(3.8, playNextEffect);
   }
 
+  // Mobile: only the hero entrance + RASA letter loop.
+  // All ScrollTrigger-based scroll animations are skipped on touch devices
+  // because iOS Safari's event model is incompatible with ScrollTrigger's
+  // position tracking. AOS (initialized in main.js) covers scroll reveals.
+  function initMobile() {
+    initHeroAnimation();
+    initRasaLoopAnimation();
+  }
+
+  // Desktop: full animation suite with ScrollTrigger
   function init() {
     initHeroAnimation();
     initRasaLoopAnimation();
@@ -610,28 +611,24 @@
     initFooterReveal();
     initMarqueeEffect();
     initGalleryReveal();
-
-    // Refresh ScrollTrigger after all animations are set up
     ScrollTrigger.refresh();
   }
 
+  const runner = isTouchDevice ? initMobile : init;
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', runner);
   } else {
-    init();
+    runner();
   }
 
-  // Re-calculate on window resize (debounced)
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 200);
-  });
-
-  // Re-measure all trigger positions after full page load.
-  // At DOMContentLoaded, lazy-loaded images haven't rendered yet so the
-  // page is shorter than its final height — trigger offsets are wrong and
-  // iOS scroll animations never fire. This corrects all positions once
-  // every resource (image, font, iframe) is fully loaded.
-  window.addEventListener('load', () => ScrollTrigger.refresh());
+  // Resize + load refresh only needed on desktop (ScrollTrigger)
+  if (!isTouchDevice) {
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 200);
+    });
+    window.addEventListener('load', () => ScrollTrigger.refresh());
+  }
 })();
