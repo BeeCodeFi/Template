@@ -336,8 +336,6 @@ body {
 
 .swiper-slide {
   height: auto;
-  opacity: 0.5;
-  transform: scale(0.96);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
