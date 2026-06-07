@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Forge Industries — Precision engineering and advanced manufacturing solutions. CNC machining, robotics automation, and quality-certified components for aerospace, automotive, and defence." />
+  <meta name="keywords" content="manufacturing, precision engineering, CNC machining, robotics, automation, aerospace, Forge Industries" />
+  <meta property="og:title" content="Forge Industries — Engineering the Future" />
+  <meta property="og:description" content="Precision manufacturing, robotics automation, and advanced engineering solutions." />
+  <meta property="og:type" content="website" />
+  <title>Forge Industries — Engineering the Future</title>
+
+  <!-- Fonts: Space Grotesk + DM Sans + Space Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Swiper (testimonials only) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- Remix Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- Noise overlay -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════
+       NAVIGATION — Minimal bar + full-screen menu
+  ═══════════════════════════════════════════ -->
+  <nav class="nav" id="navbar">
+    <div class="nav__inner">
+      <a href="#home" class="nav__logo" id="navLogo">
+        <span class="nav__logo-dot"></span>
+        <span>Forge</span>
+      </a>
+
+      <div class="nav__links" id="navDesktopLinks">
+        <a href="#about" class="nav__link">About</a>
+        <a href="#services" class="nav__link">Services</a>
+        <a href="#process" class="nav__link">Process</a>
+        <a href="#gallery" class="nav__link">Facility</a>
+        <a href="#contact" class="nav__link">Contact</a>
+      </div>
+
+      <div class="nav__cta">
+        <a href="#contact" class="btn btn--primary btn--nav" style="padding: 0.65rem 1.5rem; font-size: 0.6875rem;">Get a Quote</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation menu">
+          <span class="menu-btn__label">Menu</span>
+          <div class="menu-btn__lines">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Full-screen mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-menu__links">
+      <li><a href="#home" class="mobile-menu__link"><span class="mobile-menu__counter">01</span>Home</a></li>
+      <li><a href="#about" class="mobile-menu__link"><span class="mobile-menu__counter">02</span>About</a></li>
+      <li><a href="#services" class="mobile-menu__link"><span class="mobile-menu__counter">03</span>Services</a></li>
+      <li><a href="#process" class="mobile-menu__link"><span class="mobile-menu__counter">04</span>Process</a></li>
+      <li><a href="#gallery" class="mobile-menu__link"><span class="mobile-menu__counter">05</span>Facility</a></li>
+      <li><a href="#team" class="mobile-menu__link"><span class="mobile-menu__counter">06</span>Team</a></li>
+      <li><a href="#contact" class="mobile-menu__link"><span class="mobile-menu__counter">07</span>Contact</a></li>
+    </ul>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════
+       HERO — Split screen
+  ═══════════════════════════════════════════ -->
+  <section class="hero" id="home">
+    <div class="hero__content">
+      <p class="hero__label" id="heroLabel">// Est. 1998 · Precision Engineering</p>
+
+      <h1 class="hero__title" id="heroTitle">
+        Engineering
+        <em>the Future.</em>
+      </h1>
+
+      <div class="hero__divider" id="heroDivider"></div>
+
+      <p class="hero__tagline" id="heroTagline">
+        Advanced manufacturing solutions built on decades of precision.
+      </p>
+
+      <p class="hero__desc" id="heroDesc">
+        From CNC machining to robotic automation, we deliver mission-critical
+        components for aerospace, automotive, and defence industries worldwide.
+      </p>
+
+      <div class="hero__ctas" id="heroCtas">
+        <a href="#services" class="btn btn--primary">
+          <span class="btn__text">Our Services</span>
+          <i class="ri-arrow-right-line"></i>
+        </a>
+        <a href="#contact" class="btn btn--outline">
+          <span class="btn__text">Request Quote</span>
+        </a>
+      </div>
+
+      <div class="hero__stats" id="heroStats">
+        <div class="hero__stat">
+          <div class="hero__stat-num" data-count="26">0</div>
+          <div class="hero__stat-label">Years of Excellence</div>
+        </div>
+        <div class="hero__stat">
+          <div class="hero__stat-num" data-count="850">0</div>
+          <div class="hero__stat-label">Team Members</div>
+        </div>
+        <div class="hero__stat">
+          <div class="hero__stat-num" data-count="40">0</div>
+          <div class="hero__stat-label">Countries Served</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__image">
+      <img src="assets/images/hero.png" alt="Advanced manufacturing facility with robotic automation" loading="eager" />
+    </div>
+
+    <div class="hero__scroll">
+      <span class="hero__scroll-label">Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       MARQUEE
+  ═══════════════════════════════════════════ -->
+  <div class="marquee-section" aria-hidden="true">
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span>CNC Machining</span><span class="dot"></span>
+        <span>Robotic Automation</span><span class="dot"></span>
+        <span>Precision Engineering</span><span class="dot"></span>
+        <span>Quality Assurance</span><span class="dot"></span>
+        <span>Aerospace Components</span><span class="dot"></span>
+        <span>Defence Manufacturing</span><span class="dot"></span>
+        <span>Additive Manufacturing</span><span class="dot"></span>
+        <span>Metal Fabrication</span><span class="dot"></span>
+        <span>CNC Machining</span><span class="dot"></span>
+        <span>Robotic Automation</span><span class="dot"></span>
+        <span>Precision Engineering</span><span class="dot"></span>
+        <span>Quality Assurance</span><span class="dot"></span>
+        <span>Aerospace Components</span><span class="dot"></span>
+        <span>Defence Manufacturing</span><span class="dot"></span>
+        <span>Additive Manufacturing</span><span class="dot"></span>
+        <span>Metal Fabrication</span><span class="dot"></span>
+      </div>
+      <div class="marquee-content">
+        <span>CNC Machining</span><span class="dot"></span>
+        <span>Robotic Automation</span><span class="dot"></span>
+        <span>Precision Engineering</span><span class="dot"></span>
+        <span>Quality Assurance</span><span class="dot"></span>
+        <span>Aerospace Components</span><span class="dot"></span>
+        <span>Defence Manufacturing</span><span class="dot"></span>
+        <span>Additive Manufacturing</span><span class="dot"></span>
+        <span>Metal Fabrication</span><span class="dot"></span>
+        <span>CNC Machining</span><span class="dot"></span>
+        <span>Robotic Automation</span><span class="dot"></span>
+        <span>Precision Engineering</span><span class="dot"></span>
+        <span>Quality Assurance</span><span class="dot"></span>
+        <span>Aerospace Components</span><span class="dot"></span>
+        <span>Defence Manufacturing</span><span class="dot"></span>
+        <span>Additive Manufacturing</span><span class="dot"></span>
+        <span>Metal Fabrication</span><span class="dot"></span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════
+       ABOUT — Asymmetric split
+  ═══════════════════════════════════════════ -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about__grid">
+        <div class="about__image-wrap" data-reveal="fade-up">
+          <img class="about__image" src="assets/images/about-engineer.png" alt="Lead engineer inspecting precision components" loading="lazy" />
+        </div>
+
+        <div class="about__content">
+          <div class="section-header" data-reveal="fade-up">
+            <p class="label">About Forge</p>
+            <h2 class="section-title">Built for<br />Precision</h2>
+          </div>
+
+          <div data-reveal="fade-up">
+            <p class="about__text">
+              Since 1998, Forge Industries has been at the forefront of advanced manufacturing. Our 120,000 sq ft state-of-the-art facility houses over 200 CNC machines, robotic cells, and dedicated quality labs.
+            </p>
+            <p class="about__text">
+              We serve the world's most demanding industries — aerospace, defence, medical, and automotive — delivering components with tolerances measured in microns and quality measured in zero defects.
+            </p>
+          </div>
+
+          <div class="about__stats-row" data-reveal="fade-up">
+            <div>
+              <div class="about__stat-num" data-count="120">0</div>
+              <p class="about__stat-text">Thousand Sq Ft Facility</p>
+            </div>
+            <div>
+              <div class="about__stat-num" data-count="850">0</div>
+              <p class="about__stat-text">Team Members</p>
+            </div>
+            <div>
+              <div class="about__stat-num" data-count="26">0</div>
+              <p class="about__stat-text">Years of Excellence</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       STATS BAND — Lime green bg with black text
+  ═══════════════════════════════════════════ -->
+  <section class="stats-band">
+    <div class="container">
+      <div class="stats__grid" data-reveal-stagger>
+        <div class="stat-card">
+          <div class="stat__number"><span data-count="2500">0</span><span class="stat__suffix">+</span></div>
+          <div class="stat__label">Projects Delivered</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat__number"><span data-count="40">0</span><span class="stat__suffix">+</span></div>
+          <div class="stat__label">Countries Worldwide</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat__number"><span data-count="99">0</span><span class="stat__suffix">.8%</span></div>
+          <div class="stat__label">Quality Rating</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat__number">24<span class="stat__suffix">/7</span></div>
+          <div class="stat__label">Operations Uptime</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SERVICES — Edge-to-edge industrial cards
+  ═══════════════════════════════════════════ -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header" data-reveal="fade-up">
+        <p class="label">Services</p>
+        <h2 class="section-title">Manufacturing<br />Services</h2>
+        <p class="section-desc">End-to-end engineering solutions from prototype to full-scale production — delivered with zero-defect precision.</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="services__grid" data-reveal-stagger>
+        <!-- Card 1 -->
+        <div class="service-card">
+          <div class="service-card__image-wrap">
+            <img class="service-card__image" src="assets/images/product-precision.png" alt="CNC precision machining" loading="lazy" />
+          </div>
+          <div class="service-card__body">
+            <p class="service-card__num">// 01</p>
+            <h3 class="service-card__name">CNC Precision Machining</h3>
+            <p class="service-card__desc">
+              Multi-axis CNC turning and milling with tolerances down to ±0.005mm.
+              Titanium, Inconel, aluminium, and high-performance alloys.
+            </p>
+            <a href="#contact" class="service-card__link">
+              Learn More <i class="ri-arrow-right-up-line"></i>
+            </a>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="service-card">
+          <div class="service-card__image-wrap">
+            <img class="service-card__image" src="assets/images/product-robotics.png" alt="Robotic automation cell" loading="lazy" />
+          </div>
+          <div class="service-card__body">
+            <p class="service-card__num">// 02</p>
+            <h3 class="service-card__name">Robotic Automation</h3>
+            <p class="service-card__desc">
+              Custom-engineered robotic cells for welding, assembly, and material handling.
+              Integrated vision systems with AI-driven quality control.
+            </p>
+            <a href="#contact" class="service-card__link">
+              Learn More <i class="ri-arrow-right-up-line"></i>
+            </a>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="service-card">
+          <div class="service-card__image-wrap">
+            <img class="service-card__image" src="assets/images/product-quality.png" alt="Quality assurance inspection" loading="lazy" />
+          </div>
+          <div class="service-card__body">
+            <p class="service-card__num">// 03</p>
+            <h3 class="service-card__name">Quality Assurance</h3>
+            <p class="service-card__desc">
+              CMM inspection, NDT testing, surface profilometry, and full dimensional reporting.
+              AS9100D & ISO 9001 certified processes.
+            </p>
+            <a href="#contact" class="service-card__link">
+              Learn More <i class="ri-arrow-right-up-line"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       PROCESS — Horizontal timeline
+  ═══════════════════════════════════════════ -->
+  <section class="process-section" id="process">
+    <div class="container">
+      <div class="section-header" style="text-align: center;" data-reveal="fade-up">
+        <p class="label" style="text-align: center;">How We Work</p>
+        <h2 class="section-title">Our Manufacturing<br />Process</h2>
+        <p class="section-desc" style="margin: 0 auto;">From initial consultation to final delivery — a streamlined, transparent workflow engineered for efficiency.</p>
+      </div>
+
+      <div class="process__timeline" data-reveal-stagger>
+        <div class="process-step">
+          <div class="process-step__dot"></div>
+          <p class="process-step__num">Step 01</p>
+          <h3 class="process-step__title">Design & Engineering</h3>
+          <p class="process-step__desc">
+            DFM analysis, CAD/CAM programming, material selection, and tolerance optimization using Siemens NX and SolidWorks.
+          </p>
+        </div>
+
+        <div class="process-step">
+          <div class="process-step__dot"></div>
+          <p class="process-step__num">Step 02</p>
+          <h3 class="process-step__title">Prototyping</h3>
+          <p class="process-step__desc">
+            Rapid prototyping via 5-axis CNC and metal additive manufacturing. First articles in as few as 5 business days.
+          </p>
+        </div>
+
+        <div class="process-step">
+          <div class="process-step__dot"></div>
+          <p class="process-step__num">Step 03</p>
+          <h3 class="process-step__title">Production</h3>
+          <p class="process-step__desc">
+            Automated production cells with in-line SPC monitoring, robotic material handling, and lights-out manufacturing capability.
+          </p>
+        </div>
+
+        <div class="process-step">
+          <div class="process-step__dot"></div>
+          <p class="process-step__num">Step 04</p>
+          <h3 class="process-step__title">Delivery & Support</h3>
+          <p class="process-step__desc">
+            Full traceability, AS9102 FAIR documentation, and global logistics partnerships. 98.7% on-time delivery rate.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       GALLERY — Grid with hover reveal
+  ═══════════════════════════════════════════ -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <div class="section-header" data-reveal="fade-up">
+        <p class="label">Facility</p>
+        <h2 class="section-title">Inside Our<br />Facility</h2>
+        <p class="section-desc">A walkthrough of our 120,000 sq ft advanced manufacturing facility.</p>
+      </div>
+    </div>
+
+    <div class="gallery__grid" data-reveal-stagger>
+      <div class="gallery__item" data-lb-src="assets/images/factory-floor.png" data-lb-cap="Main Factory Floor">
+        <img src="assets/images/factory-floor.png" alt="Main factory floor" loading="lazy" />
+        <div class="gallery__item-info"><span class="gallery__item-title">Main Factory Floor</span></div>
+      </div>
+      <div class="gallery__item" data-lb-src="assets/images/product-precision.png" data-lb-cap="CNC Machining Center">
+        <img src="assets/images/product-precision.png" alt="CNC machining center" loading="lazy" />
+        <div class="gallery__item-info"><span class="gallery__item-title">CNC Machining Center</span></div>
+      </div>
+      <div class="gallery__item" data-lb-src="assets/images/product-robotics.png" data-lb-cap="Robotic Welding Bay">
+        <img src="assets/images/product-robotics.png" alt="Robotic welding bay" loading="lazy" />
+        <div class="gallery__item-info"><span class="gallery__item-title">Robotic Welding Bay</span></div>
+      </div>
+      <div class="gallery__item" data-lb-src="assets/images/product-quality.png" data-lb-cap="Quality Inspection Lab">
+        <img src="assets/images/product-quality.png" alt="Quality inspection lab" loading="lazy" />
+        <div class="gallery__item-info"><span class="gallery__item-title">Quality Inspection Lab</span></div>
+      </div>
+      <div class="gallery__item" data-lb-src="assets/images/about-engineer.png" data-lb-cap="Engineering Office">
+        <img src="assets/images/about-engineer.png" alt="Engineering office" loading="lazy" />
+        <div class="gallery__item-info"><span class="gallery__item-title">Engineering Office</span></div>
+      </div>
+      <div class="gallery__item" data-lb-src="assets/images/hero.png" data-lb-cap="Assembly Line Overview">
+        <img src="assets/images/hero.png" alt="Assembly line overview" loading="lazy" />
+        <div class="gallery__item-info"><span class="gallery__item-title">Assembly Line Overview</span></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       CTA BAND — Black on lime
+  ═══════════════════════════════════════════ -->
+  <section class="cta-band">
+    <div class="container" data-reveal="fade-up">
+      <p class="cta-band__text">
+        "Precision is not an act. It is a habit. Every component we produce carries the weight of that commitment."
+      </p>
+      <p class="cta-band__cite">— Vikram Rao, CEO & Founder</p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       TEAM — Offset grid
+  ═══════════════════════════════════════════ -->
+  <section class="team" id="team">
+    <div class="container">
+      <div class="section-header" data-reveal="fade-up">
+        <p class="label">Leadership</p>
+        <h2 class="section-title">The Team Behind<br />the Machines</h2>
+      </div>
+
+      <div class="team__grid" data-reveal-stagger>
+        <!-- CEO -->
+        <div class="team-card">
+          <div class="team-card__image-wrap">
+            <img src="assets/images/team-ceo.png" alt="Vikram Rao — CEO" loading="lazy" />
+          </div>
+          <div class="team-card__body">
+            <h3 class="team-card__name">Vikram Rao</h3>
+            <p class="team-card__title">CEO & Founder</p>
+            <p class="team-card__bio">26 years in precision engineering. Former R&D Director at Rolls-Royce Aerospace Division.</p>
+            <div class="team-card__socials">
+              <a href="#" aria-label="LinkedIn"><i class="ri-linkedin-fill"></i></a>
+              <a href="#" aria-label="Twitter"><i class="ri-twitter-x-fill"></i></a>
+            </div>
+          </div>
+        </div>
+        <!-- CTO -->
+        <div class="team-card">
+          <div class="team-card__image-wrap">
+            <img src="assets/images/team-engineer.png" alt="Ananya Sharma — CTO" loading="lazy" />
+          </div>
+          <div class="team-card__body">
+            <h3 class="team-card__name">Ananya Sharma</h3>
+            <p class="team-card__title">Chief Technology Officer</p>
+            <p class="team-card__bio">MIT-trained robotics engineer. Led the Industry 4.0 transformation of our production lines.</p>
+            <div class="team-card__socials">
+              <a href="#" aria-label="LinkedIn"><i class="ri-linkedin-fill"></i></a>
+            </div>
+          </div>
+        </div>
+        <!-- VP Ops -->
+        <div class="team-card">
+          <div class="team-card__image-wrap">
+            <img src="assets/images/team-operations.png" alt="Rajesh Kumar — VP Operations" loading="lazy" />
+          </div>
+          <div class="team-card__body">
+            <h3 class="team-card__name">Rajesh Kumar</h3>
+            <p class="team-card__title">VP of Operations</p>
+            <p class="team-card__bio">ISO Lead Auditor with 18 years in lean manufacturing. Manages global supply chain and logistics.</p>
+            <div class="team-card__socials">
+              <a href="#" aria-label="LinkedIn"><i class="ri-linkedin-fill"></i></a>
+              <a href="#" aria-label="Twitter"><i class="ri-twitter-x-fill"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       TESTIMONIALS — Swiper carousel
+  ═══════════════════════════════════════════ -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-header" style="text-align: center;" data-reveal="fade-up">
+        <p class="label" style="text-align: center;">Testimonials</p>
+        <h2 class="section-title">Trusted by Industry<br />Leaders</h2>
+      </div>
+
+      <div class="testimonials-swiper swiper" data-reveal="fade-up">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-card__quote-mark">"</div>
+              <p class="testimonial-card__text">
+                Forge Industries delivered our turbine housing prototypes 3 weeks ahead of schedule with zero defects. Their precision machining capability is unmatched in the industry.
+              </p>
+              <div class="testimonial-card__author">
+                <img src="assets/images/testimonial-1.png" alt="James Thornton" />
+                <div>
+                  <strong>James Thornton</strong>
+                  <span>VP Engineering, AeroTech Solutions</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-card__quote-mark">"</div>
+              <p class="testimonial-card__text">
+                We've been working with Forge for 8 years. Their robotic automation solutions reduced our assembly line cycle time by 42% while improving quality metrics across the board.
+              </p>
+              <div class="testimonial-card__author">
+                <img src="assets/images/testimonial-2.png" alt="Sarah Chen" />
+                <div>
+                  <strong>Sarah Chen</strong>
+                  <span>Director of Manufacturing, AutoPrime</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-card__quote-mark">"</div>
+              <p class="testimonial-card__text">
+                The level of documentation and traceability Forge provides meets and exceeds our stringent AS9100D requirements. They're not just a supplier — they're a strategic partner.
+              </p>
+              <div class="testimonial-card__author">
+                <img src="assets/images/testimonial-3.png" alt="Martin Kiefer" />
+                <div>
+                  <strong>Martin Kiefer</strong>
+                  <span>Head of Quality, Eurofighter GmbH</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       CERTIFICATIONS
+  ═══════════════════════════════════════════ -->
+  <section class="certifications">
+    <div class="container">
+      <div class="section-header" style="text-align: center;" data-reveal="fade-up">
+        <p class="label" style="text-align: center;">Compliance</p>
+        <h2 class="section-title">Certifications</h2>
+      </div>
+
+      <div class="certs__grid" data-reveal-stagger>
+        <div class="cert-item">
+          <div class="cert-item__icon"><i class="ri-shield-check-fill"></i></div>
+          <h3 class="cert-item__name">ISO 9001</h3>
+          <p class="cert-item__sub">Quality Management</p>
+        </div>
+        <div class="cert-item">
+          <div class="cert-item__icon"><i class="ri-plane-fill"></i></div>
+          <h3 class="cert-item__name">AS9100D</h3>
+          <p class="cert-item__sub">Aerospace Standard</p>
+        </div>
+        <div class="cert-item">
+          <div class="cert-item__icon"><i class="ri-leaf-fill"></i></div>
+          <h3 class="cert-item__name">ISO 14001</h3>
+          <p class="cert-item__sub">Environmental Mgmt</p>
+        </div>
+        <div class="cert-item">
+          <div class="cert-item__icon"><i class="ri-fire-fill"></i></div>
+          <h3 class="cert-item__name">NADCAP</h3>
+          <p class="cert-item__sub">Special Processes</p>
+        </div>
+        <div class="cert-item">
+          <div class="cert-item__icon"><i class="ri-car-fill"></i></div>
+          <h3 class="cert-item__name">IATF 16949</h3>
+          <p class="cert-item__sub">Automotive Quality</p>
+        </div>
+        <div class="cert-item">
+          <div class="cert-item__icon"><i class="ri-lock-fill"></i></div>
+          <h3 class="cert-item__name">ITAR</h3>
+          <p class="cert-item__sub">Defence Compliant</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       CONTACT
+  ═══════════════════════════════════════════ -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="section-header" data-reveal="fade-up">
+        <p class="label">Contact</p>
+        <h2 class="section-title">Let's Build<br />Something</h2>
+      </div>
+
+      <div class="contact__grid">
+        <!-- Info -->
+        <div class="contact__info" data-reveal="fade-up">
+          <h3>Forge Industries HQ</h3>
+          <p><i class="ri-map-pin-2-fill"></i> Plot 12, Industrial Zone IV<br />Sector 62, Noida 201301, India</p>
+          <p><i class="ri-phone-fill"></i> <a href="tel:+911204567890">+91 120 456 7890</a></p>
+          <p><i class="ri-mail-fill"></i> <a href="mailto:info@forgeindustries.com">info@forgeindustries.com</a></p>
+          <p><i class="ri-time-fill"></i> Mon – Sat: 08:00 – 18:00 IST</p>
+
+          <div class="contact__social">
+            <a href="#" class="social-link" aria-label="LinkedIn"><i class="ri-linkedin-fill"></i></a>
+            <a href="#" class="social-link" aria-label="Twitter"><i class="ri-twitter-x-fill"></i></a>
+            <a href="#" class="social-link" aria-label="YouTube"><i class="ri-youtube-fill"></i></a>
+            <a href="#" class="social-link" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="contact__form-col" data-reveal="fade-up">
+          <h3>Request a Quote</h3>
+          <p class="contact__subtitle">Fill in the details and our engineering team will respond within 24 hours.</p>
+
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contactName">Full Name</label>
+                <input type="text" id="contactName" name="name" placeholder="John Doe" required />
+                <span class="form-error" id="nameError"></span>
+              </div>
+              <div class="form-group">
+                <label for="contactEmail">Email</label>
+                <input type="email" id="contactEmail" name="email" placeholder="john@company.com" required />
+                <span class="form-error" id="emailError"></span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contactPhone">Phone</label>
+                <input type="tel" id="contactPhone" name="phone" placeholder="+91 XXX XXX XXXX" />
+              </div>
+              <div class="form-group">
+                <label for="contactService">Service</label>
+                <select id="contactService" name="service" required>
+                  <option value="" disabled selected>Select a service</option>
+                  <option>CNC Precision Machining</option>
+                  <option>Robotic Automation</option>
+                  <option>Quality Assurance</option>
+                  <option>Design & Prototyping</option>
+                  <option>Full Production Run</option>
+                  <option>Other</option>
+                </select>
+                <span class="form-error" id="serviceError"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contactMessage">Message</label>
+              <textarea id="contactMessage" name="message" rows="4" placeholder="Tell us about your project requirements..." required></textarea>
+              <span class="form-error" id="messageError"></span>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--full" id="submitBtn">
+              <span class="btn__text">Submit Inquiry</span>
+              <span class="btn__loader"><i class="ri-loader-4-line"></i></span>
+            </button>
+          </form>
+
+          <div class="contact-success" id="contactSuccess">
+            <i class="ri-checkbox-circle-fill"></i>
+            <h3>Inquiry Received</h3>
+            <p>Our engineering team will review your requirements and respond within 24 hours.</p>
+            <button class="btn btn--outline" onclick="document.getElementById('contactSuccess').classList.remove('visible'); document.getElementById('contactForm').style.display='flex'; document.getElementById('contactForm').reset();">Submit Another</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <div class="footer__logo">
+            <span class="dot"></span>
+            <span>Forge Industries</span>
+          </div>
+          <p class="footer__tagline">Precision engineering and advanced manufacturing solutions for the world's most demanding industries.</p>
+          <div class="footer__social">
+            <a href="#" aria-label="LinkedIn"><i class="ri-linkedin-fill"></i></a>
+            <a href="#" aria-label="Twitter"><i class="ri-twitter-x-fill"></i></a>
+            <a href="#" aria-label="YouTube"><i class="ri-youtube-fill"></i></a>
+            <a href="#" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+          </div>
+        </div>
+
+        <nav class="footer__nav">
+          <div class="footer__nav-col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#team">Leadership</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Sustainability</a></li>
+            </ul>
+          </div>
+          <div class="footer__nav-col">
+            <h4>Services</h4>
+            <ul>
+              <li><a href="#services">CNC Machining</a></li>
+              <li><a href="#services">Robotic Automation</a></li>
+              <li><a href="#services">Quality Assurance</a></li>
+              <li><a href="#services">Prototyping</a></li>
+            </ul>
+          </div>
+          <div class="footer__nav-col">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="#">Case Studies</a></li>
+              <li><a href="#">Technical Specs</a></li>
+              <li><a href="#">ISO Certificates</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div class="footer__bottom">
+        <span class="footer__copy">© 2024 Forge Industries Pvt. Ltd. All rights reserved.</span>
+        <div class="footer__legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Settings</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="ri-arrow-up-line"></i>
+  </button>
+
+
+  <!-- Lightbox -->
+  <dialog id="forge-lightbox">
+    <div class="lb-content">
+      <div class="lb-spinner" id="lbSpinner"><div></div></div>
+      <img class="lb-img" id="lbImg" src="" alt="" />
+      <p class="lb-caption" id="lbCaption"></p>
+      <p class="lb-counter" id="lbCounter"></p>
+    </div>
+    <button class="lb-btn lb-close" id="lbClose" aria-label="Close lightbox"><i class="ri-close-line"></i></button>
+    <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous image"><i class="ri-arrow-left-s-line"></i></button>
+    <button class="lb-btn lb-next" id="lbNext" aria-label="Next image"><i class="ri-arrow-right-s-line"></i></button>
+  </dialog>
+
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/gsap-animations.js"></script>
+</body>
+</html>

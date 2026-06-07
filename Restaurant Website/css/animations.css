@@ -9,74 +9,160 @@
    ───────────────────────────────────── */
 
 @keyframes marqueeScroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes scrollLine {
-  0%   { transform: scaleY(0); transform-origin: top; }
-  45%  { transform: scaleY(1); transform-origin: top; }
-  55%  { transform: scaleY(1); transform-origin: bottom; }
-  100% { transform: scaleY(0); transform-origin: bottom; }
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  45% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  55% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
 }
 
 @keyframes fadeInPanel {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes shimmer {
-  0%   { background-position: -1000px 0; }
-  100% { background-position: 1000px 0; }
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
 }
 
 @keyframes pulse-ring {
-  0%   { transform: scale(0.8); opacity: 0.8; }
-  70%  { transform: scale(1.4); opacity: 0; }
-  100% { transform: scale(1.4); opacity: 0; }
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-8px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 @keyframes grain {
-  0%, 100% { transform: translate(0, 0); }
-  10%       { transform: translate(-2%, -3%); }
-  20%       { transform: translate(3%, 2%); }
-  30%       { transform: translate(-1%, 4%); }
-  40%       { transform: translate(4%, -1%); }
-  50%       { transform: translate(-3%, 3%); }
-  60%       { transform: translate(2%, -4%); }
-  70%       { transform: translate(-4%, 2%); }
-  80%       { transform: translate(3%, -3%); }
-  90%       { transform: translate(-2%, 1%); }
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-2%, -3%);
+  }
+  20% {
+    transform: translate(3%, 2%);
+  }
+  30% {
+    transform: translate(-1%, 4%);
+  }
+  40% {
+    transform: translate(4%, -1%);
+  }
+  50% {
+    transform: translate(-3%, 3%);
+  }
+  60% {
+    transform: translate(2%, -4%);
+  }
+  70% {
+    transform: translate(-4%, 2%);
+  }
+  80% {
+    transform: translate(3%, -3%);
+  }
+  90% {
+    transform: translate(-2%, 1%);
+  }
 }
 
 @keyframes counterUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes drawUnderline {
-  from { width: 0; }
-  to   { width: 100%; }
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }
 
 @keyframes ripple {
-  0%   { transform: scale(0); opacity: 0.4; }
-  100% { transform: scale(4); opacity: 0; }
+  0% {
+    transform: scale(0);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
 }
 
 @keyframes bounceArrow {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50%       { transform: translateX(-50%) translateY(6px); }
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(6px);
+  }
 }
 
 /* ─────────────────────────────────────
@@ -84,7 +170,6 @@
    ───────────────────────────────────── */
 
 .hero__grain {
-  animation: grain 6s steps(1) infinite;
   will-change: transform;
 }
 
@@ -108,7 +193,8 @@
   position: absolute;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.3);
-  width: 10px; height: 10px;
+  width: 10px;
+  height: 10px;
   pointer-events: none;
   animation: ripple 0.6s ease-out forwards;
   transform: translate(-50%, -50%);
@@ -119,9 +205,10 @@
    ───────────────────────────────────── */
 
 .nav__link::after {
-  content: '';
+  content: "";
   position: absolute;
-  left: 0; bottom: -4px;
+  left: 0;
+  bottom: -4px;
   height: 1px;
   background: var(--color-accent);
   width: 0;
@@ -160,7 +247,9 @@
    ───────────────────────────────────── */
 
 .menu-item .dish-badge {
-  transition: transform 0.2s var(--transition-spring), box-shadow 0.2s;
+  transition:
+    transform 0.2s var(--transition-spring),
+    box-shadow 0.2s;
 }
 
 .menu-item:hover .dish-badge {
@@ -186,8 +275,9 @@
    ───────────────────────────────────── */
 
 .gallery__item {
-  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              box-shadow 0.5s ease;
+  transition:
+    transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.5s ease;
 }
 
 /* ─────────────────────────────────────
@@ -197,9 +287,10 @@
 .form-group input,
 .form-group select,
 .form-group textarea {
-  transition: border-color 0.25s ease,
-              box-shadow 0.25s ease,
-              background-color 0.3s ease;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.3s ease;
 }
 
 /* ─────────────────────────────────────
@@ -258,7 +349,8 @@ body,
    ───────────────────────────────────── */
 
 .skeleton {
-  background: linear-gradient(90deg,
+  background: linear-gradient(
+    90deg,
     var(--color-bg-card) 25%,
     var(--color-bg-alt) 50%,
     var(--color-bg-card) 75%
@@ -274,7 +366,10 @@ body,
 .mobile-menu__link {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.4s ease, transform 0.4s ease, color 0.3s ease;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    color 0.3s ease;
 }
 
 .mobile-menu.open .mobile-menu__link {
@@ -282,12 +377,24 @@ body,
   transform: translateY(0);
 }
 
-.mobile-menu.open li:nth-child(1) .mobile-menu__link { transition-delay: 0.1s; }
-.mobile-menu.open li:nth-child(2) .mobile-menu__link { transition-delay: 0.15s; }
-.mobile-menu.open li:nth-child(3) .mobile-menu__link { transition-delay: 0.2s; }
-.mobile-menu.open li:nth-child(4) .mobile-menu__link { transition-delay: 0.25s; }
-.mobile-menu.open li:nth-child(5) .mobile-menu__link { transition-delay: 0.3s; }
-.mobile-menu.open li:nth-child(6) .mobile-menu__link { transition-delay: 0.35s; }
+.mobile-menu.open li:nth-child(1) .mobile-menu__link {
+  transition-delay: 0.1s;
+}
+.mobile-menu.open li:nth-child(2) .mobile-menu__link {
+  transition-delay: 0.15s;
+}
+.mobile-menu.open li:nth-child(3) .mobile-menu__link {
+  transition-delay: 0.2s;
+}
+.mobile-menu.open li:nth-child(4) .mobile-menu__link {
+  transition-delay: 0.25s;
+}
+.mobile-menu.open li:nth-child(5) .mobile-menu__link {
+  transition-delay: 0.3s;
+}
+.mobile-menu.open li:nth-child(6) .mobile-menu__link {
+  transition-delay: 0.35s;
+}
 
 /* ─────────────────────────────────────
    PAGE LOAD — prevent FOUC
@@ -298,8 +405,12 @@ body,
    ───────────────────────────────────── */
 
 @keyframes bodyFadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 body {
@@ -336,7 +447,9 @@ body {
 
 .swiper-slide {
   height: auto;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
 }
 
 .swiper-slide-active {
@@ -349,7 +462,10 @@ body {
    ───────────────────────────────────── */
 
 .back-to-top {
-  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    background-color 0.3s ease;
 }
 
 /* ─────────────────────────────────────
@@ -427,10 +543,20 @@ section + section {
 }
 
 @keyframes particleRise {
-  0%   { transform: translateY(0) translateX(0);                     opacity: 0; }
-  12%  { opacity: 0.7; }
-  88%  { opacity: 0.2; }
-  100% { transform: translateY(-90vh) translateX(var(--drift, 40px)); opacity: 0; }
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.7;
+  }
+  88% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-90vh) translateX(var(--drift, 40px));
+    opacity: 0;
+  }
 }
 
 /* ─────────────────────────────────────
