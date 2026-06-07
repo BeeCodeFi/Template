@@ -51,7 +51,7 @@
     --section-py: clamp(3rem, 7vw, 6rem);
   }
 
-  /* Nav — show hamburger, hide links */
+  /* Nav — show hamburger, hide desktop links */
   .nav__links {
     display: none;
   }
