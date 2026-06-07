@@ -25,6 +25,13 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
+  // iOS Safari fix: normalizeScroll intercepts touch events directly so
+  // ScrollTrigger fires reliably during momentum scrolling on real devices.
+  // Only enabled on touch/coarse-pointer devices; desktop uses Lenis instead.
+  if (window.matchMedia('(pointer: coarse)').matches) {
+    ScrollTrigger.normalizeScroll(true);
+  }
+
   /* ─────────────────────────────────────
      HERO ENTRANCE ANIMATION
      Character-by-character title reveal
