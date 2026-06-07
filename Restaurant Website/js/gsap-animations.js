@@ -46,6 +46,14 @@
 
     if (!chars.length) return;
 
+    // Set initial hidden state via GSAP (not CSS) so elements are visible
+    // as a fallback if GSAP ever fails to complete the animation.
+    gsap.set(chars, { opacity: 0, y: 60, rotationX: -40 });
+    if (eyebrow) gsap.set(eyebrow, { opacity: 0, y: 20 });
+    if (tagline) gsap.set(tagline, { opacity: 0, y: 20 });
+    if (desc)    gsap.set(desc,    { opacity: 0, y: 20 });
+    if (ctas)    gsap.set(ctas,    { opacity: 0, y: 20 });
+
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
     // Eyebrow fades in first

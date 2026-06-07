@@ -307,6 +307,15 @@ body {
   animation: bodyFadeIn 0.5s ease 0.1s forwards;
 }
 
+/* Safety net: if the device has Reduce Motion on, the CSS animation
+   may not play, leaving the body permanently invisible. */
+@media (prefers-reduced-motion: reduce) {
+  body {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}
+
 /* ─────────────────────────────────────
    AOS CUSTOM OVERRIDES
    Ensure consistent with our theme

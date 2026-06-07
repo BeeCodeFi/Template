@@ -584,7 +584,6 @@ section {
   text-transform: uppercase;
   color: var(--color-accent);
   margin-bottom: 1.5rem;
-  opacity: 0;
 }
 
 .hero__title {
@@ -602,7 +601,6 @@ section {
 
 .hero__char {
   display: inline-block;
-  opacity: 0;
   will-change: transform, color;
   transform-origin: center bottom;
 }
@@ -615,7 +613,6 @@ section {
   color: rgba(232, 221, 208, 0.9);
   letter-spacing: 0.05em;
   margin-bottom: 1rem;
-  opacity: 0;
 }
 
 .hero__desc {
@@ -623,7 +620,6 @@ section {
   color: rgba(232, 221, 208, 0.65);
   margin-bottom: 2.5rem;
   line-height: 1.8;
-  opacity: 0;
 }
 
 .hero__ctas {
@@ -632,7 +628,6 @@ section {
   justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
-  opacity: 0;
 }
 
 /* Hero Scroll Indicator */
