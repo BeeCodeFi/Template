@@ -150,16 +150,16 @@
     object-fit: cover;
   }
 
-  /* Gradient: transparent at top, dark at bottom so text reads cleanly */
+  /* Dark overlay across full image so all text is clearly legible */
   .hero__image::after {
     content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(10, 10, 10, 0.25) 0%,
-      rgba(10, 10, 10, 0.55) 40%,
-      rgba(10, 10, 10, 0.92) 75%,
+      rgba(10, 10, 10, 0.60) 0%,
+      rgba(10, 10, 10, 0.72) 35%,
+      rgba(10, 10, 10, 0.88) 65%,
       #0A0A0A 100%
     );
     z-index: 1;
@@ -181,9 +181,15 @@
 
   .hero__title {
     font-size: clamp(2.5rem, 10vw, 4rem);
-    text-shadow:
-      0 2px 12px rgba(0, 0, 0, 0.9),
-      0 4px 32px rgba(0, 0, 0, 0.7);
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.95), 0 4px 32px rgba(0, 0, 0, 0.8);
+  }
+
+  #heroLabel,
+  .hero__tagline,
+  .hero__desc,
+  .hero__stat-label,
+  .hero__stat-num {
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9), 0 2px 20px rgba(0, 0, 0, 0.7);
   }
 
   .hero__ctas {
