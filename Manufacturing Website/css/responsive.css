@@ -101,7 +101,7 @@
     --nav-h: 60px;
   }
 
-  /* ── Disable all hero entry animations on mobile ── */
+  /* ── Kill all hero entry animations on mobile ── */
   .hero__image,
   .hero__divider,
   .hero__tagline,
@@ -117,78 +117,99 @@
   #heroLabel { opacity: 1 !important; transform: none !important; }
   .h-char    { opacity: 1 !important; transform: none !important; }
 
-  /* ── Mobile hero: image covers top (label + title only),
-        then solid dark bg for tagline/desc/ctas/stats ── */
+  /* ─────────────────────────────────────────────
+     MOBILE HERO LAYOUT
+     • Flex column so order works
+     • Image (order -1) → 65vh, gradient fades to dark at bottom
+     • Content pulled up 8rem to overlap image bottom
+       - label + title sit over dark part of image
+       - transparent bg so image shows through that top zone
+       - below: hero section's solid #0A0A0A bg shows through
+  ───────────────────────────────────────────── */
   .hero {
-    display: block;
-    position: relative;
+    display: flex;
+    flex-direction: column;
     background: #0A0A0A;
     min-height: unset;
     overflow: visible;
+    position: relative;
   }
 
-  /* Image: normal flow, tall enough for label + title */
   .hero__image {
     position: relative;
-    height: 56vh;
-    min-height: 300px;
-    width: 100%;
     order: -1;
+    flex-shrink: 0;
+    height: 65vh;
+    min-height: 320px;
+    width: 100%;
     overflow: hidden;
+    animation: none !important;
+    clip-path: none !important;
   }
+
+  /* Remove desktop diagonal cut */
+  .hero__image::before { display: none !important; }
 
   .hero__image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center top;
+    object-position: center center;
   }
 
-  /* Gradient: slight dark at top for label, fully solid at bottom to blend into bg */
+  /* Overlay: keeps top visible, fades to solid dark at bottom */
   .hero__image::after {
     content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(10, 10, 10, 0.50) 0%,
-      rgba(10, 10, 10, 0.30) 30%,
-      rgba(10, 10, 10, 0.80) 75%,
+      rgba(10, 10, 10, 0.25) 0%,
+      rgba(10, 10, 10, 0.15) 30%,
+      rgba(10, 10, 10, 0.70) 65%,
       #0A0A0A 100%
     );
     z-index: 1;
     pointer-events: none;
   }
 
-  /* Content: pull up so label + title sit over the image bottom */
+  /* Pull content up so label + title overlap the dark bottom of image.
+     Transparent bg → image/dark shows through; below overlap = solid dark. */
   .hero__content {
     position: relative;
     z-index: 2;
-    min-height: unset;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    margin-top: -13rem;
-    padding-top: 0;
+    min-height: unset;
+    margin-top: -9rem;
+    padding-top: 0.5rem;
     padding-bottom: 3rem;
+    background: transparent;
     order: unset;
-    /* Transparent behind label+title (over image), solid dark below */
-    background: linear-gradient(to bottom, transparent 13rem, #0A0A0A 13rem);
   }
 
-  /* Label + title: text-shadow to read over image */
+  /* Label + title read over the dark image bottom */
   #heroLabel {
-    text-shadow: 0 1px 8px rgba(0,0,0,0.9);
+    text-shadow: 0 1px 8px rgba(0,0,0,0.95);
   }
 
   .hero__title {
-    font-size: clamp(2.5rem, 10vw, 4rem);
-    text-shadow: 0 2px 16px rgba(0,0,0,0.95), 0 4px 32px rgba(0,0,0,0.75);
+    font-size: clamp(2.4rem, 9.5vw, 3.75rem);
+    text-shadow: 0 2px 12px rgba(0,0,0,0.95), 0 4px 28px rgba(0,0,0,0.8);
   }
 
-  /* Tagline, desc, stats — on solid dark bg, use normal readable colors */
-  .hero__tagline { color: var(--color-text-dim); }
-  .hero__desc    { color: var(--color-text-muted); }
+  /* Divider accent line */
+  .hero__divider { margin-top: 1.25rem; margin-bottom: 1.25rem; }
+
+  /* Tagline + desc on solid dark — full native colors, perfectly readable */
+  .hero__tagline {
+    color: var(--color-text-dim);
+    font-size: 1rem;
+  }
+
+  .hero__desc {
+    color: var(--color-text-muted);
+  }
 
   .hero__ctas {
     flex-direction: column;
