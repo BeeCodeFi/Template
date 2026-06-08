@@ -41,6 +41,153 @@
 }
 
 /* ─────────────────────────────────────
+   LIGHT THEME
+   Warm industrial off-white · Dark olive accent
+   All WCAG AA compliant on light backgrounds
+   ───────────────────────────────────── */
+[data-theme="light"] {
+  --color-bg:          #F4F1EB;
+  --color-bg-alt:      #EAE7E0;
+  --color-bg-card:     #E2DED6;
+  --color-bg-elevated: #D8D4CB;
+  --color-text:        #1A1A1A;
+  --color-text-muted:  #505050;
+  --color-text-dim:    #3D3D3D;
+  /* Darkened lime — 5.1:1 contrast on --color-bg (WCAG AA) */
+  --color-accent:      #546E00;
+  --color-accent-dim:  rgba(84, 110, 0, 0.09);
+  --color-accent-hover:#3F5400;
+  --color-accent-dark: #0A0F00;
+  --color-secondary:   #CC3300;
+  --color-border:      rgba(0, 0, 0, 0.12);
+  --color-border-accent: rgba(84, 110, 0, 0.25);
+  --color-white:       #1A1A1A;   /* headings — dark on light bg */
+}
+
+/* ── Light theme component overrides ── */
+[data-theme="light"] .nav.scrolled {
+  background: rgba(244, 241, 235, 0.93);
+}
+
+/* Nav sits over the always-dark hero — keep dark-theme colours until scrolled */
+[data-theme="light"] .nav:not(.scrolled) .nav__logo          { color: #FFFFFF; }
+[data-theme="light"] .nav:not(.scrolled) .nav__logo-dot      { background: #C8FF00; }
+[data-theme="light"] .nav:not(.scrolled) .nav__link          { color: #777777; }
+[data-theme="light"] .nav:not(.scrolled) .nav__link:hover,
+[data-theme="light"] .nav:not(.scrolled) .nav__link.active   { color: #C8FF00; }
+[data-theme="light"] .nav:not(.scrolled) .menu-btn           { color: #777777; }
+[data-theme="light"] .nav:not(.scrolled) .menu-btn:hover     { color: #C8FF00; }
+[data-theme="light"] .nav:not(.scrolled) .theme-toggle       { color: #777777; }
+[data-theme="light"] .nav:not(.scrolled) .theme-toggle:hover { color: #C8FF00; }
+[data-theme="light"] .nav:not(.scrolled) .btn--primary       { background: #C8FF00; color: #0A0A0A; border-color: #C8FF00; }
+[data-theme="light"] .nav:not(.scrolled) .btn--primary::before { background: #0A0A0A; }
+[data-theme="light"] .nav:not(.scrolled) .btn--primary:hover { color: #C8FF00; }
+
+[data-theme="light"] .mobile-menu {
+  background: var(--color-bg);
+}
+
+/* Stats band on accent bg — keep white-ish text for contrast */
+[data-theme="light"] .stats-band {
+  background: var(--color-accent);
+}
+[data-theme="light"] .stat__number,
+[data-theme="light"] .stats-band .stat__label {
+  color: #F4F1EB;
+}
+[data-theme="light"] .stats-band .stat__label {
+  color: rgba(244, 241, 235, 0.75);
+}
+[data-theme="light"] .stat-card {
+  border-right-color: rgba(244, 241, 235, 0.20);
+}
+
+/* Form inputs — use card bg so they stand out from page bg */
+[data-theme="light"] .form-group input,
+[data-theme="light"] .form-group select,
+[data-theme="light"] .form-group textarea {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.18);
+  color: var(--color-text);
+}
+[data-theme="light"] .form-group input:focus,
+[data-theme="light"] .form-group select:focus,
+[data-theme="light"] .form-group textarea:focus {
+  box-shadow: 0 0 0 1px var(--color-accent), 0 0 12px rgba(84, 110, 0, 0.12);
+}
+
+/* Outline button — readable on light bg */
+[data-theme="light"] .btn--outline {
+  color: var(--color-text-muted);
+  border-color: rgba(0, 0, 0, 0.22);
+}
+[data-theme="light"] .btn--outline:hover {
+  color: #F4F1EB;
+  border-color: var(--color-accent);
+}
+
+/* Primary button — dark olive bg, light text */
+[data-theme="light"] .btn--primary {
+  color: #F4F1EB;
+}
+[data-theme="light"] .btn--primary::before {
+  background: #F4F1EB;
+}
+[data-theme="light"] .btn--primary:hover {
+  color: var(--color-accent);
+}
+
+/* ── Hero always renders as dark regardless of theme ── */
+.hero,
+[data-theme="light"] .hero {
+  --color-bg:          #0A0A0A;
+  --color-bg-alt:      #111111;
+  --color-accent:      #C8FF00;
+  --color-accent-dim:  rgba(200, 255, 0, 0.08);
+  --color-accent-hover:#DFFF60;
+  --color-text:        #E8E8E8;
+  --color-text-muted:  #777777;
+  --color-text-dim:    #999999;
+  --color-white:       #FFFFFF;
+  --color-border:      rgba(255, 255, 255, 0.08);
+  background: #0A0A0A;
+}
+
+/* Diagonal cut and glow — keep dark values */
+[data-theme="light"] .hero__image::before {
+  background: #0A0A0A;
+}
+
+[data-theme="light"] .hero__content::after {
+  display: block;
+}
+
+/* Buttons inside hero — restore dark-theme styling */
+[data-theme="light"] .hero .btn--outline {
+  color: var(--color-text-muted) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+[data-theme="light"] .hero .btn--outline:hover {
+  color: var(--color-bg) !important;
+  border-color: var(--color-accent) !important;
+}
+[data-theme="light"] .hero .btn--primary {
+  color: var(--color-accent-dark) !important;
+}
+
+/* Service card hover accent border already uses --color-accent var */
+
+/* Gallery / team image filters — slightly less dark on light bg */
+[data-theme="light"] .service-card__image {
+  filter: grayscale(0.2) brightness(0.85);
+}
+
+/* Theme toggle icon swap */
+[data-theme="light"] .theme-toggle .ri-sun-line { display: none; }
+[data-theme="light"] .theme-toggle .ri-moon-line { display: inline; }
+.theme-toggle .ri-moon-line { display: none; }
+
+/* ─────────────────────────────────────
    2. RESET & BASE
    ───────────────────────────────────── */
 
@@ -232,6 +379,23 @@ section {
 }
 
 .menu-btn:hover { color: var(--color-accent); }
+
+/* Theme toggle button */
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-size: 1.125rem;
+  transition: color 0.3s ease, transform 0.4s ease;
+  flex-shrink: 0;
+}
+.theme-toggle:hover {
+  color: var(--color-accent);
+  transform: rotate(20deg);
+}
 
 .menu-btn__lines {
   display: flex;
