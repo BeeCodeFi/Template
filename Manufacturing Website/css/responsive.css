@@ -101,6 +101,32 @@
     --nav-h: 60px;
   }
 
+  /* ── Disable hero entry animations on mobile — body fade-in handles reveal ── */
+  .hero__image {
+    animation: none !important;
+    clip-path: none !important;
+  }
+
+  #heroLabel {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .h-char {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero__divider,
+  .hero__tagline,
+  .hero__desc,
+  .hero__ctas,
+  .hero__stats {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
   /* ── Mobile hero: image fills section, content overlaid on top ── */
   .hero {
     display: block;
