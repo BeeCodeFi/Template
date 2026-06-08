@@ -1,0 +1,141 @@
+/* ═══════════════════════════════════════════════════════════
+   VITALCARE — SCROLL ANIMATIONS
+   ─────────────────────────────────────────────────────────
+   Custom IntersectionObserver-driven animations
+   Lightweight — no external animation library required
+═══════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────
+   BASE ANIMATION STATES
+   ───────────────────────────────────── */
+[data-animate] {
+  opacity: 0;
+  transition-property: opacity, transform;
+  transition-duration: 0.8s;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+[data-animate="fade-up"] {
+  transform: translateY(40px);
+}
+
+[data-animate="fade-down"] {
+  transform: translateY(-40px);
+}
+
+[data-animate="fade-left"] {
+  transform: translateX(40px);
+}
+
+[data-animate="fade-right"] {
+  transform: translateX(-40px);
+}
+
+[data-animate="fade-in"] {
+  transform: scale(0.95);
+}
+
+[data-animate="zoom-in"] {
+  transform: scale(0.85);
+}
+
+/* ─────────────────────────────────────
+   ANIMATED STATE (triggered by JS)
+   ───────────────────────────────────── */
+[data-animate].animated {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+}
+
+/* ─────────────────────────────────────
+   STAGGER DELAYS (set via data-delay)
+   ───────────────────────────────────── */
+[data-delay="50"]  { transition-delay: 50ms; }
+[data-delay="100"] { transition-delay: 100ms; }
+[data-delay="150"] { transition-delay: 150ms; }
+[data-delay="200"] { transition-delay: 200ms; }
+[data-delay="250"] { transition-delay: 250ms; }
+[data-delay="300"] { transition-delay: 300ms; }
+[data-delay="350"] { transition-delay: 350ms; }
+[data-delay="400"] { transition-delay: 400ms; }
+[data-delay="500"] { transition-delay: 500ms; }
+[data-delay="600"] { transition-delay: 600ms; }
+
+/* ─────────────────────────────────────
+   HERO CARD FLOAT ANIMATION
+   ───────────────────────────────────── */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(0.5deg); }
+  75% { transform: translateY(4px) rotate(-0.5deg); }
+}
+
+/* ─────────────────────────────────────
+   PULSE GLOW (for icons)
+   ───────────────────────────────────── */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(37, 99, 235, 0);
+  }
+}
+
+.pulse-glow {
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────
+   COUNTER NUMBER ANIMATION
+   ───────────────────────────────────── */
+.stats__number {
+  transition: all 0.3s ease;
+}
+
+/* ─────────────────────────────────────
+   HOVER LIFT EFFECT
+   ───────────────────────────────────── */
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px var(--color-shadow-lg);
+}
+
+/* ─────────────────────────────────────
+   GRADIENT SHIFT (subtle background)
+   ───────────────────────────────────── */
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.gradient-animate {
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────
+   SKELETON LOADING (optional)
+   ───────────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-alt) 25%,
+    var(--color-bg-card) 50%,
+    var(--color-bg-alt) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
