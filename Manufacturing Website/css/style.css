@@ -541,11 +541,18 @@ section {
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marqueeScroll 50s linear infinite;
+  will-change: transform;
 }
 
-.marquee-section:hover .marquee-track {
-  animation-play-state: paused;
+/* Only pause on real pointer (mouse) devices — touch :hover gets stuck on mobile */
+@media (hover: hover) and (pointer: fine) {
+  .marquee-section:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  .marquee-section:hover .marquee-content span {
+    color: var(--color-text-muted);
+  }
 }
 
 .marquee-content {
@@ -565,10 +572,6 @@ section {
   color: var(--color-text-dim);
   white-space: nowrap;
   transition: color 0.3s;
-}
-
-.marquee-section:hover .marquee-content span {
-  color: var(--color-text-muted);
 }
 
 .marquee-content .dot {

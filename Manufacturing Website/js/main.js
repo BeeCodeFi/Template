@@ -420,6 +420,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ═══════════════════════════════════
+     12. MARQUEE — rAF driven (CSS anim unreliable on mobile)
+  ═══════════════════════════════════ */
+
+  const marqueeTrack = document.querySelector('.marquee-track');
+  if (marqueeTrack) {
+    // Speed in px per second
+    const SPEED = 60;
+    let offset = 0;
+    let lastTime = null;
+    let paused = false;
+
+    // Pause only on real pointer devices (mouse hover)
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      const marqueeSection = document.querySelector('.marquee-section');
+      if (marqueeSection) {
+        marqueeSection.addEventListener('mouseenter', () => { paused = true; });
+        marqueeSection.addEventListener('mouseleave', () => { paused = false; });
+      }
+    }
+
+    function tickMarquee(timestamp) {
+      if (lastTime !== null && !paused) {
+        const delta = (timestamp - lastTime) / 1000; // seconds
+        offset += SPEED * delta;
+        // Reset when one full half scrolled (two identical content blocks)
+        const halfWidth = marqueeTrack.scrollWidth / 2;
+        if (offset >= halfWidth) offset -= halfWidth;
+        marqueeTrack.style.transform = `translateX(-${offset}px)`;
+      }
+      lastTime = timestamp;
+      requestAnimationFrame(tickMarquee);
+    }
+
+    requestAnimationFrame(tickMarquee);
+  }
+
+  /* ═══════════════════════════════════
      12. HERO MOUSE PARALLAX
   ═══════════════════════════════════ */
 
