@@ -129,7 +129,7 @@
   .hero {
     display: flex;
     flex-direction: column;
-    background: #0A0A0A;
+    background: var(--color-bg);
     min-height: unset;
     overflow: visible;
     position: relative;
@@ -157,7 +157,7 @@
     object-position: center center;
   }
 
-  /* Overlay: keeps top visible, fades to solid dark at bottom */
+  /* Overlay: keeps top visible, fades to solid bg at bottom */
   .hero__image::after {
     content: '';
     position: absolute;
@@ -171,6 +171,17 @@
     );
     z-index: 1;
     pointer-events: none;
+  }
+
+  /* Light theme: warm off-white overlay fading to light bg */
+  [data-theme="light"] .hero__image::after {
+    background: linear-gradient(
+      to bottom,
+      rgba(244, 241, 235, 0.10) 0%,
+      rgba(244, 241, 235, 0.10) 30%,
+      rgba(244, 241, 235, 0.82) 68%,
+      #F4F1EB 100%
+    );
   }
 
   /* Pull content up so label + title overlap the dark bottom of image.
@@ -196,6 +207,25 @@
   .hero__title {
     font-size: clamp(2.4rem, 9.5vw, 3.75rem);
     text-shadow: 0 2px 12px rgba(0,0,0,0.95), 0 4px 28px rgba(0,0,0,0.8);
+  }
+
+  /* Light theme: label + title always sit OVER the image — force white text */
+  [data-theme="light"] #heroLabel {
+    color: rgba(255, 255, 255, 0.90) !important;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.8), 0 2px 16px rgba(0,0,0,0.6);
+  }
+  [data-theme="light"] .hero__title {
+    color: #ffffff !important;
+    text-shadow: 0 2px 14px rgba(0,0,0,0.9), 0 4px 28px rgba(0,0,0,0.7);
+  }
+  [data-theme="light"] .hero__title em {
+    color: #C8FF00 !important;
+  }
+  [data-theme="light"] .h-char {
+    color: inherit !important;
+  }
+  [data-theme="light"] .hero__content {
+    background: transparent;
   }
 
   /* Divider accent line */
@@ -247,8 +277,61 @@
     gap: 0.75rem; 
   }
 
+  /* Hide Get a Quote from nav bar on mobile — too cramped */
+  .btn--nav { display: none !important; }
+
+  /* Always show theme toggle clearly */
+  .theme-toggle {
+    color: var(--color-white);
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+
   .mobile-menu__link {
     font-size: clamp(1.75rem, 8vw, 2.5rem);
+  }
+
+  /* Theme toggle row inside mobile menu */
+  .mobile-menu__footer {
+    position: absolute;
+    bottom: 2.5rem;
+    left: var(--container-px);
+    right: var(--container-px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.5rem;
+  }
+
+  .mobile-menu__theme-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .mobile-menu__theme-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    background: none;
+    border: 1px solid var(--color-accent);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .mobile-menu__theme-btn:hover {
+    background: var(--color-accent);
+    color: var(--color-bg);
   }
 
   .back-to-top {

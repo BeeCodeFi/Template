@@ -457,6 +457,56 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ═══════════════════════════════════
+     13. THEME TOGGLE — light / dark
+  ═══════════════════════════════════ */
+
+  const themeToggle = document.getElementById('themeToggle');
+  const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+  const root = document.documentElement;
+  const heroImg = document.getElementById('heroImg');
+
+  const HERO_DARK  = 'assets/images/hero.png';
+  const HERO_LIGHT = 'assets/images/hero-light.jpg';
+
+  function applyTheme(theme) {
+    if (theme === 'light') {
+      root.setAttribute('data-theme', 'light');
+    } else {
+      root.removeAttribute('data-theme');
+    }
+    localStorage.setItem('forge-theme', theme);
+
+    // Swap hero image
+    if (heroImg) {
+      heroImg.src = theme === 'light' ? HERO_LIGHT : HERO_DARK;
+    }
+
+    // Sync mobile button label
+    if (mobileThemeToggle) {
+      const isLight = theme === 'light';
+      mobileThemeToggle.querySelector('i').className = isLight ? 'ri-moon-line' : 'ri-sun-line';
+      mobileThemeToggle.querySelector('span').textContent = isLight ? 'Dark' : 'Light';
+    }
+  }
+
+  // Set initial mobile button state
+  applyTheme(root.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const isLight = root.getAttribute('data-theme') === 'light';
+      applyTheme(isLight ? 'dark' : 'light');
+    });
+  }
+
+  if (mobileThemeToggle) {
+    mobileThemeToggle.addEventListener('click', () => {
+      const isLight = root.getAttribute('data-theme') === 'light';
+      applyTheme(isLight ? 'dark' : 'light');
+    });
+  }
+
+  /* ═══════════════════════════════════
      12. HERO MOUSE PARALLAX
   ═══════════════════════════════════ */
 

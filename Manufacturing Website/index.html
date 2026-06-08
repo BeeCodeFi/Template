@@ -25,6 +25,13 @@
   <link rel="stylesheet" href="css/animations.css" />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/responsive.css" />
+  <!-- Anti-FOUC: apply saved theme before first paint -->
+  <script>
+    (function(){
+      const t = localStorage.getItem('forge-theme');
+      if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
+    })();
+  </script>
 </head>
 <body>
 
@@ -50,6 +57,10 @@
       </div>
 
       <div class="nav__cta">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme">
+          <i class="ri-sun-line"></i>
+          <i class="ri-moon-line"></i>
+        </button>
         <a href="#contact" class="btn btn--primary btn--nav" style="padding: 0.65rem 1.5rem; font-size: 0.6875rem;">Get a Quote</a>
         <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation menu">
           <span class="menu-btn__label">Menu</span>
@@ -74,6 +85,13 @@
       <li><a href="#team" class="mobile-menu__link"><span class="mobile-menu__counter">06</span>Team</a></li>
       <li><a href="#contact" class="mobile-menu__link"><span class="mobile-menu__counter">07</span>Contact</a></li>
     </ul>
+    <div class="mobile-menu__footer">
+      <span class="mobile-menu__theme-label">Theme</span>
+      <button class="mobile-menu__theme-btn" id="mobileThemeToggle">
+        <i class="ri-sun-line"></i>
+        <span>Light</span>
+      </button>
+    </div>
   </div>
 
 
@@ -127,7 +145,7 @@
     </div>
 
     <div class="hero__image">
-      <img src="assets/images/hero.png" alt="Advanced manufacturing facility with robotic automation" loading="eager" />
+      <img id="heroImg" src="assets/images/hero.png" alt="Advanced manufacturing facility with robotic automation" loading="eager" />
     </div>
 
     <div class="hero__scroll">
