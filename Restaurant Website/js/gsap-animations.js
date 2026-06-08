@@ -462,11 +462,13 @@
 
     // ── 1. EXPLOSIVE SCATTER — chars hurl outward then elastic-snap back ──
     function explosiveScatter() {
+      // Scale offsets down on small viewports so chars don't fly off-screen
+      const scale = isTouchDevice ? 0.35 : 1;
       const vectors = [
-        { x: -160, y: -90,  r: -220 },
-        { x: -60,  y:  120, r:  180 },
-        { x:  60,  y:  130, r: -160 },
-        { x:  170, y: -80,  r:  200 },
+        { x: -160 * scale, y: -90 * scale,  r: -220 },
+        { x: -60  * scale, y:  120 * scale, r:  180 },
+        { x:  60  * scale, y:  130 * scale, r: -160 },
+        { x:  170 * scale, y: -80  * scale, r:  200 },
       ];
       return gsap.timeline()
         .to(chars, {
@@ -557,11 +559,14 @@
         }, '+=0.04');
     }
 
-    // ── 5. ORBITAL SWEEP — letters arc far right with skew blur, whip back ──
+    // ── 5. ORBITAL SWEEP — letters arc right with skew blur, whip back ──
     function orbitalSweep() {
+      // Scale offsets down on mobile so chars stay within viewport
+      const base = isTouchDevice ? 20 : 80;
+      const step = isTouchDevice ? 18 : 55;
       return gsap.timeline()
         .to(chars, {
-          x: (i) => 80 + i * 55,
+          x: (i) => base + i * step,
           skewX: -30,
           opacity: 0.2,
           color: GOLD,
@@ -595,8 +600,8 @@
     gsap.delayedCall(3.8, playNextEffect);
   }
 
-  // Mobile: only the hero entrance + RASA letter loop.
-  // All ScrollTrigger-based scroll animations are skipped on touch devices
+  // Mobile: hero entrance + RASA letter loop with mobile-safe offsets.
+  // ScrollTrigger-based scroll animations are skipped on touch devices
   // because iOS Safari's event model is incompatible with ScrollTrigger's
   // position tracking. AOS (initialized in main.js) covers scroll reveals.
   function initMobile() {

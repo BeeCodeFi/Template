@@ -851,6 +851,8 @@ function initTextScramble() {
 
   document.querySelectorAll('.section-eyebrow').forEach((el) => {
     const fx = new Scramble(el);
+    // Lower threshold on touch/mobile so small viewport doesn't block trigger
+    const isMobileViewport = window.matchMedia('(pointer: coarse)').matches;
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -858,7 +860,7 @@ function initTextScramble() {
           observer.unobserve(el);
         }
       },
-      { threshold: 0.8 }
+      { threshold: isMobileViewport ? 0.4 : 0.8 }
     );
     observer.observe(el);
   });

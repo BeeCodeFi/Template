@@ -326,6 +326,14 @@
    ───────────────────────────────────── */
 
 @media (max-width: 480px) {
+  /* Safety net: if GSAP CDN is slow/blocked, hero text stays readable.
+     GSAP sets opacity:0 via inline style immediately on load, so these
+     rules only apply before GSAP runs or if it fails entirely. */
+  #heroEyebrow, #heroTagline, #heroDesc, #heroCtas, .hero__char {
+    opacity: 1;
+    transform: none;
+  }
+
   :root {
     --container-px: 1.125rem;
   }
