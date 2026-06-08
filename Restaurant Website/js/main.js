@@ -739,6 +739,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initRipple();
   initBookingForm();
   initActiveNav();
+  initMarquee();
   // Premium loop animations
   initTextScramble();
   initMagneticButtons();
@@ -746,6 +747,45 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroParticles();
   initCursorSpotlight();
 });
+
+/* ─────────────────────────────────────
+   MARQUEE — rAF loop (replaces CSS animation
+   which freezes on touch devices)
+   ───────────────────────────────────── */
+
+function initMarquee() {
+  const track = document.querySelector('.marquee-track');
+  if (!track) return;
+
+  const SPEED = 60; // px/sec
+  let offset = 0;
+  let lastTime = null;
+  let paused = false;
+
+  // Pause on hover only for pointer devices
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    track.closest('.marquee-section')?.addEventListener('mouseenter', () => { paused = true; });
+    track.closest('.marquee-section')?.addEventListener('mouseleave', () => { paused = false; });
+  }
+
+  function tick(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    const delta = (timestamp - lastTime) / 1000;
+    lastTime = timestamp;
+
+    if (!paused) {
+      offset += SPEED * delta;
+      // Reset when we've scrolled half the track width (since content is duplicated)
+      const halfWidth = track.scrollWidth / 2;
+      if (offset >= halfWidth) offset -= halfWidth;
+      track.style.transform = `translateX(-${offset}px)`;
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
+}
 
 /* ─────────────────────────────────────
    TEXT SCRAMBLE
