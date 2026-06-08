@@ -101,22 +101,8 @@
     --nav-h: 60px;
   }
 
-  /* ── Disable hero entry animations on mobile — body fade-in handles reveal ── */
-  .hero__image {
-    animation: none !important;
-    clip-path: none !important;
-  }
-
-  #heroLabel {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  .h-char {
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
+  /* ── Disable all hero entry animations on mobile ── */
+  .hero__image,
   .hero__divider,
   .hero__tagline,
   .hero__desc,
@@ -125,86 +111,84 @@
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+    clip-path: none !important;
   }
 
-  /* ── Mobile hero: image fills section, content overlaid on top ── */
+  #heroLabel { opacity: 1 !important; transform: none !important; }
+  .h-char    { opacity: 1 !important; transform: none !important; }
+
+  /* ── Mobile hero: image covers top (label + title only),
+        then solid dark bg for tagline/desc/ctas/stats ── */
   .hero {
     display: block;
     position: relative;
-    min-height: 100svh;
-    overflow: hidden;
+    background: #0A0A0A;
+    min-height: unset;
+    overflow: visible;
   }
 
+  /* Image: normal flow, tall enough for label + title */
   .hero__image {
-    position: absolute;
-    inset: 0;
+    position: relative;
+    height: 56vh;
+    min-height: 300px;
     width: 100%;
-    height: 100%;
-    z-index: 0;
-    order: unset;
+    order: -1;
+    overflow: hidden;
   }
 
   .hero__image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center top;
   }
 
-  /* Dark overlay across full image so all text is clearly legible */
+  /* Gradient: slight dark at top for label, fully solid at bottom to blend into bg */
   .hero__image::after {
     content: '';
     position: absolute;
     inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(10, 10, 10, 0.60) 0%,
-      rgba(10, 10, 10, 0.72) 35%,
-      rgba(10, 10, 10, 0.88) 65%,
+      rgba(10, 10, 10, 0.50) 0%,
+      rgba(10, 10, 10, 0.30) 30%,
+      rgba(10, 10, 10, 0.80) 75%,
       #0A0A0A 100%
     );
     z-index: 1;
     pointer-events: none;
   }
 
+  /* Content: pull up so label + title sit over the image bottom */
   .hero__content {
     position: relative;
     z-index: 2;
-    min-height: 100svh;
+    min-height: unset;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding-top: calc(var(--nav-h) + 1.5rem);
+    justify-content: flex-start;
+    margin-top: -13rem;
+    padding-top: 0;
     padding-bottom: 3rem;
-    margin-top: 0;
     order: unset;
+    /* Transparent behind label+title (over image), solid dark below */
+    background: linear-gradient(to bottom, transparent 13rem, #0A0A0A 13rem);
+  }
+
+  /* Label + title: text-shadow to read over image */
+  #heroLabel {
+    text-shadow: 0 1px 8px rgba(0,0,0,0.9);
   }
 
   .hero__title {
     font-size: clamp(2.5rem, 10vw, 4rem);
-    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.95), 0 4px 32px rgba(0, 0, 0, 0.8);
+    text-shadow: 0 2px 16px rgba(0,0,0,0.95), 0 4px 32px rgba(0,0,0,0.75);
   }
 
-  /* Force all hero text to solid white so it reads over the image */
-  .hero__tagline {
-    color: rgba(255, 255, 255, 0.9) !important;
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
-  }
-
-  .hero__desc {
-    color: rgba(255, 255, 255, 0.75) !important;
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
-  }
-
-  .hero__stat-label {
-    color: rgba(255, 255, 255, 0.7) !important;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
-  }
-
-  /* Outline button — white border + white text over image */
-  .hero .btn--outline {
-    color: #ffffff !important;
-    border-color: rgba(255, 255, 255, 0.5) !important;
-  }
+  /* Tagline, desc, stats — on solid dark bg, use normal readable colors */
+  .hero__tagline { color: var(--color-text-dim); }
+  .hero__desc    { color: var(--color-text-muted); }
 
   .hero__ctas {
     flex-direction: column;
