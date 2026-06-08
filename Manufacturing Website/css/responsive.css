@@ -105,7 +105,13 @@
     font-size: clamp(2.5rem, 10vw, 4rem);
   }
 
-  .hero__image { height: 40vh; min-height: 250px; }
+  .hero__image {
+    height: 40vh;
+    min-height: 250px;
+    order: -1;
+  }
+
+  .hero__content { order: 0; }
 
   .hero__ctas {
     flex-direction: column;
