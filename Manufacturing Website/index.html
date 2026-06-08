@@ -54,10 +54,15 @@
         <a href="#process" class="nav__link">Process</a>
         <a href="#gallery" class="nav__link">Facility</a>
         <a href="#contact" class="nav__link">Contact</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme">
+          <i class="ri-sun-line"></i>
+          <i class="ri-moon-line"></i>
+        </button>
       </div>
 
       <div class="nav__cta">
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme">
+        <!-- Mobile-only toggle: shown when nav__links (which holds desktop toggle) is hidden -->
+        <button class="theme-toggle theme-toggle--mobile" id="themeToggleMobile" aria-label="Toggle light/dark theme">
           <i class="ri-sun-line"></i>
           <i class="ri-moon-line"></i>
         </button>
@@ -84,14 +89,14 @@
       <li><a href="#gallery" class="mobile-menu__link"><span class="mobile-menu__counter">05</span>Facility</a></li>
       <li><a href="#team" class="mobile-menu__link"><span class="mobile-menu__counter">06</span>Team</a></li>
       <li><a href="#contact" class="mobile-menu__link"><span class="mobile-menu__counter">07</span>Contact</a></li>
+      <li>
+        <button class="mobile-menu__link mobile-menu__theme-inline" id="mobileThemeToggle">
+          <span class="mobile-menu__counter">08</span>
+          <i class="ri-sun-line"></i>
+          <span>Light Mode</span>
+        </button>
+      </li>
     </ul>
-    <div class="mobile-menu__footer">
-      <span class="mobile-menu__theme-label">Theme</span>
-      <button class="mobile-menu__theme-btn" id="mobileThemeToggle">
-        <i class="ri-sun-line"></i>
-        <span>Light</span>
-      </button>
-    </div>
   </div>
 
 

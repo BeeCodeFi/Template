@@ -461,6 +461,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ═══════════════════════════════════ */
 
   const themeToggle = document.getElementById('themeToggle');
+  const themeToggleMobile = document.getElementById('themeToggleMobile');
   const mobileThemeToggle = document.getElementById('mobileThemeToggle');
   const root = document.documentElement;
   const heroImg = document.getElementById('heroImg');
@@ -481,17 +482,18 @@ document.addEventListener('DOMContentLoaded', () => {
       heroImg.src = theme === 'light' ? HERO_LIGHT : HERO_DARK;
     }
 
-    // Sync mobile button label
+    // Sync mobile menu list button label
     if (mobileThemeToggle) {
       const isLight = theme === 'light';
       mobileThemeToggle.querySelector('i').className = isLight ? 'ri-moon-line' : 'ri-sun-line';
-      mobileThemeToggle.querySelector('span').textContent = isLight ? 'Dark' : 'Light';
+      mobileThemeToggle.querySelector('span').textContent = isLight ? 'Dark Mode' : 'Light Mode';
     }
   }
 
-  // Set initial mobile button state
+  // Set initial state
   applyTheme(root.getAttribute('data-theme') === 'light' ? 'light' : 'dark');
 
+  // Desktop toggle (inside nav__links)
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
       const isLight = root.getAttribute('data-theme') === 'light';
@@ -499,6 +501,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Mobile nav-bar toggle (inside nav__cta, shown when nav__links hidden)
+  if (themeToggleMobile) {
+    themeToggleMobile.addEventListener('click', () => {
+      const isLight = root.getAttribute('data-theme') === 'light';
+      applyTheme(isLight ? 'dark' : 'light');
+    });
+  }
+
+  // Mobile menu list toggle
   if (mobileThemeToggle) {
     mobileThemeToggle.addEventListener('click', () => {
       const isLight = root.getAttribute('data-theme') === 'light';

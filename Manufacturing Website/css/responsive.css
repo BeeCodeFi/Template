@@ -74,6 +74,8 @@
   .footer__nav { margin-top: 2rem; }
 
   .nav__links { display: none; }
+  /* Show mobile toggle in nav bar now that nav__links (with desktop toggle) is hidden */
+  .theme-toggle--mobile { display: flex; }
 }
 
 /* ─── Tablet portrait ─── */
@@ -292,46 +294,25 @@
     font-size: clamp(1.75rem, 8vw, 2.5rem);
   }
 
-  /* Theme toggle row inside mobile menu */
-  .mobile-menu__footer {
-    position: absolute;
-    bottom: 2.5rem;
-    left: var(--container-px);
-    right: var(--container-px);
+  /* Theme toggle as inline menu list item */
+  .mobile-menu__theme-inline {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid var(--color-border);
-    padding-top: 1.5rem;
-  }
-
-  .mobile-menu__theme-label {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    gap: 0.6em;
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
     color: var(--color-text-muted);
   }
-
-  .mobile-menu__theme-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+  .mobile-menu__theme-inline:hover {
     color: var(--color-accent);
-    background: none;
-    border: 1px solid var(--color-accent);
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
   }
-
-  .mobile-menu__theme-btn:hover {
-    background: var(--color-accent);
-    color: var(--color-bg);
+  .mobile-menu__theme-inline i {
+    font-size: 0.75em;
+    line-height: 1;
   }
 
   .back-to-top {

@@ -69,20 +69,6 @@
   background: rgba(244, 241, 235, 0.93);
 }
 
-/* Nav sits over the always-dark hero — keep dark-theme colours until scrolled */
-[data-theme="light"] .nav:not(.scrolled) .nav__logo          { color: #FFFFFF; }
-[data-theme="light"] .nav:not(.scrolled) .nav__logo-dot      { background: #C8FF00; }
-[data-theme="light"] .nav:not(.scrolled) .nav__link          { color: #777777; }
-[data-theme="light"] .nav:not(.scrolled) .nav__link:hover,
-[data-theme="light"] .nav:not(.scrolled) .nav__link.active   { color: #C8FF00; }
-[data-theme="light"] .nav:not(.scrolled) .menu-btn           { color: #777777; }
-[data-theme="light"] .nav:not(.scrolled) .menu-btn:hover     { color: #C8FF00; }
-[data-theme="light"] .nav:not(.scrolled) .theme-toggle       { color: #777777; }
-[data-theme="light"] .nav:not(.scrolled) .theme-toggle:hover { color: #C8FF00; }
-[data-theme="light"] .nav:not(.scrolled) .btn--primary       { background: #C8FF00; color: #0A0A0A; border-color: #C8FF00; }
-[data-theme="light"] .nav:not(.scrolled) .btn--primary::before { background: #0A0A0A; }
-[data-theme="light"] .nav:not(.scrolled) .btn--primary:hover { color: #C8FF00; }
-
 [data-theme="light"] .mobile-menu {
   background: var(--color-bg);
 }
@@ -137,42 +123,9 @@
   color: var(--color-accent);
 }
 
-/* ── Hero always renders as dark regardless of theme ── */
-.hero,
-[data-theme="light"] .hero {
-  --color-bg:          #0A0A0A;
-  --color-bg-alt:      #111111;
-  --color-accent:      #C8FF00;
-  --color-accent-dim:  rgba(200, 255, 0, 0.08);
-  --color-accent-hover:#DFFF60;
-  --color-text:        #E8E8E8;
-  --color-text-muted:  #777777;
-  --color-text-dim:    #999999;
-  --color-white:       #FFFFFF;
-  --color-border:      rgba(255, 255, 255, 0.08);
-  background: #0A0A0A;
-}
-
-/* Diagonal cut and glow — keep dark values */
+/* Hero image diagonal cut uses bg color */
 [data-theme="light"] .hero__image::before {
-  background: #0A0A0A;
-}
-
-[data-theme="light"] .hero__content::after {
-  display: block;
-}
-
-/* Buttons inside hero — restore dark-theme styling */
-[data-theme="light"] .hero .btn--outline {
-  color: var(--color-text-muted) !important;
-  border-color: rgba(255, 255, 255, 0.08) !important;
-}
-[data-theme="light"] .hero .btn--outline:hover {
-  color: var(--color-bg) !important;
-  border-color: var(--color-accent) !important;
-}
-[data-theme="light"] .hero .btn--primary {
-  color: var(--color-accent-dark) !important;
+  background: var(--color-bg);
 }
 
 /* Service card hover accent border already uses --color-accent var */
@@ -395,6 +348,11 @@ section {
 .theme-toggle:hover {
   color: var(--color-accent);
   transform: rotate(20deg);
+}
+
+/* Mobile-only toggle (in nav__cta) — hidden on desktop, shown when nav__links is hidden */
+.theme-toggle--mobile {
+  display: none;
 }
 
 .menu-btn__lines {
