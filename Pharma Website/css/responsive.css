@@ -13,6 +13,19 @@
    ≤ 1200px — LARGE TABLETS
    ───────────────────────────────────── */
 @media (max-width: 1200px) {
+  /* About layout adapts: image column shrinks */
+  .about__layout {
+    gap: 2.5rem;
+  }
+
+  .about__img-badge {
+    right: -0.75rem;
+  }
+
+  .about__img-badge-2 {
+    left: -0.75rem;
+  }
+
   .about__grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -54,6 +67,40 @@
     display: flex;
   }
 
+  /* Hero image - reduce size */
+  .hero__img-wrap {
+    width: 340px;
+    height: 420px;
+  }
+
+  .hero__card--stat {
+    left: -1rem;
+    bottom: 1.5rem;
+  }
+
+  /* About section stacks vertically */
+  .about__layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .about__image-col {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .about__img {
+    height: 380px;
+  }
+
+  .about__img-badge {
+    right: 1rem;
+  }
+
+  .about__img-badge-2 {
+    left: 1rem;
+  }
+
   .hero__container {
     grid-template-columns: 1fr;
     text-align: center;
@@ -76,6 +123,19 @@
   .hero__visual {
     min-height: 360px;
     order: -1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero__img-wrap {
+    width: 300px;
+    height: 380px;
+  }
+
+  .hero__card--stat {
+    left: 0;
+    bottom: 1rem;
+    padding: 1rem 1.25rem;
   }
 
   .hero__card--float-2 {
