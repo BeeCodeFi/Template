@@ -103,15 +103,37 @@
 
   .hero__title {
     font-size: clamp(2.5rem, 10vw, 4rem);
+    text-shadow:
+      0 2px 12px rgba(0, 0, 0, 0.95),
+      0 4px 32px rgba(0, 0, 0, 0.8),
+      0 8px 60px rgba(0, 0, 0, 0.6);
   }
 
   .hero__image {
-    height: 40vh;
-    min-height: 250px;
+    height: 58vh;
+    min-height: 300px;
     order: -1;
+    position: relative;
   }
 
-  .hero__content { order: 0; }
+  .hero__image::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70%;
+    background: linear-gradient(to top, #0A0A0A 10%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .hero__content {
+    order: 0;
+    position: relative;
+    z-index: 2;
+    margin-top: -7.5rem;
+    padding-top: 0;
+  }
 
   .hero__ctas {
     flex-direction: column;
