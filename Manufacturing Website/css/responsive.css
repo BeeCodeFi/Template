@@ -184,12 +184,26 @@
     text-shadow: 0 2px 16px rgba(0, 0, 0, 0.95), 0 4px 32px rgba(0, 0, 0, 0.8);
   }
 
-  #heroLabel,
-  .hero__tagline,
-  .hero__desc,
-  .hero__stat-label,
-  .hero__stat-num {
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9), 0 2px 20px rgba(0, 0, 0, 0.7);
+  /* Force all hero text to solid white so it reads over the image */
+  .hero__tagline {
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+  }
+
+  .hero__desc {
+    color: rgba(255, 255, 255, 0.75) !important;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+  }
+
+  .hero__stat-label {
+    color: rgba(255, 255, 255, 0.7) !important;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+  }
+
+  /* Outline button — white border + white text over image */
+  .hero .btn--outline {
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
   }
 
   .hero__ctas {
