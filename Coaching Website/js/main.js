@@ -44,37 +44,41 @@
   // ========== PRELOADER ==========
   const preloader = document.getElementById('preloader');
 
-  // Lock scroll on both html + body for mobile Safari
+  // Scroll lock: height-based (no position:fixed to avoid layout jump on unlock)
   function lockScroll() {
     document.documentElement.style.overflow = 'hidden';
+    document.documentElement.style.height = '100%';
     document.body.style.overflow = 'hidden';
-    document.body.style.position = 'fixed';
-    document.body.style.width = '100%';
-    document.body.style.top = -window.scrollY + 'px';
+    document.body.style.height = '100%';
   }
 
   function unlockScroll() {
-    const scrollY = Math.abs(parseInt(document.body.style.top || '0'));
     document.documentElement.style.overflow = '';
+    document.documentElement.style.height = '';
     document.body.style.overflow = '';
-    document.body.style.position = '';
-    document.body.style.width = '';
-    document.body.style.top = '';
-    window.scrollTo(0, scrollY);
+    document.body.style.height = '';
   }
 
   lockScroll();
 
+  // Build word-split DOM immediately so words are painted hidden before any animation
+  setupWordSplit();
+
   window.addEventListener('load', () => {
     setTimeout(() => {
+      // Step 1: Start preloader fade-out (CSS transition: 0.7s)
       preloader.classList.add('hidden');
-      unlockScroll();
-      initParticles();
-      initWordSplit();
-      initRipple();
-      initStoriesDots();
-      initTickerTouch();
-    }, 2200);
+
+      // Step 2: After fade completes, unlock scroll + trigger word animation
+      setTimeout(() => {
+        unlockScroll();
+        triggerWordAnimation();
+        initParticles();
+        initRipple();
+        initStoriesDots();
+        initTickerTouch();
+      }, 750); // slightly longer than the 0.7s CSS transition
+    }, 2000);
   });
 
   // ========== CUSTOM CURSOR ==========
@@ -371,54 +375,57 @@
   });
 
   // ========== WORD SPLIT ANIMATION ==========
-  function initWordSplit() {
+  // Phase 1: Build DOM (words in hidden state) — called at init before preloader hides
+  function setupWordSplit() {
     const heroTitle = document.getElementById('hero-title');
-    if (!heroTitle) return;
+    if (!heroTitle || heroTitle.dataset.splitDone) return;
+    heroTitle.dataset.splitDone = '1';
 
-    // Collect all child nodes (text + element) and rebuild as word spans
     const nodes = Array.from(heroTitle.childNodes);
     const frag = document.createDocumentFragment();
     let wordIndex = 0;
 
     nodes.forEach(node => {
       if (node.nodeType === Node.TEXT_NODE) {
-        const text = node.textContent;
-        const words = text.split(/(\s+)/);
+        const words = node.textContent.split(/([\s]+)/);
         words.forEach(part => {
           if (!part) return;
-          if (/^\s+$/.test(part)) {
-            // Preserve whitespace as a text node
+          if (/^[\s]+$/.test(part)) {
             frag.appendChild(document.createTextNode(part));
           } else {
             const span = document.createElement('span');
             span.className = 'word';
             span.textContent = part;
-            span.style.transitionDelay = (wordIndex * 0.08) + 's';
+            span.style.transitionDelay = (wordIndex * 0.09) + 's';
             wordIndex++;
             frag.appendChild(span);
           }
         });
       } else if (node.nodeType === Node.ELEMENT_NODE) {
-        // Keep span (e.g. .hero__title-gradient) but wrap its text content too
-        node.classList.add('word');
-        node.style.transitionDelay = (wordIndex * 0.08) + 's';
+        const clone = node.cloneNode(true);
+        clone.classList.add('word');
+        clone.style.transitionDelay = (wordIndex * 0.09) + 's';
         wordIndex++;
-        frag.appendChild(node.cloneNode(true));
+        frag.appendChild(clone);
       }
     });
 
-    // Replace all children at once
     heroTitle.innerHTML = '';
     heroTitle.appendChild(frag);
+  }
 
-    // Force a paint of initial hidden state before adding 'animated'
-    // Double rAF guarantees the browser has committed the transform/opacity
+  // Phase 2: Trigger animation — called only after preloader fully fades
+  function triggerWordAnimation() {
+    const heroTitle = document.getElementById('hero-title');
+    if (!heroTitle) return;
+    // One rAF is enough — DOM was set up long before this call
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        heroTitle.classList.add('animated');
-      });
+      heroTitle.classList.add('animated');
     });
   }
+
+  // Legacy alias kept for any future calls
+  function initWordSplit() { setupWordSplit(); triggerWordAnimation(); }
 
   // ========== BUTTON RIPPLE EFFECT ==========
   function initRipple() {
