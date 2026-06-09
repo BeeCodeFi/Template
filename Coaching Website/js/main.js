@@ -43,17 +43,39 @@
 
   // ========== PRELOADER ==========
   const preloader = document.getElementById('preloader');
+
+  // Lock scroll on both html + body for mobile Safari
+  function lockScroll() {
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.body.style.top = -window.scrollY + 'px';
+  }
+
+  function unlockScroll() {
+    const scrollY = Math.abs(parseInt(document.body.style.top || '0'));
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.width = '';
+    document.body.style.top = '';
+    window.scrollTo(0, scrollY);
+  }
+
+  lockScroll();
+
   window.addEventListener('load', () => {
     setTimeout(() => {
       preloader.classList.add('hidden');
-      document.body.style.overflow = '';
+      unlockScroll();
       initParticles();
       initWordSplit();
       initRipple();
       initStoriesDots();
+      initTickerTouch();
     }, 2200);
   });
-  document.body.style.overflow = 'hidden';
 
   // ========== CUSTOM CURSOR ==========
   const cursor = document.getElementById('cursor');
@@ -353,41 +375,49 @@
     const heroTitle = document.getElementById('hero-title');
     if (!heroTitle) return;
 
-    // Wrap each text node word in a .word-line > .word structure
-    const lines = [];
-    heroTitle.childNodes.forEach(node => {
+    // Collect all child nodes (text + element) and rebuild as word spans
+    const nodes = Array.from(heroTitle.childNodes);
+    const frag = document.createDocumentFragment();
+    let wordIndex = 0;
+
+    nodes.forEach(node => {
       if (node.nodeType === Node.TEXT_NODE) {
-        const text = node.textContent.trim();
-        if (!text) return;
-        const line = document.createElement('span');
-        line.className = 'word-line';
-        text.split(' ').forEach((word, i) => {
-          const w = document.createElement('span');
-          w.className = 'word';
-          w.textContent = (i > 0 ? '\u00a0' : '') + word;
-          line.appendChild(w);
+        const text = node.textContent;
+        const words = text.split(/(\s+)/);
+        words.forEach(part => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) {
+            // Preserve whitespace as a text node
+            frag.appendChild(document.createTextNode(part));
+          } else {
+            const span = document.createElement('span');
+            span.className = 'word';
+            span.textContent = part;
+            span.style.transitionDelay = (wordIndex * 0.08) + 's';
+            wordIndex++;
+            frag.appendChild(span);
+          }
         });
-        lines.push({ original: node, replacement: line });
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        // Keep span (e.g. .hero__title-gradient) but wrap its text content too
+        node.classList.add('word');
+        node.style.transitionDelay = (wordIndex * 0.08) + 's';
+        wordIndex++;
+        frag.appendChild(node.cloneNode(true));
       }
     });
 
-    lines.forEach(({ original, replacement }) => {
-      heroTitle.replaceChild(replacement, original);
-    });
+    // Replace all children at once
+    heroTitle.innerHTML = '';
+    heroTitle.appendChild(frag);
 
-    // Observe and trigger
-    const splitObs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.querySelectorAll('.word-line').forEach((line, i) => {
-            setTimeout(() => line.classList.add('animated'), i * 80);
-          });
-          splitObs.unobserve(entry.target);
-        }
+    // Force a paint of initial hidden state before adding 'animated'
+    // Double rAF guarantees the browser has committed the transform/opacity
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        heroTitle.classList.add('animated');
       });
-    }, { threshold: 0.3 });
-
-    splitObs.observe(heroTitle);
+    });
   }
 
   // ========== BUTTON RIPPLE EFFECT ==========
@@ -406,6 +436,50 @@
   }
 
   // ========== STORIES DOTS NAVIGATION ==========
+  // ========== TICKER — rAF LOOP (works on mobile, CSS animation freezes) ==========
+  function initTickerTouch() {
+    const track = document.querySelector('.ticker__track');
+    if (!track) return;
+
+    const SPEED = 60; // px per second
+    let offset = 0;
+    let lastTime = null;
+    let paused = false;
+
+    // Hover pause — pointer devices only
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      const section = track.closest('.ticker');
+      if (section) {
+        section.addEventListener('mouseenter', () => { paused = true; });
+        section.addEventListener('mouseleave', () => { paused = false; });
+      }
+    }
+
+    // Touch pause — mobile
+    const section = track.closest('.ticker');
+    if (section) {
+      section.addEventListener('touchstart', () => { paused = true; }, { passive: true });
+      section.addEventListener('touchend', () => { paused = false; }, { passive: true });
+    }
+
+    function tick(timestamp) {
+      if (!lastTime) lastTime = timestamp;
+      const delta = (timestamp - lastTime) / 1000;
+      lastTime = timestamp;
+
+      if (!paused) {
+        offset += SPEED * delta;
+        const halfWidth = track.scrollWidth / 2;
+        if (halfWidth > 0 && offset >= halfWidth) offset -= halfWidth;
+        track.style.transform = `translateX(-${offset}px)`;
+      }
+
+      requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  }
+
   function initStoriesDots() {
     const track = document.getElementById('stories-track');
     if (!track) return;

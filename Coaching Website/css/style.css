@@ -1030,11 +1030,15 @@ input {
   display: inline-flex;
   align-items: center;
   gap: 36px;
-  animation: tickerScroll 35s linear infinite;
+  will-change: transform;
+  /* Animation is driven by JS rAF loop — works on mobile unlike CSS animation */
 }
 
-.ticker:hover .ticker__track {
-  animation-play-state: paused;
+/* CSS hover pause only for real pointer devices; touch handled in JS */
+@media (hover: hover) and (pointer: fine) {
+  .ticker:hover .ticker__track {
+    /* JS sets animationPaused flag on mouseenter/leave */
+  }
 }
 
 .ticker__item {
@@ -1062,6 +1066,7 @@ input {
 @keyframes tickerScroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
+  /* Kept as fallback only; actual animation driven by JS */
 }
 
 /* ========== ABOUT SECTION ========== */
@@ -2071,19 +2076,30 @@ input {
   display: block;
 }
 
-.word-line .word {
+#hero-title .word {
   display: inline-block;
-  transform: translateY(110%);
+  transform: translateY(40px);
   opacity: 0;
-  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+  will-change: transform, opacity;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
 }
 
-.word-line.animated .word:nth-child(1) { transform: translateY(0); opacity: 1; transition-delay: 0.05s; }
-.word-line.animated .word:nth-child(2) { transform: translateY(0); opacity: 1; transition-delay: 0.12s; }
-.word-line.animated .word:nth-child(3) { transform: translateY(0); opacity: 1; transition-delay: 0.19s; }
-.word-line.animated .word:nth-child(4) { transform: translateY(0); opacity: 1; transition-delay: 0.26s; }
-.word-line.animated .word:nth-child(5) { transform: translateY(0); opacity: 1; transition-delay: 0.33s; }
-.word-line.animated .word:nth-child(6) { transform: translateY(0); opacity: 1; transition-delay: 0.40s; }
+#hero-title.animated .word {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.word-line.animated .word {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.word-line.animated .word:nth-child(1) { transition-delay: 0.05s; }
+.word-line.animated .word:nth-child(2) { transition-delay: 0.14s; }
+.word-line.animated .word:nth-child(3) { transition-delay: 0.23s; }
+.word-line.animated .word:nth-child(4) { transition-delay: 0.32s; }
+.word-line.animated .word:nth-child(5) { transition-delay: 0.41s; }
+.word-line.animated .word:nth-child(6) { transition-delay: 0.50s; }
 
 /* ========== BUTTON RIPPLE ========== */
 .ripple-effect {
