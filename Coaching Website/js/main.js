@@ -44,40 +44,42 @@
   // ========== PRELOADER ==========
   const preloader = document.getElementById('preloader');
 
-  // Scroll lock: height-based (no position:fixed to avoid layout jump on unlock)
-  function lockScroll() {
-    document.documentElement.style.overflow = 'hidden';
-    document.documentElement.style.height = '100%';
-    document.body.style.overflow = 'hidden';
-    document.body.style.height = '100%';
-  }
+  // No scroll lock — preloader covers the screen entirely so scrolling is invisible.
+  // Scroll locks using overflow/height on iOS Safari break compositing and freeze animations.
 
-  function unlockScroll() {
-    document.documentElement.style.overflow = '';
-    document.documentElement.style.height = '';
-    document.body.style.overflow = '';
-    document.body.style.height = '';
-  }
-
-  lockScroll();
-
-  // Build word-split DOM immediately so words are painted hidden before any animation
+  // Build word DOM immediately so words are invisible from first paint
   setupWordSplit();
+
+  // Fade preloader out using rAF (CSS transitions are unreliable on iOS during page load)
+  function fadeOutPreloader(onComplete) {
+    let start = null;
+    const DURATION = 700;
+    function step(ts) {
+      if (!start) start = ts;
+      const t = Math.min((ts - start) / DURATION, 1);
+      const opacity = 1 - t;
+      preloader.style.opacity = opacity;
+      preloader.style.webkitOpacity = opacity;
+      if (t < 1) {
+        requestAnimationFrame(step);
+      } else {
+        preloader.style.display = 'none';
+        if (onComplete) onComplete();
+      }
+    }
+    requestAnimationFrame(step);
+  }
 
   window.addEventListener('load', () => {
     setTimeout(() => {
-      // Step 1: Start preloader fade-out (CSS transition: 0.7s)
-      preloader.classList.add('hidden');
-
-      // Step 2: After fade completes, unlock scroll + trigger word animation
-      setTimeout(() => {
-        unlockScroll();
+      fadeOutPreloader(() => {
+        // All animations start only after preloader is fully gone
         triggerWordAnimation();
         initParticles();
         initRipple();
         initStoriesDots();
         initTickerTouch();
-      }, 750); // slightly longer than the 0.7s CSS transition
+      });
     }, 2000);
   });
 
@@ -316,54 +318,70 @@
     });
   });
 
-  // ========== FLOATING PARTICLES ==========
+  // ========== FLOATING PARTICLES — rAF loop (CSS @keyframes injected dynamically don't work on iOS) ==========
   function initParticles() {
     const container = document.getElementById('hero-particles');
     if (!container) return;
-
-    const isDark = html.getAttribute('data-theme') !== 'light';
-    const particleCount = 50;
-
-    // Clear existing particles
     container.innerHTML = '';
 
-    for (let i = 0; i < particleCount; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
+    const COUNT = 40;
+    const colors = ['rgba(167,139,250,', 'rgba(6,182,212,', 'rgba(245,158,11,'];
+    const particles = [];
 
+    for (let i = 0; i < COUNT; i++) {
+      const el = document.createElement('div');
       const size = Math.random() * 3 + 1;
-      const x = Math.random() * 100;
-      const y = Math.random() * 100;
-      const duration = Math.random() * 25 + 12;
-      const delay = Math.random() * 12;
-      const opacity = Math.random() * 0.5 + 0.1;
-      const colors = ['rgba(167,139,250,', 'rgba(6,182,212,', 'rgba(245,158,11,'];
+      const baseOpacity = Math.random() * 0.45 + 0.1;
       const color = colors[Math.floor(Math.random() * colors.length)];
-      const moveX = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 160 + 40);
-      const moveY = -(Math.random() * 500 + 150);
-
-      particle.style.cssText = `
-        position: absolute;
-        width: ${size}px;
-        height: ${size}px;
-        background: ${color}${opacity});
-        border-radius: 50%;
-        left: ${x}%;
-        top: ${y}%;
-        animation: particleMove${i} ${duration}s linear ${delay}s infinite;
-        pointer-events: none;
-      `;
-
-      const kf = document.createElement('style');
-      kf.textContent = `@keyframes particleMove${i} {
-        0% { transform: translate(0,0) scale(1); opacity: 0; }
-        10% { opacity: ${opacity}; }
-        80% { opacity: ${opacity * 0.6}; }
-        100% { transform: translate(${moveX}px,${moveY}px) scale(0.3); opacity: 0; }
-      }`;
-      document.head.appendChild(kf);
-      container.appendChild(particle);
+      el.style.cssText = 'position:absolute;border-radius:50%;pointer-events:none;will-change:transform,opacity;'
+        + 'width:' + size + 'px;height:' + size + 'px;background:' + color + baseOpacity + ')';
+      container.appendChild(el);
+      particles.push({
+        el,
+        x: Math.random() * 100,
+        y: Math.random() * 120,
+        vx: (Math.random() - 0.5) * 0.018,
+        vy: -(Math.random() * 0.025 + 0.008),
+        baseOpacity,
+        age: Math.random() * 6000,
+        lifetime: Math.random() * 7000 + 5000
+      });
     }
+
+    let lastTs = null;
+    function tick(ts) {
+      const delta = lastTs ? Math.min(ts - lastTs, 50) : 16.67;
+      lastTs = ts;
+
+      particles.forEach(p => {
+        p.age += delta;
+        if (p.age >= p.lifetime) {
+          p.x = Math.random() * 100;
+          p.y = 105;
+          p.vx = (Math.random() - 0.5) * 0.018;
+          p.vy = -(Math.random() * 0.025 + 0.008);
+          p.age = 0;
+          p.lifetime = Math.random() * 7000 + 5000;
+        }
+        p.x += p.vx * delta;
+        p.y += p.vy * delta;
+        if (p.x < -2) p.x = 102;
+        if (p.x > 102) p.x = -2;
+
+        const ratio = p.age / p.lifetime;
+        const alpha = ratio < 0.12
+          ? (ratio / 0.12) * p.baseOpacity
+          : ratio > 0.8
+            ? ((1 - ratio) / 0.2) * p.baseOpacity
+            : p.baseOpacity;
+
+        p.el.style.opacity = alpha.toFixed(3);
+        p.el.style.left = p.x.toFixed(2) + '%';
+        p.el.style.top = p.y.toFixed(2) + '%';
+      });
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
   }
 
   // ========== MOUSE FOLLOW GRADIENT GLOW ==========
