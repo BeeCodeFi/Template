@@ -2081,35 +2081,19 @@ input {
 /* ========== SCROLL ANIMATIONS ========== */
 
 /* ========== WORD SPLIT ANIMATION ========== */
-.word-line {
-  overflow: hidden;
-  display: block;
-}
-
+/* Initial hidden state + animation both driven by JS rAF loop (CSS transitions unreliable on mobile) */
 #hero-title .word {
   display: inline-block;
-  transform: translateY(40px);
   opacity: 0;
+  transform: translateY(32px);
   will-change: transform, opacity;
-  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
 }
 
-#hero-title.animated .word {
-  transform: translateY(0);
-  opacity: 1;
+/* Fallback: if JS fails, show words */
+.no-js #hero-title .word {
+  opacity: 1 !important;
+  transform: none !important;
 }
-
-.word-line.animated .word {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.word-line.animated .word:nth-child(1) { transition-delay: 0.05s; }
-.word-line.animated .word:nth-child(2) { transition-delay: 0.14s; }
-.word-line.animated .word:nth-child(3) { transition-delay: 0.23s; }
-.word-line.animated .word:nth-child(4) { transition-delay: 0.32s; }
-.word-line.animated .word:nth-child(5) { transition-delay: 0.41s; }
-.word-line.animated .word:nth-child(6) { transition-delay: 0.50s; }
 
 /* ========== BUTTON RIPPLE ========== */
 .ripple-effect {

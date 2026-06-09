@@ -414,17 +414,47 @@
     heroTitle.appendChild(frag);
   }
 
-  // Phase 2: Trigger animation — called only after preloader fully fades
+  // Phase 2: Trigger animation — rAF loop per word (CSS transitions unreliable on mobile)
   function triggerWordAnimation() {
     const heroTitle = document.getElementById('hero-title');
     if (!heroTitle) return;
-    // One rAF is enough — DOM was set up long before this call
-    requestAnimationFrame(() => {
-      heroTitle.classList.add('animated');
+
+    const words = Array.from(heroTitle.querySelectorAll('.word'));
+    if (!words.length) return;
+
+    const DURATION = 700;   // ms per word animation
+    const STAGGER  = 90;    // ms between each word start
+
+    // Easing: ease-out cubic
+    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+    words.forEach((word, i) => {
+      const startDelay = i * STAGGER;
+      let startTime = null;
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+
+        if (elapsed < startDelay) {
+          requestAnimationFrame(step);
+          return;
+        }
+
+        const t = Math.min((elapsed - startDelay) / DURATION, 1);
+        const e = easeOut(t);
+
+        word.style.opacity = e;
+        word.style.transform = `translateY(${(1 - e) * 32}px)`;
+
+        if (t < 1) requestAnimationFrame(step);
+      }
+
+      requestAnimationFrame(step);
     });
   }
 
-  // Legacy alias kept for any future calls
+  // Legacy alias
   function initWordSplit() { setupWordSplit(); triggerWordAnimation(); }
 
   // ========== BUTTON RIPPLE EFFECT ==========
