@@ -141,6 +141,10 @@
   }
 
   /* Hero */
+  .hero__float-badge {
+    display: none;
+  }
+
   .hero {
     padding: 100px 0 60px;
   }
