@@ -375,7 +375,8 @@
   });
 
   // ========== WORD SPLIT ANIMATION ==========
-  // Phase 1: Build DOM (words in hidden state) — called at init before preloader hides
+  // Phase 1: Build DOM with words HIDDEN inline — must use inline style, not CSS,
+  // because iOS Safari may not apply the CSS rule before the first rAF paint.
   function setupWordSplit() {
     const heroTitle = document.getElementById('hero-title');
     if (!heroTitle || heroTitle.dataset.splitDone) return;
@@ -383,29 +384,36 @@
 
     const nodes = Array.from(heroTitle.childNodes);
     const frag = document.createDocumentFragment();
-    let wordIndex = 0;
+
+    function makeWord(text) {
+      const span = document.createElement('span');
+      span.className = 'word';
+      span.textContent = text;
+      // Set hidden state INLINE so it's guaranteed before any paint
+      span.style.opacity = '0';
+      span.style.transform = 'translateY(32px)';
+      span.style.webkitTransform = 'translateY(32px)';
+      span.style.display = 'inline-block';
+      return span;
+    }
 
     nodes.forEach(node => {
       if (node.nodeType === Node.TEXT_NODE) {
-        const words = node.textContent.split(/([\s]+)/);
-        words.forEach(part => {
+        node.textContent.split(/([ \t]+)/).forEach(part => {
           if (!part) return;
-          if (/^[\s]+$/.test(part)) {
+          if (/^[ \t]+$/.test(part)) {
             frag.appendChild(document.createTextNode(part));
           } else {
-            const span = document.createElement('span');
-            span.className = 'word';
-            span.textContent = part;
-            span.style.transitionDelay = (wordIndex * 0.09) + 's';
-            wordIndex++;
-            frag.appendChild(span);
+            frag.appendChild(makeWord(part));
           }
         });
       } else if (node.nodeType === Node.ELEMENT_NODE) {
         const clone = node.cloneNode(true);
         clone.classList.add('word');
-        clone.style.transitionDelay = (wordIndex * 0.09) + 's';
-        wordIndex++;
+        clone.style.opacity = '0';
+        clone.style.transform = 'translateY(32px)';
+        clone.style.webkitTransform = 'translateY(32px)';
+        clone.style.display = 'inline-block';
         frag.appendChild(clone);
       }
     });
@@ -414,7 +422,7 @@
     heroTitle.appendChild(frag);
   }
 
-  // Phase 2: Trigger animation — rAF loop per word (CSS transitions unreliable on mobile)
+  // Phase 2: rAF loop per word — no CSS transitions, works on iOS
   function triggerWordAnimation() {
     const heroTitle = document.getElementById('hero-title');
     if (!heroTitle) return;
@@ -422,39 +430,39 @@
     const words = Array.from(heroTitle.querySelectorAll('.word'));
     if (!words.length) return;
 
-    const DURATION = 700;   // ms per word animation
-    const STAGGER  = 90;    // ms between each word start
+    const DURATION = 650;
+    const STAGGER  = 85;
 
-    // Easing: ease-out cubic
     function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
 
-    words.forEach((word, i) => {
-      const startDelay = i * STAGGER;
-      let startTime = null;
+    let globalStart = null;
 
-      function step(timestamp) {
-        if (!startTime) startTime = timestamp;
-        const elapsed = timestamp - startTime;
+    function tick(timestamp) {
+      if (!globalStart) globalStart = timestamp;
+      const elapsed = timestamp - globalStart;
+      let allDone = true;
 
-        if (elapsed < startDelay) {
-          requestAnimationFrame(step);
+      words.forEach((word, i) => {
+        const wordStart = i * STAGGER;
+        if (elapsed < wordStart) {
+          allDone = false;
           return;
         }
-
-        const t = Math.min((elapsed - startDelay) / DURATION, 1);
+        const t = Math.min((elapsed - wordStart) / DURATION, 1);
         const e = easeOut(t);
+        const y = (1 - e) * 32;
+        word.style.opacity = String(e);
+        word.style.transform = 'translateY(' + y + 'px)';
+        word.style.webkitTransform = 'translateY(' + y + 'px)';
+        if (t < 1) allDone = false;
+      });
 
-        word.style.opacity = e;
-        word.style.transform = `translateY(${(1 - e) * 32}px)`;
+      if (!allDone) requestAnimationFrame(tick);
+    }
 
-        if (t < 1) requestAnimationFrame(step);
-      }
-
-      requestAnimationFrame(step);
-    });
+    requestAnimationFrame(tick);
   }
 
-  // Legacy alias
   function initWordSplit() { setupWordSplit(); triggerWordAnimation(); }
 
   // ========== BUTTON RIPPLE EFFECT ==========

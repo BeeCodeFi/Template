@@ -2081,15 +2081,11 @@ input {
 /* ========== SCROLL ANIMATIONS ========== */
 
 /* ========== WORD SPLIT ANIMATION ========== */
-/* Initial hidden state + animation both driven by JS rAF loop (CSS transitions unreliable on mobile) */
+/* Hidden state + animation fully driven by JS rAF — no CSS transitions needed */
 #hero-title .word {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(32px);
   will-change: transform, opacity;
 }
 
-/* Fallback: if JS fails, show words */
 .no-js #hero-title .word {
   opacity: 1 !important;
   transform: none !important;
