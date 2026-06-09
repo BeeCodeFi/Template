@@ -21,6 +21,9 @@
 </head>
 <body>
 
+  <!-- ========== SCROLL PROGRESS BAR ========== -->
+  <div class="scroll-progress-bar" id="scroll-progress"></div>
+
   <!-- ========== PRELOADER ========== -->
   <div class="preloader" id="preloader">
     <div class="preloader__content">
@@ -56,11 +59,16 @@
         </li>
       </ul>
 
-      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <div class="nav__actions">
+        <button class="nav__theme-toggle magnetic-btn" id="theme-toggle" aria-label="Toggle light/dark theme">
+          <i class="ri-sun-line" id="theme-icon"></i>
+        </button>
+        <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </nav>
   </header>
 
@@ -73,6 +81,21 @@
         <div class="hero__gradient-orb hero__gradient-orb--3"></div>
         <div class="hero__particles" id="hero-particles"></div>
         <div class="hero__grid-lines"></div>
+        <div class="hero__spotlight" id="hero-spotlight"></div>
+        <div class="hero__float-badge hero__float-badge--1" data-animate="fade-left" data-delay="600">
+          <span class="hero__float-badge-icon">🏆</span>
+          <div class="hero__float-badge-text">
+            <strong>#1 Rated Coaching</strong>
+            <span>Forbes Coaches Council</span>
+          </div>
+        </div>
+        <div class="hero__float-badge hero__float-badge--2" data-animate="fade-right" data-delay="700">
+          <span class="hero__float-badge-icon">⚡</span>
+          <div class="hero__float-badge-text">
+            <strong>90-Day Breakthrough</strong>
+            <span>Average student result</span>
+          </div>
+        </div>
       </div>
 
       <div class="hero__content container">
@@ -81,7 +104,7 @@
           Trusted by 10,000+ achievers worldwide
         </div>
 
-        <h1 class="hero__title" data-animate="fade-up" data-delay="100">
+        <h1 class="hero__title" id="hero-title" data-animate="fade-up" data-delay="100">
           Transform Your Life<br />
           Into Your <span class="hero__title-gradient">Greatest</span><br />
           Success Story
@@ -131,6 +154,41 @@
         <span>Scroll to explore</span>
       </div>
     </section>
+
+    <!-- ========== SOCIAL PROOF TICKER ========== -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span class="ticker__item"><i class="ri-star-fill"></i> Mindset Mastery</span>
+        <span class="ticker__dot">◆</span>
+        <span class="ticker__item"><i class="ri-rocket-2-line"></i> Career Acceleration</span>
+        <span class="ticker__dot">◆</span>
+        <span class="ticker__item"><i class="ri-money-dollar-circle-line"></i> Wealth Blueprint</span>
+        <span class="ticker__dot">◆</span>
+        <span class="ticker__item"><i class="ri-flashlight-line"></i> Peak Performance</span>
+        <span class="ticker__dot">◆</span>
+        <span class="ticker__item"><i class="ri-user-star-line"></i> 10,000+ Lives Changed</span>
+        <span class="ticker__dot">◆</span>
+        <span class="ticker__item"><i class="ri-global-line"></i> 45+ Countries Served</span>
+        <span class="ticker__dot">◆</span>
+        <span class="ticker__item"><i class="ri-award-line"></i> 95% Satisfaction Rate</span>
+        <span class="ticker__dot">◆</span>
+        <!-- Duplicate for seamless loop -->
+        <span class="ticker__item"><i class="ri-star-fill"></i> Mindset Mastery</span>
+        <span class="ticker__dot">◆</span>
+        <span class="ticker__item"><i class="ri-rocket-2-line"></i> Career Acceleration</span>
+        <span class="ticker__dot">◆</span>
+        <span class="ticker__item"><i class="ri-money-dollar-circle-line"></i> Wealth Blueprint</span>
+        <span class="ticker__dot">◆</span>
+        <span class="ticker__item"><i class="ri-flashlight-line"></i> Peak Performance</span>
+        <span class="ticker__dot">◆</span>
+        <span class="ticker__item"><i class="ri-user-star-line"></i> 10,000+ Lives Changed</span>
+        <span class="ticker__dot">◆</span>
+        <span class="ticker__item"><i class="ri-global-line"></i> 45+ Countries Served</span>
+        <span class="ticker__dot">◆</span>
+        <span class="ticker__item"><i class="ri-award-line"></i> 95% Satisfaction Rate</span>
+        <span class="ticker__dot">◆</span>
+      </div>
+    </div>
 
     <!-- ========== ABOUT SECTION ========== -->
     <section class="about" id="about">

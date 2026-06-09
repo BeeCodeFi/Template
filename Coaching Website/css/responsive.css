@@ -78,6 +78,16 @@
     display: flex;
   }
 
+  .nav__actions {
+    gap: 4px;
+  }
+
+  .nav__theme-toggle {
+    width: 36px;
+    height: 36px;
+    font-size: 0.95rem;
+  }
+
   /* About */
   .about__layout {
     grid-template-columns: 1fr;

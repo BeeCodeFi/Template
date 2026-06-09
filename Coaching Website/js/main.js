@@ -6,6 +6,41 @@
 (function () {
   'use strict';
 
+  const html = document.documentElement;
+
+  // ========== THEME MANAGEMENT ==========
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+
+  const savedTheme = localStorage.getItem('elevate-theme') || 'dark';
+  html.setAttribute('data-theme', savedTheme);
+  syncThemeIcon(savedTheme);
+
+  function syncThemeIcon(theme) {
+    if (!themeIcon) return;
+    themeIcon.className = theme === 'dark' ? 'ri-sun-line' : 'ri-moon-line';
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('elevate-theme', next);
+      syncThemeIcon(next);
+    });
+  }
+
+  // ========== SCROLL PROGRESS BAR ==========
+  const scrollProgressBar = document.getElementById('scroll-progress');
+
+  function updateScrollProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    if (scrollProgressBar) scrollProgressBar.style.width = pct + '%';
+  }
+
   // ========== PRELOADER ==========
   const preloader = document.getElementById('preloader');
   window.addEventListener('load', () => {
@@ -13,6 +48,9 @@
       preloader.classList.add('hidden');
       document.body.style.overflow = '';
       initParticles();
+      initWordSplit();
+      initRipple();
+      initStoriesDots();
     }, 2200);
   });
   document.body.style.overflow = 'hidden';
@@ -23,11 +61,25 @@
   let mouseX = 0, mouseY = 0;
   let followerX = 0, followerY = 0;
 
+  // ========== HERO SPOTLIGHT ==========
+  const heroSpotlight = document.getElementById('hero-spotlight');
+
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
     cursor.style.left = mouseX - 4 + 'px';
     cursor.style.top = mouseY - 4 + 'px';
+
+    // Update spotlight position inside hero only
+    if (heroSpotlight) {
+      const heroEl = document.getElementById('hero');
+      if (heroEl) {
+        const rect = heroEl.getBoundingClientRect();
+        const xPct = ((e.clientX - rect.left) / rect.width) * 100;
+        const yPct = ((e.clientY - rect.top) / rect.height) * 100;
+        heroSpotlight.style.background = `radial-gradient(500px circle at ${xPct}% ${yPct}%, rgba(124,58,237,0.08), transparent 40%)`;
+      }
+    }
   });
 
   function animateCursor() {
@@ -40,11 +92,13 @@
   animateCursor();
 
   // Cursor hover effect on interactive elements
-  const hoverElements = document.querySelectorAll('a, button, .magnetic-btn, .tilt-card');
-  hoverElements.forEach(el => {
-    el.addEventListener('mouseenter', () => follower.classList.add('hover'));
-    el.addEventListener('mouseleave', () => follower.classList.remove('hover'));
-  });
+  function refreshCursorTargets() {
+    document.querySelectorAll('a, button, .magnetic-btn, .tilt-card').forEach(el => {
+      el.addEventListener('mouseenter', () => follower.classList.add('hover'));
+      el.addEventListener('mouseleave', () => follower.classList.remove('hover'));
+    });
+  }
+  refreshCursorTargets();
 
   // ========== HEADER SCROLL ==========
   const header = document.getElementById('header');
@@ -57,6 +111,7 @@
     } else {
       header.classList.remove('scrolled');
     }
+    updateScrollProgress();
     lastScrollY = scrollY;
   }
 
@@ -240,7 +295,11 @@
     const container = document.getElementById('hero-particles');
     if (!container) return;
 
-    const particleCount = 40;
+    const isDark = html.getAttribute('data-theme') !== 'light';
+    const particleCount = 50;
+
+    // Clear existing particles
+    container.innerHTML = '';
 
     for (let i = 0; i < particleCount; i++) {
       const particle = document.createElement('div');
@@ -249,37 +308,36 @@
       const size = Math.random() * 3 + 1;
       const x = Math.random() * 100;
       const y = Math.random() * 100;
-      const duration = Math.random() * 20 + 10;
-      const delay = Math.random() * 10;
+      const duration = Math.random() * 25 + 12;
+      const delay = Math.random() * 12;
       const opacity = Math.random() * 0.5 + 0.1;
+      const colors = ['rgba(167,139,250,', 'rgba(6,182,212,', 'rgba(245,158,11,'];
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      const moveX = (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 160 + 40);
+      const moveY = -(Math.random() * 500 + 150);
 
       particle.style.cssText = `
         position: absolute;
         width: ${size}px;
         height: ${size}px;
-        background: ${Math.random() > 0.5 ? 'var(--color-primary-light)' : 'var(--color-secondary)'};
+        background: ${color}${opacity});
         border-radius: 50%;
         left: ${x}%;
         top: ${y}%;
-        opacity: ${opacity};
-        animation: particleFloat ${duration}s linear ${delay}s infinite;
+        animation: particleMove${i} ${duration}s linear ${delay}s infinite;
         pointer-events: none;
       `;
 
+      const kf = document.createElement('style');
+      kf.textContent = `@keyframes particleMove${i} {
+        0% { transform: translate(0,0) scale(1); opacity: 0; }
+        10% { opacity: ${opacity}; }
+        80% { opacity: ${opacity * 0.6}; }
+        100% { transform: translate(${moveX}px,${moveY}px) scale(0.3); opacity: 0; }
+      }`;
+      document.head.appendChild(kf);
       container.appendChild(particle);
     }
-
-    // Add particle animation keyframes
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes particleFloat {
-        0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
-        10% { opacity: 0.5; }
-        90% { opacity: 0.5; }
-        100% { transform: translate(${Math.random() > 0.5 ? '' : '-'}${Math.random() * 200}px, -${Math.random() * 600 + 200}px) rotate(360deg); opacity: 0; }
-      }
-    `;
-    document.head.appendChild(style);
   }
 
   // ========== MOUSE FOLLOW GRADIENT GLOW ==========
@@ -289,6 +347,123 @@
     document.documentElement.style.setProperty('--mouse-x', x + '%');
     document.documentElement.style.setProperty('--mouse-y', y + '%');
   });
+
+  // ========== WORD SPLIT ANIMATION ==========
+  function initWordSplit() {
+    const heroTitle = document.getElementById('hero-title');
+    if (!heroTitle) return;
+
+    // Wrap each text node word in a .word-line > .word structure
+    const lines = [];
+    heroTitle.childNodes.forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const text = node.textContent.trim();
+        if (!text) return;
+        const line = document.createElement('span');
+        line.className = 'word-line';
+        text.split(' ').forEach((word, i) => {
+          const w = document.createElement('span');
+          w.className = 'word';
+          w.textContent = (i > 0 ? '\u00a0' : '') + word;
+          line.appendChild(w);
+        });
+        lines.push({ original: node, replacement: line });
+      }
+    });
+
+    lines.forEach(({ original, replacement }) => {
+      heroTitle.replaceChild(replacement, original);
+    });
+
+    // Observe and trigger
+    const splitObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.word-line').forEach((line, i) => {
+            setTimeout(() => line.classList.add('animated'), i * 80);
+          });
+          splitObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    splitObs.observe(heroTitle);
+  }
+
+  // ========== BUTTON RIPPLE EFFECT ==========
+  function initRipple() {
+    document.querySelectorAll('.btn, .program-card__btn').forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        const rect = btn.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple-effect';
+        ripple.style.left = (e.clientX - rect.left) + 'px';
+        ripple.style.top = (e.clientY - rect.top) + 'px';
+        btn.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 650);
+      });
+    });
+  }
+
+  // ========== STORIES DOTS NAVIGATION ==========
+  function initStoriesDots() {
+    const track = document.getElementById('stories-track');
+    if (!track) return;
+
+    const cards = track.querySelectorAll('.story-card');
+    const dotsContainer = document.createElement('div');
+    dotsContainer.className = 'stories__dots';
+
+    cards.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'stories__dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Story ${i + 1}`);
+      dot.addEventListener('click', () => scrollToCard(i));
+      dotsContainer.appendChild(dot);
+    });
+
+    track.parentElement.appendChild(dotsContainer);
+    const dots = dotsContainer.querySelectorAll('.stories__dot');
+
+    function scrollToCard(index) {
+      const card = cards[index];
+      if (!card) return;
+      track.scrollTo({ left: card.offsetLeft - 24, behavior: 'smooth' });
+      dots.forEach(d => d.classList.remove('active'));
+      dots[index].classList.add('active');
+    }
+
+    // Sync dots on manual scroll
+    let scrollTimer;
+    track.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        const scrollLeft = track.scrollLeft;
+        let closestIdx = 0;
+        let closestDist = Infinity;
+        cards.forEach((card, i) => {
+          const dist = Math.abs(card.offsetLeft - scrollLeft - 24);
+          if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+        });
+        dots.forEach(d => d.classList.remove('active'));
+        if (dots[closestIdx]) dots[closestIdx].classList.add('active');
+      }, 80);
+    }, { passive: true });
+
+    // Auto-advance on mobile
+    let autoSlide;
+    function startAutoSlide() {
+      let current = 0;
+      autoSlide = setInterval(() => {
+        current = (current + 1) % cards.length;
+        scrollToCard(current);
+      }, 4000);
+    }
+
+    if (window.innerWidth < 768) startAutoSlide();
+    track.addEventListener('mouseenter', () => clearInterval(autoSlide));
+    track.addEventListener('touchstart', () => clearInterval(autoSlide), { passive: true });
+  }
 
   // ========== BACK TO TOP ==========
   const backToTop = document.getElementById('back-to-top');
