@@ -413,6 +413,10 @@ section + section {
    HERO FLOATING PARTICLES
    Saffron/gold spice-dust motes rising
    through the hero background
+   — position, size, opacity and transform
+     driven entirely by rAF loop in main.js
+     (CSS @keyframes + var() in keyframes
+      are unreliable on iOS Safari)
    ───────────────────────────────────── */
 
 .hero__particle {
@@ -422,15 +426,8 @@ section + section {
   background: var(--color-accent);
   pointer-events: none;
   z-index: 2;
-  animation: particleRise linear infinite;
   will-change: transform, opacity;
-}
-
-@keyframes particleRise {
-  0%   { transform: translateY(0) translateX(0);                     opacity: 0; }
-  12%  { opacity: 0.7; }
-  88%  { opacity: 0.2; }
-  100% { transform: translateY(-90vh) translateX(var(--drift, 40px)); opacity: 0; }
+  /* No animation property — rAF loop drives opacity and transform */
 }
 
 /* ─────────────────────────────────────

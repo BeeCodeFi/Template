@@ -947,20 +947,58 @@ function initHeroParticles() {
   const hero = document.querySelector('.hero');
   if (!hero) return;
 
+  const accentColor = getComputedStyle(document.documentElement)
+    .getPropertyValue('--color-accent').trim() || '#E8A020';
+
+  const particles = [];
   for (let i = 0; i < 18; i++) {
-    const p = document.createElement('span');
+    const p   = document.createElement('span');
     p.className = 'hero__particle';
-    const size = Math.random() * 3 + 1;
+    const size     = Math.random() * 3 + 1;
+    const duration = (Math.random() * 10 + 10) * 1000; // 10–20 s in ms
+    const delay    = Math.random() * 12 * 1000;         // 0–12 s delay in ms
+    const driftX   = (Math.random() - 0.5) * 100;      // horizontal drift px
     p.style.cssText = [
+      'position:absolute',
+      'bottom:8%',
+      'border-radius:50%',
+      'pointer-events:none',
+      'z-index:2',
+      'will-change:transform,opacity',
+      `background:${accentColor}`,
       `left:${Math.random() * 100}%`,
       `width:${size}px`,
       `height:${size}px`,
-      `--drift:${(Math.random() - 0.5) * 100}px`,
-      `animation-delay:${Math.random() * 12}s`,
-      `animation-duration:${Math.random() * 10 + 10}s`,
+      'opacity:0',
     ].join(';');
     hero.appendChild(p);
+    particles.push({ el: p, duration, delay, driftX, age: -delay });
   }
+
+  let lastTs = null;
+  function tick(ts) {
+    if (lastTs === null) lastTs = ts;
+    const deltaMs = Math.min(ts - lastTs, 50); // cap delta to avoid jumps
+    lastTs = ts;
+    const heroH = hero.getBoundingClientRect().height || window.innerHeight;
+    particles.forEach((p) => {
+      p.age += deltaMs;
+      if (p.age < 0) { p.el.style.opacity = '0'; return; }
+      const t = (p.age % p.duration) / p.duration; // 0 → 1 cyclic
+      // Fade: ramp in 0–12%, sustain 12–88%, ramp out 88–100%
+      let opacity;
+      if (t < 0.12)      opacity = (t / 0.12) * 0.7;
+      else if (t > 0.88) opacity = ((1 - t) / 0.12) * 0.2;
+      else               opacity = 0.7 - ((t - 0.12) / 0.76) * 0.5;
+      const yPx = t * heroH * 0.9;
+      const xPx = p.driftX * t;
+      p.el.style.opacity = opacity.toFixed(3);
+      const tf = `translateY(-${yPx.toFixed(1)}px) translateX(${xPx.toFixed(1)}px)`;
+      p.el.style.transform = p.el.style.webkitTransform = tf;
+    });
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
 }
 
 /* ─────────────────────────────────────

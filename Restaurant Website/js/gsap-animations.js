@@ -37,74 +37,103 @@
      ───────────────────────────────────── */
 
   function initHeroAnimation() {
-    const chars       = document.querySelectorAll('.hero__char');
-    const eyebrow     = document.getElementById('heroEyebrow');
-    const tagline     = document.getElementById('heroTagline');
-    const desc        = document.getElementById('heroDesc');
-    const ctas        = document.getElementById('heroCtas');
-    const heroBg      = document.querySelector('.hero__bg-img');
+    const chars   = document.querySelectorAll('.hero__char');
+    const eyebrow = document.getElementById('heroEyebrow');
+    const tagline = document.getElementById('heroTagline');
+    const desc    = document.getElementById('heroDesc');
+    const ctas    = document.getElementById('heroCtas');
+    const heroBg  = document.querySelector('.hero__bg-img');
 
     if (!chars.length) return;
 
-    // Set initial hidden state via GSAP (not CSS) so elements are visible
-    // as a fallback if GSAP ever fails to complete the animation.
-    gsap.set(chars, { opacity: 0, y: 60, rotationX: -40 });
-    if (eyebrow) gsap.set(eyebrow, { opacity: 0, y: 20 });
-    if (tagline) gsap.set(tagline, { opacity: 0, y: 20 });
-    if (desc)    gsap.set(desc,    { opacity: 0, y: 20 });
-    if (ctas)    gsap.set(ctas,    { opacity: 0, y: 20 });
+    // ── Hide all elements immediately via inline styles (iOS-safe) ──
+    // No CSS transitions, no gsap.set — plain inline style writes
+    // so iOS Safari cannot defer or skip them.
+    chars.forEach((c) => {
+      c.style.opacity = '0';
+      c.style.display = 'inline-block';
+      const tf = 'perspective(600px) rotateX(-40deg) translateY(60px)';
+      c.style.transform = c.style.webkitTransform = tf;
+    });
+    const others = [eyebrow, tagline, desc, ctas].filter(Boolean);
+    others.forEach((el) => {
+      el.style.opacity = '0';
+      el.style.transform = el.style.webkitTransform = 'translateY(20px)';
+    });
 
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    // ── Ease: power3.out equivalent ──
+    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
 
-    // Eyebrow fades in first
-    if (eyebrow) {
-      tl.to(eyebrow, {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        delay: 0.3,
-      }, 0);
-    }
+    // ── Timing (ms) ──
+    const CHAR_DUR     = 900;
+    const CHAR_STAGGER = 80;
+    const CHAR_START   = 400;
+    const charsEnd = CHAR_START + (chars.length - 1) * CHAR_STAGGER + CHAR_DUR;
 
-    // Each character drops in with stagger
-    tl.fromTo(
-      chars,
-      { opacity: 0, y: 60, rotationX: -40 },
-      {
-        opacity: 1,
-        y: 0,
-        rotationX: 0,
-        duration: 0.9,
-        stagger: 0.08,
-        ease: 'power3.out',
-        transformPerspective: 600,
-      },
-      0.4
+    const schedule = [
+      eyebrow && { el: eyebrow, start: 300,            dur: 700 },
+      tagline && { el: tagline, start: charsEnd - 300, dur: 800 },
+      desc    && { el: desc,    start: charsEnd + 200, dur: 700 },
+      ctas    && { el: ctas,    start: charsEnd + 500, dur: 700 },
+    ].filter(Boolean);
+
+    const totalDur = Math.max(
+      charsEnd,
+      schedule.length ? Math.max(...schedule.map((s) => s.start + s.dur)) : 0,
+      2500
     );
 
-    // Tagline
-    if (tagline) {
-      tl.to(tagline, { opacity: 1, y: 0, duration: 0.8 }, '-=0.3');
-    }
+    let globalStart = null;
+    function tick(ts) {
+      if (!globalStart) globalStart = ts;
+      const elapsed = ts - globalStart;
 
-    // Desc
-    if (desc) {
-      tl.to(desc, { opacity: 1, y: 0, duration: 0.7 }, '-=0.5');
-    }
-
-    // CTAs
-    if (ctas) {
-      tl.to(ctas, { opacity: 1, y: 0, duration: 0.7 }, '-=0.4');
-    }
-
-    // Hero bg subtle scale-in
-    if (heroBg) {
-      gsap.to(heroBg, {
-        scale: 1,
-        duration: 2.5,
-        ease: 'power1.out',
+      // Chars: drop in with stagger
+      chars.forEach((c, i) => {
+        const t = Math.min(Math.max((elapsed - (CHAR_START + i * CHAR_STAGGER)) / CHAR_DUR, 0), 1);
+        if (t <= 0) return;
+        const e = easeOut(t);
+        c.style.opacity = e.toFixed(3);
+        const tf = `perspective(600px) rotateX(${(-40 * (1 - e)).toFixed(1)}deg) translateY(${(60 * (1 - e)).toFixed(1)}px)`;
+        c.style.transform = c.style.webkitTransform = tf;
       });
+
+      // Eyebrow / tagline / desc / ctas
+      schedule.forEach(({ el, start, dur }) => {
+        const t = Math.min(Math.max((elapsed - start) / dur, 0), 1);
+        if (t <= 0) return;
+        const e = easeOut(t);
+        el.style.opacity = e.toFixed(3);
+        el.style.transform = el.style.webkitTransform = `translateY(${(20 * (1 - e)).toFixed(1)}px)`;
+      });
+
+      // Hero bg: scale 1.05 → 1.0 over 2500 ms
+      if (heroBg) {
+        const bgT  = Math.min(elapsed / 2500, 1);
+        const scale = 1.05 - 0.05 * easeOut(bgT);
+        heroBg.style.transform = heroBg.style.webkitTransform = `scale(${scale.toFixed(4)})`;
+      }
+
+      if (elapsed < totalDur) {
+        requestAnimationFrame(tick);
+      } else {
+        // Snap to final state and clear inline transforms so GSAP loop
+        // effects start from a clean slate
+        chars.forEach((c) => {
+          c.style.opacity = '1';
+          c.style.transform = c.style.webkitTransform = '';
+        });
+        schedule.forEach(({ el }) => {
+          el.style.opacity = '1';
+          el.style.transform = el.style.webkitTransform = '';
+        });
+        if (heroBg) {
+          heroBg.style.transform = heroBg.style.webkitTransform = 'scale(1)';
+        }
+      }
     }
+
+    requestAnimationFrame(tick);
   }
 
   /* ─────────────────────────────────────
