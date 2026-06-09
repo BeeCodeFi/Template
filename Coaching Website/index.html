@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Transform your life with premium coaching. Join 10,000+ students who achieved breakthroughs in mindset, career, wealth, and personal growth." />
+  <meta name="keywords" content="life coaching, mindset coaching, career coaching, wealth coaching, personal growth, transformation" />
+  <title>Elevate — Premium Life &amp; Business Coaching</title>
+
+  <!-- Preload critical fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Remix Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- ========== PRELOADER ========== -->
+  <div class="preloader" id="preloader">
+    <div class="preloader__content">
+      <div class="preloader__logo">ELEVATE</div>
+      <div class="preloader__bar">
+        <div class="preloader__progress"></div>
+      </div>
+      <p class="preloader__text">Loading your transformation...</p>
+    </div>
+  </div>
+
+  <!-- ========== CUSTOM CURSOR ========== -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursor-follower"></div>
+
+  <!-- ========== NAVIGATION ========== -->
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#" class="nav__logo">
+        <span class="nav__logo-icon">◆</span>
+        ELEVATE
+      </a>
+
+      <ul class="nav__menu" id="nav-menu">
+        <li class="nav__item"><a href="#hero" class="nav__link active">Home</a></li>
+        <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
+        <li class="nav__item"><a href="#programs" class="nav__link">Programs</a></li>
+        <li class="nav__item"><a href="#results" class="nav__link">Results</a></li>
+        <li class="nav__item"><a href="#process" class="nav__link">Process</a></li>
+        <li class="nav__item"><a href="#faq" class="nav__link">FAQ</a></li>
+        <li class="nav__item nav__item--cta">
+          <a href="#cta" class="nav__btn magnetic-btn">Book a Call</a>
+        </li>
+      </ul>
+
+      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero" id="hero">
+      <div class="hero__bg">
+        <div class="hero__gradient-orb hero__gradient-orb--1"></div>
+        <div class="hero__gradient-orb hero__gradient-orb--2"></div>
+        <div class="hero__gradient-orb hero__gradient-orb--3"></div>
+        <div class="hero__particles" id="hero-particles"></div>
+        <div class="hero__grid-lines"></div>
+      </div>
+
+      <div class="hero__content container">
+        <div class="hero__badge" data-animate="fade-up">
+          <span class="hero__badge-dot"></span>
+          Trusted by 10,000+ achievers worldwide
+        </div>
+
+        <h1 class="hero__title" data-animate="fade-up" data-delay="100">
+          Transform Your Life<br />
+          Into Your <span class="hero__title-gradient">Greatest</span><br />
+          Success Story
+        </h1>
+
+        <p class="hero__subtitle" data-animate="fade-up" data-delay="200">
+          Join thousands of students who have unlocked confidence, wealth,<br />
+          clarity, and purpose through our proven coaching framework.
+        </p>
+
+        <div class="hero__actions" data-animate="fade-up" data-delay="300">
+          <a href="#cta" class="btn btn--primary magnetic-btn">
+            <span>Book Free Consultation</span>
+            <i class="ri-arrow-right-up-line"></i>
+          </a>
+          <a href="#stories" class="btn btn--glass magnetic-btn">
+            <i class="ri-play-circle-line"></i>
+            <span>Watch Success Stories</span>
+          </a>
+        </div>
+
+        <div class="hero__stats" data-animate="fade-up" data-delay="400">
+          <div class="hero__stat">
+            <span class="hero__stat-number" data-count="10000">0</span>
+            <span class="hero__stat-plus">+</span>
+            <span class="hero__stat-label">Students Coached</span>
+          </div>
+          <div class="hero__stat-divider"></div>
+          <div class="hero__stat">
+            <span class="hero__stat-number" data-count="500">0</span>
+            <span class="hero__stat-plus">+</span>
+            <span class="hero__stat-label">Success Stories</span>
+          </div>
+          <div class="hero__stat-divider"></div>
+          <div class="hero__stat">
+            <span class="hero__stat-number" data-count="95">0</span>
+            <span class="hero__stat-plus">%</span>
+            <span class="hero__stat-label">Satisfaction Rate</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__scroll-indicator">
+        <div class="hero__scroll-mouse">
+          <div class="hero__scroll-wheel"></div>
+        </div>
+        <span>Scroll to explore</span>
+      </div>
+    </section>
+
+    <!-- ========== ABOUT SECTION ========== -->
+    <section class="about" id="about">
+      <div class="container">
+        <div class="about__layout">
+          <div class="about__image-col" data-animate="fade-right">
+            <div class="about__img-wrap">
+              <img
+                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&h=750&q=80"
+                alt="Professional Coach"
+                class="about__img"
+                loading="lazy"
+                width="600"
+                height="750"
+              />
+              <div class="about__img-glow"></div>
+              <div class="about__img-badge">
+                <span class="about__img-badge-number">15+</span>
+                <span class="about__img-badge-text">Years<br/>Experience</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="about__content-col" data-animate="fade-left">
+            <span class="section-tag">About Your Coach</span>
+            <h2 class="section-title">From Rock Bottom to<br /><span class="gradient-text">Coaching Thousands</span></h2>
+            <p class="about__text">
+              After building multiple 7-figure businesses and overcoming personal challenges that would break most people, I dedicated my life to helping others unlock their true potential. My proven framework has transformed the lives of thousands across the globe.
+            </p>
+
+            <div class="about__timeline">
+              <div class="about__timeline-item">
+                <div class="about__timeline-year">2010</div>
+                <div class="about__timeline-content">
+                  <h4>Started First Business</h4>
+                  <p>Built a startup from zero to $2M revenue in 18 months</p>
+                </div>
+              </div>
+              <div class="about__timeline-item">
+                <div class="about__timeline-year">2015</div>
+                <div class="about__timeline-content">
+                  <h4>Began Coaching Journey</h4>
+                  <p>Mentored first 100 students to career breakthroughs</p>
+                </div>
+              </div>
+              <div class="about__timeline-item">
+                <div class="about__timeline-year">2020</div>
+                <div class="about__timeline-content">
+                  <h4>Scaled Globally</h4>
+                  <p>Launched digital programs reaching students in 45+ countries</p>
+                </div>
+              </div>
+              <div class="about__timeline-item">
+                <div class="about__timeline-year">2024</div>
+                <div class="about__timeline-content">
+                  <h4>10,000+ Lives Changed</h4>
+                  <p>Community of high-achievers generating $50M+ collectively</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PROGRAMS SECTION ========== -->
+    <section class="programs" id="programs">
+      <div class="container">
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag">Our Programs</span>
+          <h2 class="section-title">Premium Coaching <span class="gradient-text">Programs</span></h2>
+          <p class="section-desc">Choose the transformation path that aligns with your vision and goals.</p>
+        </div>
+
+        <div class="programs__grid">
+          <div class="program-card tilt-card" data-animate="fade-up" data-delay="0">
+            <div class="program-card__glow"></div>
+            <div class="program-card__icon">
+              <i class="ri-mental-health-line"></i>
+            </div>
+            <h3 class="program-card__title">Mindset Mastery</h3>
+            <p class="program-card__desc">Reprogram limiting beliefs, build unshakeable confidence, and develop the mental framework of top achievers.</p>
+            <ul class="program-card__features">
+              <li><i class="ri-check-line"></i> 12-week intensive program</li>
+              <li><i class="ri-check-line"></i> Weekly 1-on-1 sessions</li>
+              <li><i class="ri-check-line"></i> Mindset assessment tools</li>
+              <li><i class="ri-check-line"></i> Private community access</li>
+            </ul>
+            <div class="program-card__price">
+              <span class="program-card__price-amount">$4,997</span>
+              <span class="program-card__price-period">/ program</span>
+            </div>
+            <a href="#cta" class="program-card__btn magnetic-btn">Enroll Now <i class="ri-arrow-right-up-line"></i></a>
+          </div>
+
+          <div class="program-card program-card--featured tilt-card" data-animate="fade-up" data-delay="100">
+            <div class="program-card__badge">Most Popular</div>
+            <div class="program-card__glow"></div>
+            <div class="program-card__icon">
+              <i class="ri-rocket-2-line"></i>
+            </div>
+            <h3 class="program-card__title">Career Acceleration</h3>
+            <p class="program-card__desc">Fast-track your career growth, negotiate premium compensation, and position yourself as an industry leader.</p>
+            <ul class="program-card__features">
+              <li><i class="ri-check-line"></i> 16-week transformation</li>
+              <li><i class="ri-check-line"></i> Bi-weekly strategy calls</li>
+              <li><i class="ri-check-line"></i> Resume & brand overhaul</li>
+              <li><i class="ri-check-line"></i> Network access & intros</li>
+            </ul>
+            <div class="program-card__price">
+              <span class="program-card__price-amount">$7,997</span>
+              <span class="program-card__price-period">/ program</span>
+            </div>
+            <a href="#cta" class="program-card__btn magnetic-btn">Enroll Now <i class="ri-arrow-right-up-line"></i></a>
+          </div>
+
+          <div class="program-card tilt-card" data-animate="fade-up" data-delay="200">
+            <div class="program-card__glow"></div>
+            <div class="program-card__icon">
+              <i class="ri-money-dollar-circle-line"></i>
+            </div>
+            <h3 class="program-card__title">Wealth Blueprint</h3>
+            <p class="program-card__desc">Master wealth creation strategies, build multiple income streams, and achieve financial freedom on your terms.</p>
+            <ul class="program-card__features">
+              <li><i class="ri-check-line"></i> 20-week deep dive</li>
+              <li><i class="ri-check-line"></i> Investment strategy sessions</li>
+              <li><i class="ri-check-line"></i> Business model templates</li>
+              <li><i class="ri-check-line"></i> Wealth tracking tools</li>
+            </ul>
+            <div class="program-card__price">
+              <span class="program-card__price-amount">$9,997</span>
+              <span class="program-card__price-period">/ program</span>
+            </div>
+            <a href="#cta" class="program-card__btn magnetic-btn">Enroll Now <i class="ri-arrow-right-up-line"></i></a>
+          </div>
+
+          <div class="program-card tilt-card" data-animate="fade-up" data-delay="300">
+            <div class="program-card__glow"></div>
+            <div class="program-card__icon">
+              <i class="ri-flashlight-line"></i>
+            </div>
+            <h3 class="program-card__title">Peak Performance</h3>
+            <p class="program-card__desc">Optimize energy, health, and productivity to operate at your highest level consistently every single day.</p>
+            <ul class="program-card__features">
+              <li><i class="ri-check-line"></i> 12-week performance sprint</li>
+              <li><i class="ri-check-line"></i> Health & routine optimization</li>
+              <li><i class="ri-check-line"></i> Productivity systems</li>
+              <li><i class="ri-check-line"></i> Accountability partner</li>
+            </ul>
+            <div class="program-card__price">
+              <span class="program-card__price-amount">$4,497</span>
+              <span class="program-card__price-period">/ program</span>
+            </div>
+            <a href="#cta" class="program-card__btn magnetic-btn">Enroll Now <i class="ri-arrow-right-up-line"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SUCCESS STORIES SECTION ========== -->
+    <section class="stories" id="stories">
+      <div class="container">
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag">Success Stories</span>
+          <h2 class="section-title">Real People, Real <span class="gradient-text">Transformations</span></h2>
+          <p class="section-desc">See how our coaching has changed lives across industries and continents.</p>
+        </div>
+
+        <div class="stories__track" id="stories-track">
+          <div class="story-card" data-animate="fade-up" data-delay="0">
+            <div class="story-card__video">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&crop=faces&w=400&h=300&q=80" alt="James testimonial" loading="lazy" width="400" height="300" />
+              <div class="story-card__play"><i class="ri-play-fill"></i></div>
+            </div>
+            <div class="story-card__content">
+              <div class="story-card__stars">
+                <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+              </div>
+              <p class="story-card__quote">"Went from $60K salary to $180K in 8 months. The career framework completely changed my trajectory."</p>
+              <div class="story-card__author">
+                <strong>James Mitchell</strong>
+                <span>Software Engineer → VP Engineering</span>
+              </div>
+              <div class="story-card__transformation">
+                <div class="story-card__before">Before: $60K/year</div>
+                <div class="story-card__arrow"><i class="ri-arrow-right-line"></i></div>
+                <div class="story-card__after">After: $180K/year</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="story-card" data-animate="fade-up" data-delay="100">
+            <div class="story-card__video">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&crop=faces&w=400&h=300&q=80" alt="Sarah testimonial" loading="lazy" width="400" height="300" />
+              <div class="story-card__play"><i class="ri-play-fill"></i></div>
+            </div>
+            <div class="story-card__content">
+              <div class="story-card__stars">
+                <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+              </div>
+              <p class="story-card__quote">"Built a 6-figure coaching business from scratch. The wealth blueprint gave me the exact roadmap I needed."</p>
+              <div class="story-card__author">
+                <strong>Sarah Chen</strong>
+                <span>Corporate Manager → Business Owner</span>
+              </div>
+              <div class="story-card__transformation">
+                <div class="story-card__before">Before: Employee</div>
+                <div class="story-card__arrow"><i class="ri-arrow-right-line"></i></div>
+                <div class="story-card__after">After: $250K Business</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="story-card" data-animate="fade-up" data-delay="200">
+            <div class="story-card__video">
+              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&crop=faces&w=400&h=300&q=80" alt="Marcus testimonial" loading="lazy" width="400" height="300" />
+              <div class="story-card__play"><i class="ri-play-fill"></i></div>
+            </div>
+            <div class="story-card__content">
+              <div class="story-card__stars">
+                <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+              </div>
+              <p class="story-card__quote">"Lost 40 pounds, got promoted twice, and finally feel in control of my life. Best investment I ever made."</p>
+              <div class="story-card__author">
+                <strong>Marcus Johnson</strong>
+                <span>Burnout Survivor → Peak Performer</span>
+              </div>
+              <div class="story-card__transformation">
+                <div class="story-card__before">Before: Burnt Out</div>
+                <div class="story-card__arrow"><i class="ri-arrow-right-line"></i></div>
+                <div class="story-card__after">After: Thriving</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="story-card" data-animate="fade-up" data-delay="300">
+            <div class="story-card__video">
+              <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&crop=faces&w=400&h=300&q=80" alt="Priya testimonial" loading="lazy" width="400" height="300" />
+              <div class="story-card__play"><i class="ri-play-fill"></i></div>
+            </div>
+            <div class="story-card__content">
+              <div class="story-card__stars">
+                <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+              </div>
+              <p class="story-card__quote">"The mindset program helped me overcome imposter syndrome and land my dream role at a Fortune 500."</p>
+              <div class="story-card__author">
+                <strong>Priya Patel</strong>
+                <span>Self-Doubt → C-Suite Executive</span>
+              </div>
+              <div class="story-card__transformation">
+                <div class="story-card__before">Before: Stuck</div>
+                <div class="story-card__arrow"><i class="ri-arrow-right-line"></i></div>
+                <div class="story-card__after">After: C-Suite Role</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== RESULTS SECTION ========== -->
+    <section class="results" id="results">
+      <div class="container">
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag">Our Impact</span>
+          <h2 class="section-title">Numbers That Speak <span class="gradient-text">Volumes</span></h2>
+        </div>
+
+        <div class="results__grid">
+          <div class="result-card" data-animate="fade-up" data-delay="0">
+            <div class="result-card__icon"><i class="ri-user-star-line"></i></div>
+            <div class="result-card__number" data-count="10847">0</div>
+            <div class="result-card__label">Students Coached</div>
+          </div>
+          <div class="result-card" data-animate="fade-up" data-delay="100">
+            <div class="result-card__icon"><i class="ri-money-dollar-circle-line"></i></div>
+            <div class="result-card__number" data-count="52" data-prefix="$" data-suffix="M+">0</div>
+            <div class="result-card__label">Revenue Generated by Students</div>
+          </div>
+          <div class="result-card" data-animate="fade-up" data-delay="200">
+            <div class="result-card__icon"><i class="ri-global-line"></i></div>
+            <div class="result-card__number" data-count="45" data-suffix="+">0</div>
+            <div class="result-card__label">Countries Served</div>
+          </div>
+          <div class="result-card" data-animate="fade-up" data-delay="300">
+            <div class="result-card__icon"><i class="ri-time-line"></i></div>
+            <div class="result-card__number" data-count="25000" data-suffix="+">0</div>
+            <div class="result-card__label">Coaching Hours Delivered</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== WHY CHOOSE US SECTION ========== -->
+    <section class="why" id="why">
+      <div class="container">
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag">Why Elevate</span>
+          <h2 class="section-title">What Makes Us <span class="gradient-text">Different</span></h2>
+          <p class="section-desc">A coaching experience designed for extraordinary outcomes.</p>
+        </div>
+
+        <div class="why__bento">
+          <div class="bento-card bento-card--large tilt-card" data-animate="fade-up" data-delay="0">
+            <div class="bento-card__icon"><i class="ri-route-line"></i></div>
+            <h3 class="bento-card__title">Proven Framework</h3>
+            <p class="bento-card__desc">A battle-tested system refined over 15 years with 10,000+ students. Not theory — real results backed by data.</p>
+          </div>
+          <div class="bento-card tilt-card" data-animate="fade-up" data-delay="100">
+            <div class="bento-card__icon"><i class="ri-user-settings-line"></i></div>
+            <h3 class="bento-card__title">Personalized Coaching</h3>
+            <p class="bento-card__desc">Every strategy custom-fit to your unique situation, strengths, and goals.</p>
+          </div>
+          <div class="bento-card tilt-card" data-animate="fade-up" data-delay="200">
+            <div class="bento-card__icon"><i class="ri-team-line"></i></div>
+            <h3 class="bento-card__title">Community Support</h3>
+            <p class="bento-card__desc">Join a network of high-achievers who lift each other up daily.</p>
+          </div>
+          <div class="bento-card tilt-card" data-animate="fade-up" data-delay="300">
+            <div class="bento-card__icon"><i class="ri-book-open-line"></i></div>
+            <h3 class="bento-card__title">Lifetime Resources</h3>
+            <p class="bento-card__desc">Unlimited access to frameworks, templates, and updated content forever.</p>
+          </div>
+          <div class="bento-card tilt-card" data-animate="fade-up" data-delay="400">
+            <div class="bento-card__icon"><i class="ri-lightbulb-flash-line"></i></div>
+            <h3 class="bento-card__title">Expert Mentorship</h3>
+            <p class="bento-card__desc">Direct access to coaches who have achieved what you're working toward.</p>
+          </div>
+          <div class="bento-card bento-card--large tilt-card" data-animate="fade-up" data-delay="500">
+            <div class="bento-card__icon"><i class="ri-shield-check-line"></i></div>
+            <h3 class="bento-card__title">Accountability System</h3>
+            <p class="bento-card__desc">Weekly check-ins, progress tracking, and a structured cadence that ensures you never lose momentum toward your goals.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PROCESS SECTION ========== -->
+    <section class="process" id="process">
+      <div class="container">
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag">How It Works</span>
+          <h2 class="section-title">Your Path to <span class="gradient-text">Transformation</span></h2>
+          <p class="section-desc">A clear, structured journey from where you are to where you want to be.</p>
+        </div>
+
+        <div class="process__timeline">
+          <div class="process__line"></div>
+
+          <div class="process__step" data-animate="fade-up" data-delay="0">
+            <div class="process__step-number">01</div>
+            <div class="process__step-content">
+              <div class="process__step-icon"><i class="ri-phone-line"></i></div>
+              <h3>Discovery Call</h3>
+              <p>A free 30-minute session to understand your goals, challenges, and determine if we're the right fit for your transformation.</p>
+            </div>
+          </div>
+
+          <div class="process__step" data-animate="fade-up" data-delay="100">
+            <div class="process__step-number">02</div>
+            <div class="process__step-content">
+              <div class="process__step-icon"><i class="ri-compass-3-line"></i></div>
+              <h3>Strategy Session</h3>
+              <p>Deep-dive into your current situation. We map out obstacles, opportunities, and the fastest path to your desired outcome.</p>
+            </div>
+          </div>
+
+          <div class="process__step" data-animate="fade-up" data-delay="200">
+            <div class="process__step-number">03</div>
+            <div class="process__step-content">
+              <div class="process__step-icon"><i class="ri-roadmap-line"></i></div>
+              <h3>Personalized Roadmap</h3>
+              <p>Receive a custom action plan with milestones, resources, and a week-by-week breakdown of your transformation journey.</p>
+            </div>
+          </div>
+
+          <div class="process__step" data-animate="fade-up" data-delay="300">
+            <div class="process__step-number">04</div>
+            <div class="process__step-content">
+              <div class="process__step-icon"><i class="ri-hammer-line"></i></div>
+              <h3>Implementation</h3>
+              <p>Execute with guidance. Weekly coaching sessions, accountability check-ins, and real-time support as you take massive action.</p>
+            </div>
+          </div>
+
+          <div class="process__step" data-animate="fade-up" data-delay="400">
+            <div class="process__step-number">05</div>
+            <div class="process__step-content">
+              <div class="process__step-icon"><i class="ri-trophy-line"></i></div>
+              <h3>Transformation</h3>
+              <p>Celebrate your wins, lock in new habits, and graduate with the tools and confidence to sustain growth independently.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FAQ SECTION ========== -->
+    <section class="faq" id="faq">
+      <div class="container">
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-tag">FAQ</span>
+          <h2 class="section-title">Got <span class="gradient-text">Questions?</span></h2>
+          <p class="section-desc">Everything you need to know before starting your journey.</p>
+        </div>
+
+        <div class="faq__list" data-animate="fade-up">
+          <div class="faq__item">
+            <button class="faq__question" aria-expanded="false">
+              <span>How is this different from other coaching programs?</span>
+              <i class="ri-add-line faq__icon"></i>
+            </button>
+            <div class="faq__answer">
+              <p>Unlike generic programs, we combine 1-on-1 personalized strategy with a proven framework tested on 10,000+ students. Every recommendation is tailored to your specific situation, industry, and goals. Plus, our coaches have personally achieved what they teach.</p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" aria-expanded="false">
+              <span>What kind of results can I expect?</span>
+              <i class="ri-add-line faq__icon"></i>
+            </button>
+            <div class="faq__answer">
+              <p>Results vary based on commitment, but our average student sees significant breakthroughs within 90 days. This includes career promotions (avg 40% salary increase), business revenue growth, improved health metrics, and dramatically enhanced confidence and clarity.</p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" aria-expanded="false">
+              <span>How much time do I need to commit weekly?</span>
+              <i class="ri-add-line faq__icon"></i>
+            </button>
+            <div class="faq__answer">
+              <p>We recommend 5-7 hours per week for optimal results. This includes your coaching session (1 hour), implementation work (3-4 hours), and community engagement (1-2 hours). The program is designed for busy professionals.</p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" aria-expanded="false">
+              <span>Do you offer a money-back guarantee?</span>
+              <i class="ri-add-line faq__icon"></i>
+            </button>
+            <div class="faq__answer">
+              <p>Yes. We offer a 30-day satisfaction guarantee. If you follow the program, attend all sessions, complete the work, and don't see measurable progress, we'll refund your investment in full. We're that confident in our system.</p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" aria-expanded="false">
+              <span>Can I switch programs after enrolling?</span>
+              <i class="ri-add-line faq__icon"></i>
+            </button>
+            <div class="faq__answer">
+              <p>Absolutely. If after your strategy session we determine a different program is a better fit, we'll seamlessly transition you. Many students also upgrade or add programs as they progress through their journey.</p>
+            </div>
+          </div>
+
+          <div class="faq__item">
+            <button class="faq__question" aria-expanded="false">
+              <span>Is this suitable for beginners or experienced professionals?</span>
+              <i class="ri-add-line faq__icon"></i>
+            </button>
+            <div class="faq__answer">
+              <p>Both. Our personalized approach means the program adapts to your level. We've coached fresh graduates to C-suite executives, first-time entrepreneurs to serial founders. The framework scales to wherever you are in your journey.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CTA SECTION ========== -->
+    <section class="cta" id="cta">
+      <div class="cta__bg">
+        <div class="cta__gradient-orb cta__gradient-orb--1"></div>
+        <div class="cta__gradient-orb cta__gradient-orb--2"></div>
+      </div>
+      <div class="container">
+        <div class="cta__content" data-animate="fade-up">
+          <span class="section-tag">Take The Leap</span>
+          <h2 class="cta__title">Your Future Self<br />Will <span class="gradient-text">Thank You</span></h2>
+          <p class="cta__desc">Stop waiting for the "right time." The best time to invest in yourself is now. Book your free discovery call and let's map out your transformation together.</p>
+          <a href="#" class="btn btn--primary btn--large magnetic-btn">
+            <span>Start Your Transformation Today</span>
+            <i class="ri-arrow-right-up-line"></i>
+          </a>
+          <p class="cta__note">Free 30-min call • No commitment • Limited spots available</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="#" class="footer__logo">
+            <span class="footer__logo-icon">◆</span> ELEVATE
+          </a>
+          <p class="footer__tagline">Transforming lives through premium coaching since 2010. Your breakthrough is one decision away.</p>
+          <div class="footer__socials">
+            <a href="#" class="footer__social magnetic-btn" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+            <a href="#" class="footer__social magnetic-btn" aria-label="YouTube"><i class="ri-youtube-line"></i></a>
+            <a href="#" class="footer__social magnetic-btn" aria-label="LinkedIn"><i class="ri-linkedin-line"></i></a>
+            <a href="#" class="footer__social magnetic-btn" aria-label="Twitter"><i class="ri-twitter-x-line"></i></a>
+          </div>
+        </div>
+
+        <div class="footer__links">
+          <div class="footer__col">
+            <h4 class="footer__col-title">Programs</h4>
+            <ul>
+              <li><a href="#">Mindset Mastery</a></li>
+              <li><a href="#">Career Acceleration</a></li>
+              <li><a href="#">Wealth Blueprint</a></li>
+              <li><a href="#">Peak Performance</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4 class="footer__col-title">Company</h4>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Success Stories</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Careers</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4 class="footer__col-title">Support</h4>
+            <ul>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__newsletter">
+          <h4 class="footer__col-title">Stay Inspired</h4>
+          <p>Get weekly insights on growth, mindset, and success.</p>
+          <form class="footer__form" id="newsletter-form">
+            <input type="email" placeholder="Enter your email" class="footer__input" required />
+            <button type="submit" class="footer__form-btn magnetic-btn">
+              <i class="ri-send-plane-2-line"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p>&copy; 2024 Elevate Coaching. All rights reserved.</p>
+        <p>Designed for transformation.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== BACK TO TOP ========== -->
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+    <i class="ri-arrow-up-line"></i>
+  </button>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script src="js/main.js"></script>
+</body>
+</html>
