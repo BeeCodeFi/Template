@@ -1086,7 +1086,7 @@ ul {
     position: relative;
     width: 50%;
     padding: 1.5rem;
-    opacity: 0;
+    /* opacity is managed entirely by GSAP — do NOT set it here */
 }
 
 .timeline-item.left {
@@ -1158,23 +1158,36 @@ ul {
     max-width: 700px;
     margin: 0 auto;
     position: relative;
-    min-height: 200px;
 }
 
 .testimonial-card {
     padding: 2.5rem;
     text-align: center;
+    /* Use visibility+position so height is preserved by the active card */
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    visibility: hidden;
+    pointer-events: none;
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s linear 0.5s;
 }
 
 .testimonial-card.active {
     position: relative;
+    visibility: visible;
+    pointer-events: auto;
     opacity: 1;
     transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s linear 0s;
+}
+
+/* Keeps carousel height = active card height */
+.testimonials-carousel::after {
+    content: '';
+    display: block;
 }
 
 .testimonial-text {
@@ -1376,16 +1389,15 @@ ul {
 
 .marquee-track {
     display: flex;
-    width: max-content;
-    animation: marquee 28s linear infinite;
+    will-change: transform;
+    /* Animation is driven by JS for cross-browser reliability */
 }
 
-/* Each group is one full copy of the text — duplicate provides the seamless loop */
 .marquee-group {
     display: flex;
     align-items: center;
     gap: 2rem;
-    padding-right: 2rem; /* ensures the gap between group end and next group start = 2rem */
+    padding-right: 2rem;
     flex-shrink: 0;
 }
 

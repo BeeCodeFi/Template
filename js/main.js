@@ -93,11 +93,54 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     // ============================================
+    // FOOTER MARQUEE — JS-driven for bulletproof infinite loop
+    // ============================================
+    (function initMarquee() {
+        const track = document.querySelector('.marquee-track');
+        if (!track) return;
+        const group = track.querySelector('.marquee-group');
+        if (!group) return;
+
+        // Wait one frame so layout is complete, then measure
+        requestAnimationFrame(() => {
+            const groupWidth = group.offsetWidth;
+            if (!groupWidth) return;
+
+            let pos = 0;
+            const speed = 0.7; // px per frame (~42px/s at 60fps)
+            let paused = false;
+
+            // Pause on hover to respect UX
+            track.parentElement.addEventListener('mouseenter', () => { paused = true; });
+            track.parentElement.addEventListener('mouseleave', () => { paused = false; });
+
+            function step() {
+                if (!paused) {
+                    pos -= speed;
+                    // When we've scrolled one full group, reset to 0 — seamless
+                    if (pos <= -groupWidth) pos += groupWidth;
+                    track.style.transform = `translateX(${pos}px)`;
+                }
+                requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        });
+    })();
+
+    // ============================================
     // TESTIMONIALS CAROUSEL
     // ============================================
     const testimonialCards = document.querySelectorAll('.testimonial-card');
     const dots = document.querySelectorAll('.testimonial-dots .dot');
     let currentTestimonial = 0;
+
+    // Ensure first card is active on load
+    testimonialCards.forEach((card, i) => {
+        card.classList.toggle('active', i === 0);
+    });
+    dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === 0);
+    });
 
     function showTestimonial(index) {
         testimonialCards.forEach(card => card.classList.remove('active'));
@@ -207,9 +250,13 @@ window.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Section reveals
+        // Section reveals — exclude testimonial cards (handled by carousel JS)
         document.querySelectorAll('.section').forEach(section => {
-            const elements = section.querySelectorAll('.section-header, .glass-card, .about-grid, .skills-bento, .timeline-item, .contact-grid');
+            const elements = section.querySelectorAll(
+                '.section-header, .about-grid, .skills-bento, .contact-grid, ' +
+                '.glass-card:not(.testimonial-card), .testimonials-carousel, .testimonial-dots'
+            );
+            if (!elements.length) return;
             gsap.from(elements, {
                 scrollTrigger: {
                     trigger: section,
@@ -219,29 +266,31 @@ window.addEventListener('DOMContentLoaded', () => {
                 y: 60,
                 opacity: 0,
                 duration: 0.8,
-                stagger: 0.15,
-                ease: 'power3.out'
+                stagger: 0.12,
+                ease: 'power3.out',
+                clearProps: 'opacity,transform'
             });
         });
 
-        // Timeline items
+        // Timeline items — fromTo so GSAP owns both start and end values
         document.querySelectorAll('.timeline-item').forEach((item, i) => {
             const direction = item.classList.contains('left') ? -60 : 60;
-            gsap.from(item, {
-                scrollTrigger: {
-                    trigger: item,
-                    start: 'top 80%',
-                    toggleActions: 'play none none none'
-                },
-                x: direction,
-                opacity: 0,
-                duration: 0.8,
-                delay: i * 0.1,
-                ease: 'power3.out',
-                onComplete: () => {
-                    item.style.opacity = 1;
+            gsap.fromTo(item,
+                { x: direction, opacity: 0 },
+                {
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    },
+                    x: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    delay: i * 0.08,
+                    ease: 'power3.out',
+                    clearProps: 'transform'
                 }
-            });
+            );
         });
 
         // Timeline SVG draw
