@@ -98,33 +98,41 @@ window.addEventListener('DOMContentLoaded', () => {
     (function initMarquee() {
         const track = document.querySelector('.marquee-track');
         if (!track) return;
-        const group = track.querySelector('.marquee-group');
-        if (!group) return;
 
-        // Wait one frame so layout is complete, then measure
-        requestAnimationFrame(() => {
-            const groupWidth = group.offsetWidth;
+        // Wait for fonts to load so text widths are accurate, then measure
+        const run = () => {
+            // track has width:max-content with two identical groups side-by-side
+            // so half the track width = one group width = the exact reset point
+            const groupWidth = track.offsetWidth / 2;
             if (!groupWidth) return;
 
             let pos = 0;
             const speed = 0.7; // px per frame (~42px/s at 60fps)
             let paused = false;
 
-            // Pause on hover to respect UX
+            // Pause on hover
             track.parentElement.addEventListener('mouseenter', () => { paused = true; });
             track.parentElement.addEventListener('mouseleave', () => { paused = false; });
 
             function step() {
                 if (!paused) {
                     pos -= speed;
-                    // When we've scrolled one full group, reset to 0 — seamless
+                    // When one full group has scrolled out of view, snap back — seamless
                     if (pos <= -groupWidth) pos += groupWidth;
                     track.style.transform = `translateX(${pos}px)`;
                 }
                 requestAnimationFrame(step);
             }
             requestAnimationFrame(step);
-        });
+        };
+
+        // document.fonts.ready ensures Google Fonts are applied before we measure
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(run);
+        } else {
+            // Fallback: two RAFs for older browsers
+            requestAnimationFrame(() => requestAnimationFrame(run));
+        }
     })();
 
     // ============================================
@@ -332,24 +340,6 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
-
-        // Horizontal scroll for projects
-        const horizontalTrack = document.querySelector('.projects-horizontal-track');
-        if (horizontalTrack && window.innerWidth > 768) {
-            const totalScroll = horizontalTrack.scrollWidth - window.innerWidth;
-            gsap.to(horizontalTrack, {
-                x: -totalScroll,
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: '.projects-horizontal-wrapper',
-                    start: 'top top',
-                    end: () => `+=${totalScroll}`,
-                    scrub: 1,
-                    pin: true,
-                    anticipatePin: 1
-                }
-            });
-        }
 
         // Text scramble effect for section titles
         document.querySelectorAll('[data-animate="scramble"]').forEach(el => {

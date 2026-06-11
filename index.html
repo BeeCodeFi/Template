@@ -173,48 +173,78 @@
                     <span class="section-tag">// About Me</span>
                     <h2 class="section-title" data-animate="scramble">Who I Am</h2>
                 </div>
-                <div class="about-grid">
-                    <div class="about-image-wrapper">
-                        <div class="about-image glass-card">
-                            <div class="avatar-placeholder">
-                                <span>AK</span>
+                <div class="about-layout">
+                    <!-- Left: Visual -->
+                    <div class="about-visual">
+                        <div class="about-avatar-card glass-card">
+                            <div class="about-avatar-glow"></div>
+                            <div class="avatar-frame">
+                                <div class="avatar-placeholder">AK</div>
+                                <div class="avatar-ring ring-1"></div>
+                                <div class="avatar-ring ring-2"></div>
                             </div>
-                            <div class="about-image-border"></div>
+                            <div class="about-status">
+                                <span class="status-dot"></span>
+                                <span>Available for work</span>
+                            </div>
                         </div>
-                        <div class="about-decorative">
-                            <div class="geo-shape hexagon"></div>
-                            <div class="geo-shape triangle"></div>
-                            <div class="geo-shape circle"></div>
+                        <div class="about-stats-grid">
+                            <div class="about-stat glass-card">
+                                <span class="about-stat-number">5+</span>
+                                <span class="about-stat-label">Years Exp.</span>
+                            </div>
+                            <div class="about-stat glass-card">
+                                <span class="about-stat-number">50+</span>
+                                <span class="about-stat-label">Projects</span>
+                            </div>
+                            <div class="about-stat glass-card">
+                                <span class="about-stat-number">30+</span>
+                                <span class="about-stat-label">Clients</span>
+                            </div>
                         </div>
                     </div>
+                    <!-- Right: Content -->
                     <div class="about-content">
-                        <div class="about-text glass-card">
-                            <p class="about-bio" data-animate="words">
-                                I'm a full-stack developer and UI/UX enthusiast with a passion for
-                                creating seamless digital experiences. With expertise spanning modern
-                                JavaScript frameworks, cloud architecture, and motion design, I bring
-                                ideas to life through clean code and stunning visuals.
-                            </p>
-                            <p class="about-bio" data-animate="words">
-                                My approach combines technical excellence with creative thinking —
-                                every project is an opportunity to push boundaries and deliver
-                                something extraordinary. When I'm not coding, you'll find me
-                                exploring new design trends or contributing to open-source projects.
-                            </p>
-                            <div class="about-highlights">
-                                <div class="highlight-item">
-                                    <div class="highlight-icon">🎯</div>
-                                    <span>Problem Solver</span>
-                                </div>
-                                <div class="highlight-item">
-                                    <div class="highlight-icon">🚀</div>
-                                    <span>Performance Obsessed</span>
-                                </div>
-                                <div class="highlight-item">
-                                    <div class="highlight-icon">🎨</div>
-                                    <span>Design Driven</span>
+                        <p class="about-greeting">Hey there 👋</p>
+                        <p class="about-bio" data-animate="words">
+                            I'm a full-stack developer and UI/UX enthusiast with a passion for creating seamless digital experiences. My expertise spans modern JavaScript frameworks, cloud architecture, and motion design — I bring ideas to life through clean code and stunning visuals.
+                        </p>
+                        <p class="about-bio" data-animate="words">
+                            My approach combines technical excellence with creative thinking. Every project is an opportunity to push boundaries and deliver something truly extraordinary. When I'm not coding, you'll find me exploring new design trends or contributing to open-source.
+                        </p>
+                        <div class="about-traits">
+                            <div class="trait-item">
+                                <div class="trait-icon">⚡</div>
+                                <div>
+                                    <div class="trait-title">Fast Builder</div>
+                                    <div class="trait-desc">Ship quality products quickly</div>
                                 </div>
                             </div>
+                            <div class="trait-item">
+                                <div class="trait-icon">🎨</div>
+                                <div>
+                                    <div class="trait-title">Design Driven</div>
+                                    <div class="trait-desc">UI/UX first approach</div>
+                                </div>
+                            </div>
+                            <div class="trait-item">
+                                <div class="trait-icon">🔧</div>
+                                <div>
+                                    <div class="trait-title">Problem Solver</div>
+                                    <div class="trait-desc">Turn complexity into clarity</div>
+                                </div>
+                            </div>
+                            <div class="trait-item">
+                                <div class="trait-icon">🌍</div>
+                                <div>
+                                    <div class="trait-title">Team Player</div>
+                                    <div class="trait-desc">Collaborate &amp; lead with empathy</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-actions">
+                            <a href="#contact" class="btn btn-primary">Let's Talk</a>
+                            <a href="#projects" class="btn btn-outline">View Work</a>
                         </div>
                     </div>
                 </div>
@@ -289,21 +319,19 @@
             </div>
         </section>
 
-        <!-- Projects Section (Horizontal Scroll) -->
+        <!-- Projects Section -->
         <section id="projects" class="projects-section section">
             <div class="container">
                 <div class="section-header">
                     <span class="section-tag">// Projects</span>
                     <h2 class="section-title" data-animate="scramble">Featured Work</h2>
+                    <p class="section-subtitle">A selection of projects crafted with passion and precision.</p>
                 </div>
-            </div>
-            <div class="projects-horizontal-wrapper">
-                <div class="projects-horizontal-track">
+                <div class="projects-grid">
                     <div class="project-card glass-card" data-tilt>
                         <div class="project-image">
-                            <div class="project-image-placeholder">
-                                <span>01</span>
-                            </div>
+                            <span class="project-num">01</span>
+                            <div class="project-image-placeholder" style="background: linear-gradient(135deg, #1a0533, #2d0b5e);"></div>
                         </div>
                         <div class="project-info">
                             <div class="project-tags">
@@ -312,7 +340,7 @@
                                 <span class="tag">GSAP</span>
                             </div>
                             <h3 class="project-title">Immersive 3D Experience</h3>
-                            <p class="project-desc">A WebGL-powered interactive storytelling platform with real-time 3D rendering and physics.</p>
+                            <p class="project-desc">A WebGL-powered interactive storytelling platform with real-time 3D rendering and physics simulation.</p>
                             <a href="#" class="project-link">
                                 <span>View Project</span>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
@@ -321,9 +349,8 @@
                     </div>
                     <div class="project-card glass-card" data-tilt>
                         <div class="project-image">
-                            <div class="project-image-placeholder">
-                                <span>02</span>
-                            </div>
+                            <span class="project-num">02</span>
+                            <div class="project-image-placeholder" style="background: linear-gradient(135deg, #00151a, #003d47);"></div>
                         </div>
                         <div class="project-info">
                             <div class="project-tags">
@@ -332,7 +359,7 @@
                                 <span class="tag">Prisma</span>
                             </div>
                             <h3 class="project-title">SaaS Analytics Dashboard</h3>
-                            <p class="project-desc">Real-time analytics platform with dynamic charts, custom widgets, and team collaboration.</p>
+                            <p class="project-desc">Real-time analytics platform with dynamic charts, custom widgets, and seamless team collaboration features.</p>
                             <a href="#" class="project-link">
                                 <span>View Project</span>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
@@ -341,9 +368,8 @@
                     </div>
                     <div class="project-card glass-card" data-tilt>
                         <div class="project-image">
-                            <div class="project-image-placeholder">
-                                <span>03</span>
-                            </div>
+                            <span class="project-num">03</span>
+                            <div class="project-image-placeholder" style="background: linear-gradient(135deg, #0a1a00, #1f4000);"></div>
                         </div>
                         <div class="project-info">
                             <div class="project-tags">
@@ -352,7 +378,7 @@
                                 <span class="tag">Redis</span>
                             </div>
                             <h3 class="project-title">Real-time Collaboration Tool</h3>
-                            <p class="project-desc">A multiplayer workspace enabling teams to code, design, and brainstorm simultaneously.</p>
+                            <p class="project-desc">A multiplayer workspace enabling teams to code, design, and brainstorm simultaneously in real time.</p>
                             <a href="#" class="project-link">
                                 <span>View Project</span>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
@@ -361,9 +387,8 @@
                     </div>
                     <div class="project-card glass-card" data-tilt>
                         <div class="project-image">
-                            <div class="project-image-placeholder">
-                                <span>04</span>
-                            </div>
+                            <span class="project-num">04</span>
+                            <div class="project-image-placeholder" style="background: linear-gradient(135deg, #1a1000, #3d2800);"></div>
                         </div>
                         <div class="project-info">
                             <div class="project-tags">
@@ -372,7 +397,7 @@
                                 <span class="tag">AI/ML</span>
                             </div>
                             <h3 class="project-title">AI-Powered Mobile App</h3>
-                            <p class="project-desc">Smart fitness companion with AI coaching, real-time tracking, and personalized plans.</p>
+                            <p class="project-desc">Smart fitness companion with AI coaching, real-time tracking, and fully personalized training plans.</p>
                             <a href="#" class="project-link">
                                 <span>View Project</span>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
