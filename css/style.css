@@ -817,7 +817,11 @@ ul {
 
 .avatar-frame {
     position: relative;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 220px;
+    height: 220px;
     margin-bottom: 1.5rem;
     z-index: 1;
 }
@@ -830,7 +834,6 @@ ul {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
     font-family: 'Space Grotesk', sans-serif;
     font-size: 2.25rem;
     font-weight: 700;
@@ -838,6 +841,7 @@ ul {
     position: relative;
     z-index: 1;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .avatar-photo {
