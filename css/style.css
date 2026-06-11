@@ -561,7 +561,6 @@ ul {
     font-size: 1rem;
     color: var(--accent-cyan);
     margin-bottom: 1rem;
-    opacity: 0;
     letter-spacing: 0.08em;
     text-transform: uppercase;
 }
@@ -611,7 +610,6 @@ ul {
     max-width: 580px;
     margin: 0 auto 2.5rem;
     line-height: 1.85;
-    opacity: 0;
 }
 
 .hero-cta {
@@ -620,7 +618,6 @@ ul {
     justify-content: center;
     gap: 1rem;
     margin-bottom: 3rem;
-    opacity: 0;
 }
 
 /* Buttons */
@@ -687,7 +684,6 @@ ul {
     align-items: center;
     justify-content: center;
     gap: 3rem;
-    opacity: 0;
 }
 
 .stat-item {

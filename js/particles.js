@@ -3,6 +3,9 @@
    ============================================ */
 
 window.initParticles = function () {
+    // Skip heavy particle system on mobile — saves battery and prevents OOM on low-end devices
+    if (window.innerWidth <= 768) return;
+
     const theme = document.documentElement.getAttribute('data-theme');
     const isDark = theme === 'dark';
 

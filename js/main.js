@@ -85,11 +85,15 @@ window.addEventListener('DOMContentLoaded', () => {
         window.lenis = lenis;
 
         // Drive Lenis from GSAP's ticker — single RAF, no conflicts
-        gsap.ticker.add((time) => {
-            lenis.raf(time * 1000);
+        if (typeof gsap !== 'undefined') {
+            gsap.ticker.add((time) => {
+                lenis.raf(time * 1000);
+            });
+            gsap.ticker.lagSmoothing(0);
+        }
+        lenis.on('scroll', () => {
+            if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.update();
         });
-        gsap.ticker.lagSmoothing(0);
-        lenis.on('scroll', ScrollTrigger.update);
     }
 
     // ============================================
@@ -192,6 +196,12 @@ window.addEventListener('DOMContentLoaded', () => {
     // ============================================
     function initAnimations() {
         gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
+        // Set initial hidden states in GSAP (not CSS) — elements visible by default without JS
+        gsap.set('.hero-greeting', { opacity: 0, y: 30 });
+        gsap.set('.hero-description', { opacity: 0, y: 20 });
+        gsap.set('.hero-cta', { opacity: 0, y: 20 });
+        gsap.set('.hero-stats', { opacity: 0, y: 20 });
 
         // Hero entrance animations
         const heroTl = gsap.timeline({ delay: 0.3 });

@@ -162,6 +162,28 @@
     .orb-2 { width: 250px; height: 250px; }
     .orb-3 { width: 200px; height: 200px; }
     .orb-4 { display: none; }
+
+    /* Hero mobile fixes */
+    .hero-section {
+        min-height: 100svh; /* Use small viewport height to avoid address-bar overlap */
+        min-height: 100vh;  /* Fallback for browsers without svh support */
+        padding-top: 5rem;
+        align-items: flex-start;
+        padding-bottom: 3rem;
+    }
+
+    /* Remove heavy 3D perspective transform — can glitch on mobile WebKit */
+    .hero-grid-pulse {
+        display: none;
+    }
+
+    .hero-content {
+        padding-top: 2rem;
+    }
+
+    .role-text {
+        min-width: unset;
+    }
 }
 
 /* Small Mobile — max 480px */
@@ -171,7 +193,7 @@
     }
 
     .hero-section {
-        padding-top: 4rem;
+        padding-top: 5rem;
     }
 
     .skills-bento {
@@ -213,5 +235,39 @@
 
     .skills-bento {
         grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Reduced Motion — respect user accessibility preference */
+@media (prefers-reduced-motion: reduce) {
+    /* Show all hero content immediately — skip entrance animations */
+    .hero-greeting,
+    .hero-description,
+    .hero-cta,
+    .hero-stats {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    /* Disable CSS animations */
+    .shimmer-text {
+        animation: none;
+        background-position: 0 0;
+    }
+
+    .hero-grid-pulse,
+    .orb,
+    .scroll-line {
+        animation: none;
+    }
+
+    /* Faster/no transitions */
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }
