@@ -73,23 +73,18 @@ window.addEventListener('DOMContentLoaded', () => {
     let lenis;
     if (typeof Lenis !== 'undefined') {
         lenis = new Lenis({
-            duration: 1.2,
+            duration: 0.8,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            smooth: true,
+            smoothWheel: true,
         });
 
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-
-        // Integrate Lenis with GSAP ScrollTrigger
-        lenis.on('scroll', ScrollTrigger.update);
+        // Single RAF via gsap.ticker only — a separate requestAnimationFrame
+        // loop would call lenis.raf() twice per frame, causing laggy scroll.
         gsap.ticker.add((time) => {
             lenis.raf(time * 1000);
         });
         gsap.ticker.lagSmoothing(0);
+        lenis.on('scroll', ScrollTrigger.update);
     }
 
     // ============================================
@@ -142,21 +137,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', updateActiveNav);
 
-    // ============================================
-    // NAV HIDE/SHOW ON SCROLL
-    // ============================================
-    let lastScroll = 0;
-    const navHeader = document.querySelector('.nav-header');
-
-    window.addEventListener('scroll', () => {
-        const current = window.scrollY;
-        if (current > lastScroll && current > 100) {
-            navHeader.classList.add('hidden');
-        } else {
-            navHeader.classList.remove('hidden');
-        }
-        lastScroll = current;
-    });
+    // Navbar stays fixed — no auto-hide
 
     // ============================================
     // GSAP ANIMATIONS

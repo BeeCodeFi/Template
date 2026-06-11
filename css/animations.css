@@ -74,10 +74,11 @@
     50% { transform: translateY(-20px); }
 }
 
-/* Marquee */
+/* Marquee — translateX(-50%) moves exactly one group width,
+   creating a seamless infinite loop with the duplicated group */
 @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
 }
 
 /* Timeline Node Pulse */
