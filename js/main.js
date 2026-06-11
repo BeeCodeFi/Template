@@ -93,46 +93,42 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     // ============================================
-    // FOOTER MARQUEE — JS-driven for bulletproof infinite loop
+    // FOOTER MARQUEE — timestamp-based RAF (same pattern as other templates)
+    // Speed is frame-rate independent: consistent at 60Hz, 120Hz, etc.
     // ============================================
     (function initMarquee() {
         const track = document.querySelector('.marquee-track');
         if (!track) return;
 
-        // Wait for fonts to load so text widths are accurate, then measure
-        const run = () => {
-            // track has width:max-content with two identical groups side-by-side
-            // so half the track width = one group width = the exact reset point
-            const groupWidth = track.offsetWidth / 2;
-            if (!groupWidth) return;
+        const SPEED = 60; // px/sec — frame-rate independent
+        let offset = 0;
+        let lastTime = null;
+        let paused = false;
 
-            let pos = 0;
-            const speed = 0.7; // px per frame (~42px/s at 60fps)
-            let paused = false;
-
-            // Pause on hover
+        // Pause on hover only for pointer devices (not touch)
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
             track.parentElement.addEventListener('mouseenter', () => { paused = true; });
             track.parentElement.addEventListener('mouseleave', () => { paused = false; });
-
-            function step() {
-                if (!paused) {
-                    pos -= speed;
-                    // When one full group has scrolled out of view, snap back — seamless
-                    if (pos <= -groupWidth) pos += groupWidth;
-                    track.style.transform = `translateX(${pos}px)`;
-                }
-                requestAnimationFrame(step);
-            }
-            requestAnimationFrame(step);
-        };
-
-        // document.fonts.ready ensures Google Fonts are applied before we measure
-        if (document.fonts && document.fonts.ready) {
-            document.fonts.ready.then(run);
-        } else {
-            // Fallback: two RAFs for older browsers
-            requestAnimationFrame(() => requestAnimationFrame(run));
         }
+
+        function tick(timestamp) {
+            if (!lastTime) lastTime = timestamp;
+            const delta = (timestamp - lastTime) / 1000; // seconds
+            lastTime = timestamp;
+
+            if (!paused) {
+                offset += SPEED * delta;
+                // track has two identical groups; scrollWidth / 2 = one group width
+                const halfWidth = track.scrollWidth / 2;
+                // Subtract rather than reset to 0 — avoids snap if a frame skips past boundary
+                if (offset >= halfWidth) offset -= halfWidth;
+                track.style.transform = `translateX(-${offset}px)`;
+            }
+
+            requestAnimationFrame(tick);
+        }
+
+        requestAnimationFrame(tick);
     })();
 
     // ============================================
