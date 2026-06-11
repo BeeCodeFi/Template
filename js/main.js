@@ -93,43 +93,39 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     // ============================================
-    // FOOTER MARQUEE — timestamp-based RAF (same pattern as other templates)
-    // Speed is frame-rate independent: consistent at 60Hz, 120Hz, etc.
+    // FOOTER MARQUEE — rAF driven (manufacturing-website approach)
     // ============================================
-    (function initMarquee() {
-        const track = document.querySelector('.marquee-track');
-        if (!track) return;
-
+    const marqueeTrack = document.querySelector('.marquee-track');
+    if (marqueeTrack) {
         const SPEED = 60; // px/sec — frame-rate independent
         let offset = 0;
         let lastTime = null;
-        let paused = false;
+        let marqueePaused = false;
 
-        // Pause on hover only for pointer devices (not touch)
+        // Pause only on real pointer devices (mouse hover) — touch :hover gets stuck on mobile
         if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-            track.parentElement.addEventListener('mouseenter', () => { paused = true; });
-            track.parentElement.addEventListener('mouseleave', () => { paused = false; });
-        }
-
-        function tick(timestamp) {
-            if (!lastTime) lastTime = timestamp;
-            const delta = (timestamp - lastTime) / 1000; // seconds
-            lastTime = timestamp;
-
-            if (!paused) {
-                offset += SPEED * delta;
-                // track has two identical groups; scrollWidth / 2 = one group width
-                const halfWidth = track.scrollWidth / 2;
-                // Subtract rather than reset to 0 — avoids snap if a frame skips past boundary
-                if (offset >= halfWidth) offset -= halfWidth;
-                track.style.transform = `translateX(-${offset}px)`;
+            const marqueeSection = document.querySelector('.footer-marquee');
+            if (marqueeSection) {
+                marqueeSection.addEventListener('mouseenter', () => { marqueePaused = true; });
+                marqueeSection.addEventListener('mouseleave', () => { marqueePaused = false; });
             }
-
-            requestAnimationFrame(tick);
         }
 
-        requestAnimationFrame(tick);
-    })();
+        function tickMarquee(timestamp) {
+            if (lastTime !== null && !marqueePaused) {
+                const delta = (timestamp - lastTime) / 1000; // seconds
+                offset += SPEED * delta;
+                // Reset when one full half scrolled (two identical content blocks)
+                const halfWidth = marqueeTrack.scrollWidth / 2;
+                if (offset >= halfWidth) offset -= halfWidth;
+                marqueeTrack.style.transform = `translateX(-${offset}px)`;
+            }
+            lastTime = timestamp;
+            requestAnimationFrame(tickMarquee);
+        }
+
+        requestAnimationFrame(tickMarquee);
+    }
 
     // ============================================
     // TESTIMONIALS CAROUSEL

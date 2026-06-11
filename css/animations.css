@@ -74,9 +74,13 @@
     50% { transform: translateY(-20px); }
 }
 
-/* Marquee — translateX(-50%) moves exactly one group width,
-   creating a seamless infinite loop with the duplicated group */
-/* Marquee is driven by JS (main.js initMarquee) — no CSS keyframe needed */
+/* Marquee — translateX(-50%) moves exactly one content block width,
+   creating a seamless infinite loop with the duplicated block */
+@keyframes marqueeScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+/* Animation is driven by JS (rAF) matching the manufacturing-website approach */
 
 /* Timeline Node Pulse */
 @keyframes nodePulse {
