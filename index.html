@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeHaven | Premium Real Estate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ========== PRELOADER ========== -->
+    <div id="preloader">
+        <div class="preloader-inner">
+            <div class="house-loader">
+                <div class="house-body">
+                    <div class="house-roof"></div>
+                    <div class="house-wall">
+                        <div class="house-door"></div>
+                        <div class="house-window w1"></div>
+                        <div class="house-window w2"></div>
+                    </div>
+                </div>
+                <div class="loader-glow"></div>
+            </div>
+            <p class="loader-text">Preparing Your Dream Home...</p>
+            <div class="loader-bar"><div class="loader-progress"></div></div>
+        </div>
+    </div>
+
+    <!-- ========== LIGHT SWITCH (Fixed) ========== -->
+    <div class="light-switch-container" id="lightSwitch">
+        <div class="switch-label">
+            <i class="ri-sun-line sun-icon"></i>
+            <i class="ri-moon-clear-line moon-icon"></i>
+        </div>
+        <div class="switch-plate">
+            <div class="switch-frame">
+                <div class="switch-toggle" id="switchToggle">
+                    <div class="switch-knob"></div>
+                </div>
+            </div>
+            <div class="switch-screw top"></div>
+            <div class="switch-screw bottom"></div>
+        </div>
+        <span class="switch-status">Lights Off</span>
+    </div>
+
+    <!-- ========== NAVIGATION ========== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <div class="logo-icon">
+                    <i class="ri-building-4-line"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-name">LuxeHaven</span>
+                    <span class="logo-tagline">Premium Estates</span>
+                </div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#properties" class="nav-link">Properties</a></li>
+                <li><a href="#tour" class="nav-link">3D Tour</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#testimonials" class="nav-link">Reviews</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#contact" class="nav-btn">
+                    <i class="ri-phone-line"></i>
+                    <span>Book a Tour</span>
+                </a>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero" id="hero">
+        <canvas id="heroCanvas"></canvas>
+        <div class="hero-overlay"></div>
+        <div class="hero-particles" id="heroParticles"></div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="ri-award-line"></i>
+                <span>Award-Winning Real Estate Since 2010</span>
+            </div>
+            <h1 class="hero-title">
+                <span class="title-line">Find Your</span>
+                <span class="title-line highlight">Dream Home</span>
+                <span class="title-line">In 3D</span>
+            </h1>
+            <p class="hero-subtitle">Experience luxury living through immersive 3D tours. Walk through your future home before stepping inside.</p>
+            <div class="hero-search">
+                <div class="search-box">
+                    <div class="search-field">
+                        <i class="ri-map-pin-line"></i>
+                        <input type="text" placeholder="Enter city, neighborhood, or ZIP" aria-label="Location search">
+                    </div>
+                    <div class="search-field">
+                        <i class="ri-home-4-line"></i>
+                        <select aria-label="Property type">
+                            <option>Property Type</option>
+                            <option>House</option>
+                            <option>Apartment</option>
+                            <option>Penthouse</option>
+                            <option>Villa</option>
+                            <option>Commercial</option>
+                        </select>
+                    </div>
+                    <div class="search-field">
+                        <i class="ri-money-dollar-circle-line"></i>
+                        <select aria-label="Price range">
+                            <option>Price Range</option>
+                            <option>$100K - $300K</option>
+                            <option>$300K - $500K</option>
+                            <option>$500K - $1M</option>
+                            <option>$1M - $5M</option>
+                            <option>$5M+</option>
+                        </select>
+                    </div>
+                    <button class="search-btn" aria-label="Search properties">
+                        <i class="ri-search-line"></i>
+                        <span>Search</span>
+                    </button>
+                </div>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="2500">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Properties Sold</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="1800">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Happy Families</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="15">0</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="50">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Expert Agents</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <div class="mouse">
+                <div class="mouse-wheel"></div>
+            </div>
+            <span>Scroll to Explore</span>
+        </div>
+    </section>
+
+    <!-- ========== ABOUT SECTION ========== -->
+    <section class="about section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-visual">
+                    <div class="about-image-stack">
+                        <div class="about-img primary">
+                            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&h=750&fit=crop" alt="Luxury modern home exterior" loading="lazy">
+                            <div class="img-overlay"></div>
+                        </div>
+                        <div class="about-img secondary">
+                            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=500&fit=crop" alt="Modern interior design" loading="lazy">
+                        </div>
+                        <div class="about-experience-badge">
+                            <span class="exp-number">15+</span>
+                            <span class="exp-text">Years of<br>Excellence</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <div class="section-label">
+                        <span class="label-line"></span>
+                        <span>About LuxeHaven</span>
+                    </div>
+                    <h2 class="section-title">We Build Dreams Into <span class="highlight">Reality</span></h2>
+                    <p class="about-text">At LuxeHaven, we believe that finding a home is more than a transaction — it's the beginning of a new chapter. Our immersive 3D technology lets you walk through properties from anywhere in the world, experiencing every detail before you visit in person.</p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="feature-icon"><i class="ri-3d-cude-sphere-line"></i></div>
+                            <div>
+                                <h4>3D Virtual Tours</h4>
+                                <p>Walk through properties in stunning 3D from the comfort of your home</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="feature-icon"><i class="ri-shield-check-line"></i></div>
+                            <div>
+                                <h4>Verified Listings</h4>
+                                <p>Every property is personally inspected and verified by our team</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="feature-icon"><i class="ri-hand-heart-line"></i></div>
+                            <div>
+                                <h4>Personal Concierge</h4>
+                                <p>Dedicated agents guiding you through every step of the journey</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#properties" class="btn btn-primary">
+                        <span>Explore Properties</span>
+                        <i class="ri-arrow-right-line"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PROPERTIES SECTION ========== -->
+    <section class="properties section" id="properties">
+        <div class="container">
+            <div class="section-header center">
+                <div class="section-label">
+                    <span class="label-line"></span>
+                    <span>Featured Properties</span>
+                    <span class="label-line"></span>
+                </div>
+                <h2 class="section-title">Discover Exclusive <span class="highlight">Listings</span></h2>
+                <p class="section-desc">Handpicked luxury properties with immersive 3D tours available</p>
+            </div>
+            <div class="property-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="house">Houses</button>
+                <button class="filter-btn" data-filter="apartment">Apartments</button>
+                <button class="filter-btn" data-filter="penthouse">Penthouses</button>
+                <button class="filter-btn" data-filter="villa">Villas</button>
+            </div>
+            <div class="property-grid">
+                <!-- Property Card 1 -->
+                <div class="property-card" data-category="villa" data-tilt>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&h=400&fit=crop" alt="Modern luxury villa" loading="lazy">
+                        <div class="card-badge">Featured</div>
+                        <div class="card-3d-badge"><i class="ri-3d-cude-sphere-line"></i> 3D Tour</div>
+                        <div class="card-actions">
+                            <button class="card-action" aria-label="Save property"><i class="ri-heart-line"></i></button>
+                            <button class="card-action" aria-label="Share property"><i class="ri-share-line"></i></button>
+                        </div>
+                        <div class="card-price">$2,450,000</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-location"><i class="ri-map-pin-2-line"></i> Beverly Hills, CA</div>
+                        <h3 class="card-title">Skyline Modern Villa</h3>
+                        <div class="card-features">
+                            <span><i class="ri-hotel-bed-line"></i> 5 Beds</span>
+                            <span><i class="ri-drop-line"></i> 4 Baths</span>
+                            <span><i class="ri-ruler-line"></i> 4,200 sqft</span>
+                            <span><i class="ri-car-line"></i> 3 Garage</span>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-agent">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face" alt="Agent">
+                                <span>James Miller</span>
+                            </div>
+                            <a href="#tour" class="card-tour-btn">
+                                <i class="ri-3d-cude-sphere-line"></i> View Tour
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 2 -->
+                <div class="property-card" data-category="penthouse" data-tilt>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=600&h=400&fit=crop" alt="Luxury penthouse" loading="lazy">
+                        <div class="card-badge hot">Hot Deal</div>
+                        <div class="card-3d-badge"><i class="ri-3d-cude-sphere-line"></i> 3D Tour</div>
+                        <div class="card-actions">
+                            <button class="card-action" aria-label="Save property"><i class="ri-heart-line"></i></button>
+                            <button class="card-action" aria-label="Share property"><i class="ri-share-line"></i></button>
+                        </div>
+                        <div class="card-price">$3,800,000</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-location"><i class="ri-map-pin-2-line"></i> Manhattan, NY</div>
+                        <h3 class="card-title">Panorama Sky Penthouse</h3>
+                        <div class="card-features">
+                            <span><i class="ri-hotel-bed-line"></i> 4 Beds</span>
+                            <span><i class="ri-drop-line"></i> 3 Baths</span>
+                            <span><i class="ri-ruler-line"></i> 3,800 sqft</span>
+                            <span><i class="ri-car-line"></i> 2 Garage</span>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-agent">
+                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=40&h=40&fit=crop&crop=face" alt="Agent">
+                                <span>Sarah Chen</span>
+                            </div>
+                            <a href="#tour" class="card-tour-btn">
+                                <i class="ri-3d-cude-sphere-line"></i> View Tour
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 3 -->
+                <div class="property-card" data-category="house" data-tilt>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop" alt="Modern house" loading="lazy">
+                        <div class="card-3d-badge"><i class="ri-3d-cude-sphere-line"></i> 3D Tour</div>
+                        <div class="card-actions">
+                            <button class="card-action" aria-label="Save property"><i class="ri-heart-line"></i></button>
+                            <button class="card-action" aria-label="Share property"><i class="ri-share-line"></i></button>
+                        </div>
+                        <div class="card-price">$1,250,000</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-location"><i class="ri-map-pin-2-line"></i> Austin, TX</div>
+                        <h3 class="card-title">Serenity Garden Estate</h3>
+                        <div class="card-features">
+                            <span><i class="ri-hotel-bed-line"></i> 4 Beds</span>
+                            <span><i class="ri-drop-line"></i> 3 Baths</span>
+                            <span><i class="ri-ruler-line"></i> 3,500 sqft</span>
+                            <span><i class="ri-car-line"></i> 2 Garage</span>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-agent">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face" alt="Agent">
+                                <span>David Park</span>
+                            </div>
+                            <a href="#tour" class="card-tour-btn">
+                                <i class="ri-3d-cude-sphere-line"></i> View Tour
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 4 -->
+                <div class="property-card" data-category="apartment" data-tilt>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=400&fit=crop" alt="Modern apartment" loading="lazy">
+                        <div class="card-badge new">New</div>
+                        <div class="card-3d-badge"><i class="ri-3d-cude-sphere-line"></i> 3D Tour</div>
+                        <div class="card-actions">
+                            <button class="card-action" aria-label="Save property"><i class="ri-heart-line"></i></button>
+                            <button class="card-action" aria-label="Share property"><i class="ri-share-line"></i></button>
+                        </div>
+                        <div class="card-price">$680,000</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-location"><i class="ri-map-pin-2-line"></i> San Francisco, CA</div>
+                        <h3 class="card-title">Urban Loft Residence</h3>
+                        <div class="card-features">
+                            <span><i class="ri-hotel-bed-line"></i> 2 Beds</span>
+                            <span><i class="ri-drop-line"></i> 2 Baths</span>
+                            <span><i class="ri-ruler-line"></i> 1,200 sqft</span>
+                            <span><i class="ri-car-line"></i> 1 Garage</span>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-agent">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face" alt="Agent">
+                                <span>Emma Wilson</span>
+                            </div>
+                            <a href="#tour" class="card-tour-btn">
+                                <i class="ri-3d-cude-sphere-line"></i> View Tour
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 5 -->
+                <div class="property-card" data-category="villa" data-tilt>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600&h=400&fit=crop" alt="Beachfront villa" loading="lazy">
+                        <div class="card-badge">Premium</div>
+                        <div class="card-3d-badge"><i class="ri-3d-cude-sphere-line"></i> 3D Tour</div>
+                        <div class="card-actions">
+                            <button class="card-action" aria-label="Save property"><i class="ri-heart-line"></i></button>
+                            <button class="card-action" aria-label="Share property"><i class="ri-share-line"></i></button>
+                        </div>
+                        <div class="card-price">$5,200,000</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-location"><i class="ri-map-pin-2-line"></i> Malibu, CA</div>
+                        <h3 class="card-title">Oceanfront Paradise Villa</h3>
+                        <div class="card-features">
+                            <span><i class="ri-hotel-bed-line"></i> 6 Beds</span>
+                            <span><i class="ri-drop-line"></i> 5 Baths</span>
+                            <span><i class="ri-ruler-line"></i> 5,800 sqft</span>
+                            <span><i class="ri-car-line"></i> 4 Garage</span>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-agent">
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=40&h=40&fit=crop&crop=face" alt="Agent">
+                                <span>Michael Ross</span>
+                            </div>
+                            <a href="#tour" class="card-tour-btn">
+                                <i class="ri-3d-cude-sphere-line"></i> View Tour
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Card 6 -->
+                <div class="property-card" data-category="house" data-tilt>
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1600573472556-e636c2acda9e?w=600&h=400&fit=crop" alt="Contemporary home" loading="lazy">
+                        <div class="card-3d-badge"><i class="ri-3d-cude-sphere-line"></i> 3D Tour</div>
+                        <div class="card-actions">
+                            <button class="card-action" aria-label="Save property"><i class="ri-heart-line"></i></button>
+                            <button class="card-action" aria-label="Share property"><i class="ri-share-line"></i></button>
+                        </div>
+                        <div class="card-price">$890,000</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-location"><i class="ri-map-pin-2-line"></i> Seattle, WA</div>
+                        <h3 class="card-title">Contemporary Hillside Home</h3>
+                        <div class="card-features">
+                            <span><i class="ri-hotel-bed-line"></i> 3 Beds</span>
+                            <span><i class="ri-drop-line"></i> 2 Baths</span>
+                            <span><i class="ri-ruler-line"></i> 2,400 sqft</span>
+                            <span><i class="ri-car-line"></i> 2 Garage</span>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-agent">
+                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=40&h=40&fit=crop&crop=face" alt="Agent">
+                                <span>Lisa Zhang</span>
+                            </div>
+                            <a href="#tour" class="card-tour-btn">
+                                <i class="ri-3d-cude-sphere-line"></i> View Tour
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 3D HOUSE TOUR SECTION ========== -->
+    <section class="tour section" id="tour">
+        <div class="container">
+            <div class="section-header center">
+                <div class="section-label">
+                    <span class="label-line"></span>
+                    <span>Virtual Experience</span>
+                    <span class="label-line"></span>
+                </div>
+                <h2 class="section-title">Interactive 3D <span class="highlight">House Tour</span></h2>
+                <p class="section-desc">Walk through our showcase property room by room. Click on rooms to explore — toggle the light switch to see it day &amp; night.</p>
+            </div>
+            <div class="tour-wrapper">
+                <div class="tour-canvas-container">
+                    <canvas id="tourCanvas"></canvas>
+                    <div class="tour-controls">
+                        <button class="tour-control-btn" id="tourRotateLeft" aria-label="Rotate left"><i class="ri-arrow-left-s-line"></i></button>
+                        <button class="tour-control-btn" id="tourReset" aria-label="Reset view"><i class="ri-refresh-line"></i></button>
+                        <button class="tour-control-btn" id="tourRotateRight" aria-label="Rotate right"><i class="ri-arrow-right-s-line"></i></button>
+                        <button class="tour-control-btn" id="tourZoomIn" aria-label="Zoom in"><i class="ri-zoom-in-line"></i></button>
+                        <button class="tour-control-btn" id="tourZoomOut" aria-label="Zoom out"><i class="ri-zoom-out-line"></i></button>
+                    </div>
+                    <div class="tour-hint">
+                        <i class="ri-drag-move-line"></i>
+                        <span>Click & drag to rotate • Scroll to zoom</span>
+                    </div>
+                </div>
+                <div class="tour-sidebar">
+                    <h3 class="tour-sidebar-title">Explore Rooms</h3>
+                    <div class="room-nav">
+                        <button class="room-btn active" data-room="living">
+                            <div class="room-icon"><i class="ri-sofa-line"></i></div>
+                            <div class="room-info">
+                                <span class="room-name">Living Room</span>
+                                <span class="room-size">450 sqft • Open Plan</span>
+                            </div>
+                        </button>
+                        <button class="room-btn" data-room="kitchen">
+                            <div class="room-icon"><i class="ri-restaurant-line"></i></div>
+                            <div class="room-info">
+                                <span class="room-name">Kitchen</span>
+                                <span class="room-size">320 sqft • Modern</span>
+                            </div>
+                        </button>
+                        <button class="room-btn" data-room="bedroom">
+                            <div class="room-icon"><i class="ri-hotel-bed-line"></i></div>
+                            <div class="room-info">
+                                <span class="room-name">Master Bedroom</span>
+                                <span class="room-size">380 sqft • Suite</span>
+                            </div>
+                        </button>
+                        <button class="room-btn" data-room="bathroom">
+                            <div class="room-icon"><i class="ri-drop-line"></i></div>
+                            <div class="room-info">
+                                <span class="room-name">Bathroom</span>
+                                <span class="room-size">200 sqft • Spa</span>
+                            </div>
+                        </button>
+                        <button class="room-btn" data-room="exterior">
+                            <div class="room-icon"><i class="ri-home-smile-line"></i></div>
+                            <div class="room-info">
+                                <span class="room-name">Exterior View</span>
+                                <span class="room-size">Full House • 360°</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="tour-features">
+                        <h4>Property Highlights</h4>
+                        <ul>
+                            <li><i class="ri-check-double-line"></i> Smart Home Technology</li>
+                            <li><i class="ri-check-double-line"></i> Floor-to-Ceiling Windows</li>
+                            <li><i class="ri-check-double-line"></i> Italian Marble Flooring</li>
+                            <li><i class="ri-check-double-line"></i> Infinity Pool & Garden</li>
+                            <li><i class="ri-check-double-line"></i> Home Theater System</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SERVICES SECTION ========== -->
+    <section class="services section" id="services">
+        <div class="container">
+            <div class="section-header center">
+                <div class="section-label">
+                    <span class="label-line"></span>
+                    <span>What We Offer</span>
+                    <span class="label-line"></span>
+                </div>
+                <h2 class="section-title">Our Premium <span class="highlight">Services</span></h2>
+                <p class="section-desc">From virtual tours to closing day — we handle every detail with precision and care</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" data-tilt>
+                    <div class="service-icon-wrap">
+                        <div class="service-icon"><i class="ri-3d-cude-sphere-line"></i></div>
+                        <div class="service-glow"></div>
+                    </div>
+                    <h3>3D Virtual Tours</h3>
+                    <p>Immersive walkthroughs of every property with photorealistic 3D rendering and interactive floor plans.</p>
+                    <a href="#tour" class="service-link">Experience Now <i class="ri-arrow-right-up-line"></i></a>
+                </div>
+                <div class="service-card" data-tilt>
+                    <div class="service-icon-wrap">
+                        <div class="service-icon"><i class="ri-search-eye-line"></i></div>
+                        <div class="service-glow"></div>
+                    </div>
+                    <h3>Property Valuation</h3>
+                    <p>AI-powered market analysis and expert appraisals to ensure you get the best value for your investment.</p>
+                    <a href="#contact" class="service-link">Get Estimate <i class="ri-arrow-right-up-line"></i></a>
+                </div>
+                <div class="service-card" data-tilt>
+                    <div class="service-icon-wrap">
+                        <div class="service-icon"><i class="ri-key-2-line"></i></div>
+                        <div class="service-glow"></div>
+                    </div>
+                    <h3>Buy & Sell</h3>
+                    <p>End-to-end transaction support from listing to closing with negotiation expertise and legal guidance.</p>
+                    <a href="#contact" class="service-link">Learn More <i class="ri-arrow-right-up-line"></i></a>
+                </div>
+                <div class="service-card" data-tilt>
+                    <div class="service-icon-wrap">
+                        <div class="service-icon"><i class="ri-community-line"></i></div>
+                        <div class="service-glow"></div>
+                    </div>
+                    <h3>Property Management</h3>
+                    <p>Comprehensive management services including tenant screening, maintenance, and financial reporting.</p>
+                    <a href="#contact" class="service-link">Learn More <i class="ri-arrow-right-up-line"></i></a>
+                </div>
+                <div class="service-card" data-tilt>
+                    <div class="service-icon-wrap">
+                        <div class="service-icon"><i class="ri-funds-line"></i></div>
+                        <div class="service-glow"></div>
+                    </div>
+                    <h3>Investment Advisory</h3>
+                    <p>Strategic real estate investment guidance backed by market data, trend analysis, and portfolio optimization.</p>
+                    <a href="#contact" class="service-link">Consult Now <i class="ri-arrow-right-up-line"></i></a>
+                </div>
+                <div class="service-card" data-tilt>
+                    <div class="service-icon-wrap">
+                        <div class="service-icon"><i class="ri-home-gear-line"></i></div>
+                        <div class="service-glow"></div>
+                    </div>
+                    <h3>Interior Design</h3>
+                    <p>Complimentary interior design consultations with our partner designers to visualize your dream space.</p>
+                    <a href="#contact" class="service-link">Get Started <i class="ri-arrow-right-up-line"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TESTIMONIALS SECTION ========== -->
+    <section class="testimonials section" id="testimonials">
+        <div class="container">
+            <div class="section-header center">
+                <div class="section-label">
+                    <span class="label-line"></span>
+                    <span>Client Stories</span>
+                    <span class="label-line"></span>
+                </div>
+                <h2 class="section-title">What Our Clients <span class="highlight">Say</span></h2>
+            </div>
+            <div class="testimonial-carousel">
+                <div class="testimonial-track" id="testimonialTrack">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                        </div>
+                        <p class="testimonial-text">"The 3D tour was a game-changer. We found our dream home in Manhattan without even flying to New York. LuxeHaven made the entire process seamless and stress-free."</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=60&h=60&fit=crop&crop=face" alt="Robert & Maria" loading="lazy">
+                            <div>
+                                <strong>Robert & Maria Thompson</strong>
+                                <span>Purchased Penthouse, NYC</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                        </div>
+                        <p class="testimonial-text">"I've worked with many real estate firms, but LuxeHaven's technology and personal touch are unmatched. The virtual staging helped me sell my property 40% faster."</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=60&h=60&fit=crop&crop=face" alt="Jennifer" loading="lazy">
+                            <div>
+                                <strong>Jennifer Nakamura</strong>
+                                <span>Sold Estate, Beverly Hills</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-half-fill"></i>
+                        </div>
+                        <p class="testimonial-text">"From the first 3D walkthrough to handing us the keys, the LuxeHaven team was exceptional. Our agent David understood exactly what we needed and delivered beyond expectations."</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face" alt="Marcus" loading="lazy">
+                            <div>
+                                <strong>Marcus & Aisha Williams</strong>
+                                <span>Purchased Villa, Malibu</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-nav">
+                    <button class="test-nav-btn" id="testPrev" aria-label="Previous testimonial"><i class="ri-arrow-left-line"></i></button>
+                    <div class="test-dots" id="testDots">
+                        <span class="test-dot active"></span>
+                        <span class="test-dot"></span>
+                        <span class="test-dot"></span>
+                    </div>
+                    <button class="test-nav-btn" id="testNext" aria-label="Next testimonial"><i class="ri-arrow-right-line"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CTA SECTION ========== -->
+    <section class="cta section">
+        <div class="cta-bg-scene">
+            <div class="cta-floating-house">
+                <div class="cta-house-shape"></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Find Your <span class="highlight">Dream Home?</span></h2>
+                <p>Schedule a free consultation with our expert agents and experience properties in immersive 3D.</p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary btn-lg">
+                        <i class="ri-calendar-check-line"></i>
+                        <span>Schedule a Tour</span>
+                    </a>
+                    <a href="tel:+18005550199" class="btn btn-outline btn-lg">
+                        <i class="ri-phone-line"></i>
+                        <span>Call Us Now</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CONTACT SECTION ========== -->
+    <section class="contact section" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="section-label">
+                        <span class="label-line"></span>
+                        <span>Get In Touch</span>
+                    </div>
+                    <h2 class="section-title">Let's Start Your <span class="highlight">Journey</span></h2>
+                    <p>Have questions or ready to schedule a viewing? Our team of experts is here to help you every step of the way.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="ri-map-pin-2-fill"></i></div>
+                            <div>
+                                <h4>Visit Our Office</h4>
+                                <p>1200 Wilshire Blvd, Suite 800<br>Los Angeles, CA 90017</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="ri-phone-fill"></i></div>
+                            <div>
+                                <h4>Call Us</h4>
+                                <p>+1 (800) 555-0199<br>Mon-Sat, 9AM - 7PM</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon"><i class="ri-mail-fill"></i></div>
+                            <div>
+                                <h4>Email Us</h4>
+                                <p>hello@luxehaven.com<br>tours@luxehaven.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-socials">
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="ri-instagram-fill"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="ri-twitter-x-fill"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="ri-linkedin-fill"></i></a>
+                        <a href="#" class="social-link" aria-label="YouTube"><i class="ri-youtube-fill"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form-wrap">
+                    <form class="contact-form" id="contactForm" novalidate>
+                        <h3>Book a Free Consultation</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" placeholder="John" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" placeholder="+1 (555) 000-0000">
+                        </div>
+                        <div class="form-group">
+                            <label for="interest">I'm Interested In</label>
+                            <select id="interest">
+                                <option value="">Select an option</option>
+                                <option value="buying">Buying a Property</option>
+                                <option value="selling">Selling a Property</option>
+                                <option value="renting">Renting a Property</option>
+                                <option value="investing">Investment Opportunities</option>
+                                <option value="3dtour">3D Tour Demo</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="4" placeholder="Tell us about your dream home..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <span>Send Message</span>
+                            <i class="ri-send-plane-fill"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <a href="#" class="footer-logo">
+                        <div class="logo-icon"><i class="ri-building-4-line"></i></div>
+                        <div class="logo-text">
+                            <span class="logo-name">LuxeHaven</span>
+                            <span class="logo-tagline">Premium Estates</span>
+                        </div>
+                    </a>
+                    <p>Redefining real estate with immersive 3D technology. Experience luxury properties like never before.</p>
+                    <div class="footer-socials">
+                        <a href="#" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="ri-instagram-fill"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="ri-twitter-x-fill"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="ri-linkedin-fill"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#properties">Properties</a></li>
+                        <li><a href="#tour">3D Tours</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Property Types</h4>
+                    <ul>
+                        <li><a href="#">Luxury Villas</a></li>
+                        <li><a href="#">Modern Apartments</a></li>
+                        <li><a href="#">Sky Penthouses</a></li>
+                        <li><a href="#">Family Homes</a></li>
+                        <li><a href="#">Commercial Spaces</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Stay Updated</h4>
+                    <p>Subscribe for exclusive listings and market insights.</p>
+                    <form class="newsletter-form" onsubmit="return false;">
+                        <input type="email" placeholder="Enter your email" aria-label="Newsletter email">
+                        <button type="submit" aria-label="Subscribe"><i class="ri-send-plane-fill"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 LuxeHaven Real Estate. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== SCRIPTS ========== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
