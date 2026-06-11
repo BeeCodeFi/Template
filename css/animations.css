@@ -30,10 +30,23 @@
     75% { transform: translate(10px, 40px) scale(1.03) rotate(3deg); }
 }
 
-/* Shimmer Text Animation */
+/* Shimmer Text Animation (legacy — kept for reference) */
 @keyframes shimmer {
     0% { background-position: 0% 50%; }
     100% { background-position: 300% 50%; }
+}
+
+/* Hero Name Color Shimmer — animates color directly, no background-clip needed */
+@keyframes heroNameShimmer {
+    0%, 100% { color: #fff; text-shadow: 0 0 40px rgba(123, 47, 255, 0.6); }
+    33%       { color: #c084fc; text-shadow: 0 0 40px rgba(0, 245, 255, 0.4); }
+    66%       { color: #67e8f9; text-shadow: 0 0 40px rgba(0, 245, 255, 0.6); }
+}
+
+@keyframes heroNameShimmerLight {
+    0%, 100% { color: #1a0a3d; text-shadow: 0 0 30px rgba(107, 31, 239, 0.3); }
+    33%       { color: #6B1FEF; text-shadow: 0 0 30px rgba(107, 31, 239, 0.4); }
+    66%       { color: #00C8D4; text-shadow: 0 0 30px rgba(0, 200, 212, 0.4); }
 }
 
 /* Grid Pulse Animation */

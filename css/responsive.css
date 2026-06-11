@@ -100,6 +100,11 @@
         gap: 1.5rem;
     }
 
+    /* Hide scroll indicator on mobile — overlaps hero stats */
+    .scroll-indicator {
+        display: none;
+    }
+
     .skills-bento {
         grid-template-columns: 1fr 1fr;
         gap: 1rem;
