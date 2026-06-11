@@ -573,12 +573,10 @@ ul {
     margin-bottom: 1.25rem;
     letter-spacing: -0.02em;
     color: #fff;
-    animation: heroNameShimmer 4s ease-in-out infinite;
 }
 
 [data-theme="light"] .hero-name {
     color: #1a0a3d;
-    animation: heroNameShimmerLight 4s ease-in-out infinite;
 }
 
 .hero-role {

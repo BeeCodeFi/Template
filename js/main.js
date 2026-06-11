@@ -195,24 +195,36 @@ window.addEventListener('DOMContentLoaded', () => {
     // GSAP ANIMATIONS
     // ============================================
     function initAnimations() {
-        gsap.registerPlugin(ScrollTrigger, TextPlugin);
+        if (typeof gsap === 'undefined') {
+            // GSAP failed to load — make everything visible immediately
+            document.querySelectorAll('.hero-greeting, .hero-name, .hero-role, .hero-description, .hero-cta, .hero-stats').forEach(el => {
+                el.style.opacity = '1';
+                el.style.transform = 'none';
+            });
+            return;
+        }
+
+        if (typeof ScrollTrigger !== 'undefined') gsap.registerPlugin(ScrollTrigger);
+        if (typeof TextPlugin !== 'undefined') gsap.registerPlugin(TextPlugin);
 
         // Set initial hidden states in GSAP (not CSS) — elements visible by default without JS
         gsap.set('.hero-greeting', { opacity: 0, y: 30 });
+        gsap.set('.hero-name',     { opacity: 0, y: 40 });
+        gsap.set('.hero-role',     { opacity: 0, y: 30 });
         gsap.set('.hero-description', { opacity: 0, y: 20 });
-        gsap.set('.hero-cta', { opacity: 0, y: 20 });
-        gsap.set('.hero-stats', { opacity: 0, y: 20 });
+        gsap.set('.hero-cta',     { opacity: 0, y: 20 });
+        gsap.set('.hero-stats',   { opacity: 0, y: 20 });
 
         // Hero entrance animations
         const heroTl = gsap.timeline({ delay: 0.3 });
 
         heroTl
-            .to('.hero-greeting', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
-            .from('.hero-name', { opacity: 0, y: 40, duration: 0.8, ease: 'power3.out' }, '-=0.4')
-            .from('.hero-role', { opacity: 0, y: 30, duration: 0.6, ease: 'power3.out' }, '-=0.4')
-            .to('.hero-description', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.3')
-            .to('.hero-cta', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.3')
-            .to('.hero-stats', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.3');
+            .to('.hero-greeting',    { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', clearProps: 'transform' })
+            .to('.hero-name',        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', clearProps: 'all' }, '-=0.4')
+            .to('.hero-role',        { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', clearProps: 'transform' }, '-=0.4')
+            .to('.hero-description', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', clearProps: 'transform' }, '-=0.3')
+            .to('.hero-cta',         { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', clearProps: 'transform' }, '-=0.3')
+            .to('.hero-stats',       { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', clearProps: 'transform' }, '-=0.3');
 
         // Role text rotation
         const roles = ['digital experiences', 'web applications', 'interactive UIs', 'creative solutions', 'scalable systems'];
