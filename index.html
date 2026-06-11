@@ -82,9 +82,40 @@
 
     <!-- ========== HERO SECTION ========== -->
     <section class="hero" id="hero">
-        <canvas id="heroCanvas"></canvas>
+        <!-- Real Photo Background -->
+        <div class="hero-photo-bg">
+            <img id="heroBgImage"
+                 src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80"
+                 alt="Luxury modern estate" loading="eager">
+        </div>
         <div class="hero-overlay"></div>
-        <div class="hero-particles" id="heroParticles"></div>
+        <!-- Floating Property Preview Cards -->
+        <div class="floating-props" aria-hidden="true">
+            <div class="float-card fc1">
+                <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=280&h=145&q=70" alt="">
+                <div class="fc-info">
+                    <span class="fc-price">$5.2M</span>
+                    <span class="fc-name">Oceanfront Villa</span>
+                    <span class="fc-meta"><i class="ri-map-pin-line"></i> Malibu, CA</span>
+                </div>
+            </div>
+            <div class="float-card fc2">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=280&h=145&q=70" alt="">
+                <div class="fc-info">
+                    <span class="fc-price">$1.25M</span>
+                    <span class="fc-name">Garden Estate</span>
+                    <span class="fc-meta"><i class="ri-map-pin-line"></i> Austin, TX</span>
+                </div>
+            </div>
+            <div class="float-card fc3">
+                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=280&h=145&q=70" alt="">
+                <div class="fc-info">
+                    <span class="fc-price">$3.8M</span>
+                    <span class="fc-name">Sky Penthouse</span>
+                    <span class="fc-meta"><i class="ri-map-pin-line"></i> Manhattan, NY</span>
+                </div>
+            </div>
+        </div>
         <div class="hero-content">
             <div class="hero-badge">
                 <i class="ri-award-line"></i>
@@ -450,18 +481,104 @@
                 <p class="section-desc">Walk through our showcase property room by room. Click on rooms to explore — toggle the light switch to see it day &amp; night.</p>
             </div>
             <div class="tour-wrapper">
-                <div class="tour-canvas-container">
-                    <canvas id="tourCanvas"></canvas>
+                <div class="tour-viewport" id="tourViewport">
+
+                    <!-- LIVING ROOM -->
+                    <div class="room-view active" data-room="living">
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1400&q=80"
+                             alt="Living Room" class="room-photo" draggable="false" loading="lazy">
+                        <div class="room-overlay">
+                            <div class="room-label"><i class="ri-sofa-line"></i> Living Room</div>
+                            <div class="room-hotspot" style="left:28%;top:60%">
+                                <div class="hotspot-dot"><div class="hotspot-ring"></div></div>
+                                <span>Luxury Sofa Set</span>
+                            </div>
+                            <div class="room-hotspot" style="left:74%;top:32%">
+                                <div class="hotspot-dot"><div class="hotspot-ring"></div></div>
+                                <span>Floor-to-Ceiling Windows</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KITCHEN -->
+                    <div class="room-view" data-room="kitchen">
+                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1400&q=80"
+                             alt="Kitchen" class="room-photo" draggable="false" loading="lazy">
+                        <div class="room-overlay">
+                            <div class="room-label"><i class="ri-restaurant-line"></i> Modern Kitchen</div>
+                            <div class="room-hotspot" style="left:52%;top:63%">
+                                <div class="hotspot-dot"><div class="hotspot-ring"></div></div>
+                                <span>Marble Island</span>
+                            </div>
+                            <div class="room-hotspot" style="left:22%;top:40%">
+                                <div class="hotspot-dot"><div class="hotspot-ring"></div></div>
+                                <span>Built-in Appliances</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MASTER BEDROOM -->
+                    <div class="room-view" data-room="bedroom">
+                        <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=1400&q=80"
+                             alt="Master Bedroom" class="room-photo" draggable="false" loading="lazy">
+                        <div class="room-overlay">
+                            <div class="room-label"><i class="ri-hotel-bed-line"></i> Master Bedroom</div>
+                            <div class="room-hotspot" style="left:50%;top:57%">
+                                <div class="hotspot-dot"><div class="hotspot-ring"></div></div>
+                                <span>King Suite Bed</span>
+                            </div>
+                            <div class="room-hotspot" style="left:82%;top:43%">
+                                <div class="hotspot-dot"><div class="hotspot-ring"></div></div>
+                                <span>Walk-in Wardrobe</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SPA BATHROOM -->
+                    <div class="room-view" data-room="bathroom">
+                        <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1400&q=80"
+                             alt="Spa Bathroom" class="room-photo" draggable="false" loading="lazy">
+                        <div class="room-overlay">
+                            <div class="room-label"><i class="ri-drop-line"></i> Spa Bathroom</div>
+                            <div class="room-hotspot" style="left:72%;top:65%">
+                                <div class="hotspot-dot"><div class="hotspot-ring"></div></div>
+                                <span>Freestanding Bathtub</span>
+                            </div>
+                            <div class="room-hotspot" style="left:28%;top:50%">
+                                <div class="hotspot-dot"><div class="hotspot-ring"></div></div>
+                                <span>Double Vanity</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EXTERIOR -->
+                    <div class="room-view" data-room="exterior">
+                        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1400&q=80"
+                             alt="Property Exterior" class="room-photo" draggable="false" loading="lazy">
+                        <div class="room-overlay">
+                            <div class="room-label"><i class="ri-home-smile-line"></i> Exterior &middot; Full View</div>
+                            <div class="room-hotspot" style="left:63%;top:73%">
+                                <div class="hotspot-dot"><div class="hotspot-ring"></div></div>
+                                <span>Infinity Pool</span>
+                            </div>
+                            <div class="room-hotspot" style="left:38%;top:38%">
+                                <div class="hotspot-dot"><div class="hotspot-ring"></div></div>
+                                <span>Modern Architecture</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
                     <div class="tour-controls">
-                        <button class="tour-control-btn" id="tourRotateLeft" aria-label="Rotate left"><i class="ri-arrow-left-s-line"></i></button>
-                        <button class="tour-control-btn" id="tourReset" aria-label="Reset view"><i class="ri-refresh-line"></i></button>
-                        <button class="tour-control-btn" id="tourRotateRight" aria-label="Rotate right"><i class="ri-arrow-right-s-line"></i></button>
+                        <button class="tour-control-btn" id="tourRotateLeft" aria-label="Previous room"><i class="ri-arrow-left-s-line"></i></button>
+                        <button class="tour-control-btn" id="tourReset" aria-label="Exterior view"><i class="ri-home-smile-line"></i></button>
+                        <button class="tour-control-btn" id="tourRotateRight" aria-label="Next room"><i class="ri-arrow-right-s-line"></i></button>
                         <button class="tour-control-btn" id="tourZoomIn" aria-label="Zoom in"><i class="ri-zoom-in-line"></i></button>
                         <button class="tour-control-btn" id="tourZoomOut" aria-label="Zoom out"><i class="ri-zoom-out-line"></i></button>
                     </div>
                     <div class="tour-hint">
-                        <i class="ri-drag-move-line"></i>
-                        <span>Click & drag to rotate • Scroll to zoom</span>
+                        <i class="ri-cursor-line"></i>
+                        <span>Move mouse for 3D depth &bull; Click rooms to explore</span>
                     </div>
                 </div>
                 <div class="tour-sidebar">
@@ -829,9 +946,6 @@
     </footer>
 
     <!-- ========== SCRIPTS ========== -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

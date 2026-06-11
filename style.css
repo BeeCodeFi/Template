@@ -629,12 +629,21 @@ ul { list-style: none; }
     background: var(--hero-gradient);
 }
 
-#heroCanvas {
+/* Real Photo Background */
+.hero-photo-bg {
     position: absolute;
     inset: 0;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.hero-photo-bg img {
     width: 100%;
     height: 100%;
-    z-index: 1;
+    object-fit: cover;
+    transform: scale(1.1);
+    transform-origin: center center;
+    will-change: transform;
 }
 
 .hero-overlay {
@@ -659,12 +668,99 @@ ul { list-style: none; }
     );
 }
 
-.hero-particles {
+/* Floating Property Cards */
+.floating-props {
     position: absolute;
     inset: 0;
-    z-index: 2;
+    z-index: 3;
     pointer-events: none;
 }
+
+.float-card {
+    position: absolute;
+    width: 230px;
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    pointer-events: all;
+    box-shadow: var(--shadow-lg);
+    cursor: pointer;
+    transition: box-shadow var(--transition), transform var(--transition);
+}
+
+[data-theme="light"] .float-card {
+    border-color: rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.float-card:hover {
+    box-shadow: var(--shadow-lg), 0 0 30px var(--accent-glow);
+    transform: scale(1.04) translateY(-4px) !important;
+}
+
+.float-card.fc1 {
+    top: 20%;
+    right: 5%;
+    animation: floatCard 5s ease-in-out infinite;
+}
+
+.float-card.fc2 {
+    top: 58%;
+    right: 10%;
+    animation: floatCard 5s ease-in-out infinite;
+    animation-delay: 1.8s;
+}
+
+.float-card.fc3 {
+    top: 28%;
+    left: 2.5%;
+    animation: floatCard 5s ease-in-out infinite;
+    animation-delay: 0.9s;
+}
+
+@keyframes floatCard {
+    0%, 100% { transform: translateY(0px) rotate(-1.5deg); }
+    50% { transform: translateY(-16px) rotate(1.5deg); }
+}
+
+.float-card img {
+    width: 100%;
+    height: 115px;
+    object-fit: cover;
+    display: block;
+}
+
+.fc-info { padding: 10px 14px 12px; }
+
+.fc-price {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.2;
+}
+
+.fc-name {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 3px 0;
+}
+
+.fc-meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.fc-meta i { color: var(--accent); font-size: 0.78rem; }
 
 .hero-content {
     position: relative;
@@ -1352,23 +1448,140 @@ ul { list-style: none; }
     align-items: start;
 }
 
-.tour-canvas-container {
+.tour-viewport {
     position: relative;
-    background: var(--bg-secondary);
+    background: #0a0a14;
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     overflow: hidden;
     aspect-ratio: 16 / 10;
+    perspective: 1200px;
+    perspective-origin: center center;
+    cursor: crosshair;
 }
 
-#tourCanvas {
+/* Room Views */
+.room-view {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.75s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.room-view.active {
+    opacity: 1;
+    pointer-events: all;
+    z-index: 2;
+}
+
+.room-photo {
     width: 100%;
     height: 100%;
+    object-fit: cover;
     display: block;
-    cursor: grab;
+    transform: scale(1.06);
+    transform-origin: center center;
+    will-change: transform;
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
 }
 
-#tourCanvas:active { cursor: grabbing; }
+/* Room Overlay Gradient */
+.room-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 40%,
+        rgba(0, 0, 0, 0.55) 100%
+    );
+    pointer-events: none;
+}
+
+/* Room Label */
+.room-label {
+    position: absolute;
+    bottom: 74px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    pointer-events: all;
+    z-index: 5;
+}
+
+/* Hotspots */
+.room-hotspot {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    z-index: 6;
+    pointer-events: all;
+    cursor: pointer;
+}
+
+.hotspot-dot {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.hotspot-dot::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4), 0 0 10px rgba(255,255,255,0.3);
+}
+
+.hotspot-ring {
+    position: absolute;
+    inset: 0;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: hotspotPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes hotspotPulse {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.9); opacity: 0; }
+}
+
+.room-hotspot > span {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    background: rgba(0, 0, 0, 0.82);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 50px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.room-hotspot:hover > span { opacity: 1; }
 
 .tour-controls {
     position: absolute;
@@ -2159,6 +2372,9 @@ ul { list-style: none; }
     .menu-toggle { display: flex; }
     .nav-btn span { display: none; }
 
+    /* Hide side float cards, keep one */
+    .float-card.fc3 { display: none; }
+
     .nav-links.active {
         display: flex;
         flex-direction: column;
@@ -2240,6 +2456,9 @@ ul { list-style: none; }
     }
 
     .stat-divider { display: none; }
+
+    /* Hide floating cards on small screens */
+    .floating-props { display: none; }
 
     .stat-item { flex: 0 0 calc(50% - 10px); }
 
