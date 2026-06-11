@@ -837,6 +837,20 @@ ul {
     color: #fff;
     position: relative;
     z-index: 1;
+    overflow: hidden;
+}
+
+.avatar-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.about-avatar-card:hover .avatar-photo {
+    transform: scale(1.05);
 }
 
 .avatar-ring {
@@ -1017,6 +1031,19 @@ ul {
     color: var(--accent-violet);
 }
 
+.skill-icon img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+.skill-card:hover .skill-icon img {
+    transform: scale(1.2) rotate(5deg);
+}
+
 .skill-name {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 1.05rem;
@@ -1089,6 +1116,18 @@ ul {
     width: 100%;
     height: 100%;
     transition: transform 0.5s ease;
+}
+
+.project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-img {
+    transform: scale(1.06);
 }
 
 .project-card:hover .project-image-placeholder {
