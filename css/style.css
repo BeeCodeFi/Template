@@ -67,9 +67,11 @@
 }
 
 html {
-    scroll-behavior: smooth;
+    /* scroll-behavior: smooth is intentionally removed — Lenis handles smooth
+       scroll. Having both active causes severe jamming/fighting. */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overscroll-behavior: none;
 }
 
 body {
@@ -78,6 +80,7 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
+    overscroll-behavior: none;
     transition: background-color 0.5s ease, color 0.5s ease;
     cursor: none;
 }

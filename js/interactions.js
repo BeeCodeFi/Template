@@ -140,7 +140,7 @@
     }
 
     // ============================================
-    // SMOOTH ANCHOR SCROLLING
+    // SMOOTH ANCHOR SCROLLING (via Lenis — never native scrollIntoView)
     // ============================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
@@ -149,7 +149,12 @@
             const target = document.querySelector(targetId);
             if (target) {
                 e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (window.lenis) {
+                    window.lenis.scrollTo(target, { offset: -80, duration: 1.2 });
+                } else {
+                    // Fallback only if Lenis failed to load
+                    target.scrollIntoView({ block: 'start' });
+                }
             }
         });
     });
