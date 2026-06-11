@@ -1,0 +1,209 @@
+/* ============================================
+   ANIMATIONS.CSS — All Keyframe Definitions
+   ============================================ */
+
+/* Orb Floating Animations */
+@keyframes orbFloat1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(-30px, 40px) scale(1.05); }
+    50% { transform: translate(20px, -30px) scale(0.95); }
+    75% { transform: translate(-20px, -20px) scale(1.02); }
+}
+
+@keyframes orbFloat2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(40px, -30px) scale(1.03); }
+    50% { transform: translate(-20px, 40px) scale(0.97); }
+    75% { transform: translate(30px, 20px) scale(1.05); }
+}
+
+@keyframes orbFloat3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, 30px) scale(1.04); }
+    66% { transform: translate(-40px, -20px) scale(0.96); }
+}
+
+@keyframes orbFloat4 {
+    0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    25% { transform: translate(-20px, 30px) scale(1.06) rotate(5deg); }
+    50% { transform: translate(30px, -20px) scale(0.94) rotate(-5deg); }
+    75% { transform: translate(10px, 40px) scale(1.03) rotate(3deg); }
+}
+
+/* Shimmer Text Animation */
+@keyframes shimmer {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+}
+
+/* Grid Pulse Animation */
+@keyframes gridPulse {
+    0%, 100% { opacity: 0.3; transform: rotateX(60deg) translateY(-50%) scale(1); }
+    50% { opacity: 0.6; transform: rotateX(60deg) translateY(-50%) scale(1.05); }
+}
+
+/* Scroll Line */
+@keyframes scrollLine {
+    0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
+    50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; opacity: 1; }
+}
+
+/* Logo Dot Pulse */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.7; }
+}
+
+/* Border Rotate (About Image) */
+@keyframes borderRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Geometric Shape Float + Rotate */
+@keyframes floatRotate {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(180deg); }
+    100% { transform: translateY(0) rotate(360deg); }
+}
+
+@keyframes floatBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Marquee */
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Timeline Node Pulse */
+@keyframes nodePulse {
+    0%, 100% { box-shadow: 0 0 0 3px var(--accent-violet), 0 0 0 6px transparent; }
+    50% { box-shadow: 0 0 0 3px var(--accent-violet), 0 0 0 12px rgba(var(--accent-violet-rgb), 0.2); }
+}
+
+/* Fade In Up */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade In */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Scale In */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Slide In Left */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide In Right */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Glow Pulse */
+@keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(var(--accent-violet-rgb), 0.3); }
+    50% { box-shadow: 0 0 40px rgba(var(--accent-violet-rgb), 0.6); }
+}
+
+/* Noise Animation */
+@keyframes noiseShift {
+    0% { transform: translate(0, 0); }
+    10% { transform: translate(-5%, -5%); }
+    20% { transform: translate(-10%, 5%); }
+    30% { transform: translate(5%, -10%); }
+    40% { transform: translate(-5%, 15%); }
+    50% { transform: translate(-10%, 5%); }
+    60% { transform: translate(15%, 0); }
+    70% { transform: translate(0, 10%); }
+    80% { transform: translate(-15%, 0); }
+    90% { transform: translate(10%, 5%); }
+    100% { transform: translate(5%, 0); }
+}
+
+/* Typewriter Blink */
+@keyframes blink {
+    0%, 50% { border-color: var(--accent-cyan); }
+    51%, 100% { border-color: transparent; }
+}
+
+/* Skill Icon Bounce */
+@keyframes iconBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* Card Shine Effect */
+@keyframes cardShine {
+    0% { left: -100%; }
+    50%, 100% { left: 100%; }
+}
+
+/* Breathing Animation */
+@keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.02); opacity: 0.7; }
+}
+
+/* Spin Animation */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Dash Animation for SVG Timeline */
+@keyframes drawLine {
+    to { stroke-dashoffset: 0; }
+}
+
+/* Button Ripple */
+@keyframes ripple {
+    0% { transform: scale(0); opacity: 0.6; }
+    100% { transform: scale(4); opacity: 0; }
+}
+
+/* Testimonial Fade */
+@keyframes testimonialFade {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
